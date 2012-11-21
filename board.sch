@@ -2327,7 +2327,7 @@ Standard 3-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <instance part="PORTD" gate="G$1" x="73.66" y="96.52"/>
 <instance part="PORTB" gate="G$1" x="99.06" y="101.6"/>
 <instance part="PORTE" gate="G$1" x="99.06" y="83.82"/>
-<instance part="GND1" gate="1" x="78.74" y="109.22" rot="R180"/>
+<instance part="GND1" gate="1" x="81.28" y="106.68" rot="R90"/>
 <instance part="GND2" gate="1" x="48.26" y="30.48"/>
 <instance part="PDI_STACK" gate="G$1" x="12.7" y="71.12" smashed="yes">
 <attribute name="NAME" x="8.382" y="76.962" size="1.778" layer="95"/>
@@ -2387,6 +2387,10 @@ Standard 3-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <pinref part="PDI_STACK" gate="G$1" pin="5"/>
 <wire x1="5.08" y1="68.58" x2="-5.08" y2="68.58" width="0.1524" layer="91"/>
 </segment>
+<segment>
+<pinref part="XBEE" gate="G$1" pin="DTR"/>
+<wire x1="48.26" y1="35.56" x2="45.72" y2="35.56" width="0.1524" layer="91"/>
+</segment>
 </net>
 <net name="VXMEGA" class="0">
 <segment>
@@ -2396,6 +2400,26 @@ Standard 3-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <segment>
 <pinref part="PWR_STACK" gate="G$1" pin="3"/>
 <wire x1="5.08" y1="38.1" x2="10.16" y2="38.1" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="XMEGA_RX" class="0">
+<segment>
+<pinref part="PORTD" gate="G$1" pin="3"/>
+<wire x1="78.74" y1="93.98" x2="81.28" y2="93.98" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="XBEE" gate="G$1" pin="DOUT"/>
+<wire x1="48.26" y1="53.34" x2="43.18" y2="53.34" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="XMEGA_TX" class="0">
+<segment>
+<pinref part="PORTD" gate="G$1" pin="4"/>
+<wire x1="78.74" y1="96.52" x2="81.28" y2="96.52" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="XBEE" gate="G$1" pin="DIN"/>
+<wire x1="48.26" y1="50.8" x2="43.18" y2="50.8" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
