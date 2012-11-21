@@ -581,15 +581,12 @@ design rules under a new name.</description>
 <contactref element="PWR_STACK" pad="3"/>
 <wire x1="1.27" y1="8.89" x2="5.715" y2="3.81" width="0" layer="19" extent="1-1"/>
 </signal>
-<signal name="VBAT">
-<contactref element="PWR_STACK" pad="1"/>
-</signal>
-<signal name="XMEGA_RX">
+<signal name="XMEGA_RX0">
 <contactref element="PORTD" pad="3"/>
 <contactref element="XBEE" pad="2"/>
 <wire x1="3.59" y1="26.465" x2="30.48" y2="1.27" width="0" layer="19" extent="1-1"/>
 </signal>
-<signal name="XMEGA_TX">
+<signal name="XMEGA_TX0">
 <contactref element="PORTD" pad="4"/>
 <contactref element="XBEE" pad="3"/>
 <wire x1="5.59" y1="26.465" x2="33.02" y2="1.27" width="0" layer="19" extent="1-1"/>
@@ -599,6 +596,15 @@ design rules under a new name.</description>
 </signal>
 <signal name="SCL">
 <contactref element="PORTE" pad="2"/>
+</signal>
+<signal name="VXMEGA_USB">
+<contactref element="PWR_STACK" pad="1"/>
+</signal>
+<signal name="XMEGA_TX1">
+<contactref element="PORTC" pad="8"/>
+</signal>
+<signal name="XMEGA_RX1">
+<contactref element="PORTC" pad="7"/>
 </signal>
 </signals>
 </board>

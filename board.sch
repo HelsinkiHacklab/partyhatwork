@@ -2371,10 +2371,6 @@ Standard 3-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <pinref part="P+1" gate="1" pin="V+"/>
 <wire x1="0" y1="55.88" x2="2.54" y2="55.88" width="0.1524" layer="91"/>
 </segment>
-<segment>
-<pinref part="PWR_STACK" gate="G$1" pin="1"/>
-<wire x1="5.08" y1="33.02" x2="10.16" y2="33.02" width="0.1524" layer="91"/>
-</segment>
 </net>
 <net name="PDI_DATA" class="0">
 <segment>
@@ -2402,7 +2398,7 @@ Standard 3-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <wire x1="5.08" y1="38.1" x2="10.16" y2="38.1" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="XMEGA_RX" class="0">
+<net name="XMEGA_RX0" class="0">
 <segment>
 <pinref part="PORTD" gate="G$1" pin="3"/>
 <wire x1="78.74" y1="93.98" x2="81.28" y2="93.98" width="0.1524" layer="91"/>
@@ -2412,7 +2408,7 @@ Standard 3-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <wire x1="48.26" y1="53.34" x2="43.18" y2="53.34" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="XMEGA_TX" class="0">
+<net name="XMEGA_TX0" class="0">
 <segment>
 <pinref part="PORTD" gate="G$1" pin="4"/>
 <wire x1="78.74" y1="96.52" x2="81.28" y2="96.52" width="0.1524" layer="91"/>
@@ -2432,6 +2428,24 @@ Standard 3-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <segment>
 <pinref part="PORTE" gate="G$1" pin="2"/>
 <wire x1="104.14" y1="83.82" x2="109.22" y2="83.82" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="VXMEGA_USB" class="0">
+<segment>
+<pinref part="PWR_STACK" gate="G$1" pin="1"/>
+<wire x1="5.08" y1="33.02" x2="10.16" y2="33.02" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="XMEGA_TX1" class="0">
+<segment>
+<pinref part="PORTC" gate="G$1" pin="8"/>
+<wire x1="50.8" y1="106.68" x2="53.34" y2="106.68" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="XMEGA_RX1" class="0">
+<segment>
+<pinref part="PORTC" gate="G$1" pin="7"/>
+<wire x1="50.8" y1="104.14" x2="53.34" y2="104.14" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
