@@ -594,6 +594,12 @@ design rules under a new name.</description>
 <contactref element="XBEE" pad="3"/>
 <wire x1="11.94" y1="27.1" x2="36.83" y2="3.81" width="0" layer="19" extent="1-1"/>
 </signal>
+<signal name="SDA">
+<contactref element="PORTE" pad="1"/>
+</signal>
+<signal name="SCL">
+<contactref element="PORTE" pad="2"/>
+</signal>
 </signals>
 </board>
 </drawing>
