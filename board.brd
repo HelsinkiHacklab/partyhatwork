@@ -3191,8 +3191,8 @@ design rules under a new name.</description>
 </element>
 <element name="C1" library="rcl" package="C0603K" value="0.1uF" x="8.89" y="24.13" smashed="yes" rot="MR0"/>
 <element name="JP1" library="pinhead" package="2X08" value="" x="46.99" y="34.29" rot="R270"/>
-<element name="SJ2" library="SparkFun-Passives" package="SJ_2" value="" x="22.86" y="45.72" smashed="yes" rot="R270">
-<attribute name="VALUE" x="22.86" y="45.8201" size="0.02" layer="27" rot="R270"/>
+<element name="SJ2" library="SparkFun-Passives" package="SJ_2" value="" x="22.86" y="44.45" smashed="yes" rot="R270">
+<attribute name="VALUE" x="22.86" y="44.5501" size="0.02" layer="27" rot="R270"/>
 </element>
 <element name="RLED0" library="resistor" package="R0805" value="" x="27.94" y="40.64" smashed="yes" rot="R90">
 <attribute name="VALUE" x="30.226" y="39.878" size="1.27" layer="27" rot="R90"/>
@@ -3373,7 +3373,7 @@ design rules under a new name.</description>
 <wire x1="3.048" y1="16.256" x2="6.224" y2="16.256" width="0.8128" layer="1"/>
 <wire x1="6.224" y1="16.256" x2="6.24" y2="16.24" width="0.8128" layer="1"/>
 <contactref element="VREG_3.3" pad="3"/>
-<wire x1="9.45" y1="44.61" x2="22.86" y2="47.244" width="0" layer="19" extent="1-1"/>
+<wire x1="9.45" y1="44.61" x2="22.86" y2="45.974" width="0" layer="19" extent="1-1"/>
 <wire x1="7.62" y1="16.83" x2="9.45" y2="44.61" width="0" layer="19" extent="1-16"/>
 <wire x1="6.24" y1="16.51" x2="7.62" y2="16.83" width="0" layer="19" extent="1-16"/>
 </signal>
@@ -3509,7 +3509,7 @@ design rules under a new name.</description>
 <vertex x="43.18" y="53.34"/>
 </polygon>
 <contactref element="SJ2" pad="2"/>
-<wire x1="22.86" y1="45.72" x2="25.4" y2="45.72" width="0.8128" layer="1"/>
+<wire x1="22.86" y1="44.45" x2="25.4" y2="44.45" width="0.8128" layer="1"/>
 <contactref element="JP3" pad="2"/>
 <contactref element="JP3" pad="4"/>
 <contactref element="JP3" pad="6"/>
@@ -3540,8 +3540,8 @@ design rules under a new name.</description>
 <contactref element="+3.3V_VXMEGA" pad="1"/>
 <contactref element="C2" pad="1"/>
 <contactref element="JP2" pad="2"/>
-<wire x1="22.86" y1="44.196" x2="48.26" y2="20.32" width="0" layer="19" extent="1-1"/>
-<wire x1="12.7" y1="41.64" x2="22.86" y2="44.196" width="0" layer="19" extent="1-1"/>
+<wire x1="22.86" y1="42.926" x2="48.26" y2="20.32" width="0" layer="19" extent="1-1"/>
+<wire x1="12.7" y1="41.64" x2="22.86" y2="42.926" width="0" layer="19" extent="1-1"/>
 <wire x1="9.45" y1="41.91" x2="12.7" y2="41.64" width="0" layer="19" extent="1-1"/>
 <wire x1="2.86" y1="26.465" x2="9.45" y2="41.91" width="0" layer="19" extent="1-1"/>
 <wire x1="11.938" y1="5.08" x2="2.86" y2="26.465" width="0" layer="19" extent="16-16"/>
