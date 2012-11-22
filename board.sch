@@ -13134,6 +13134,26 @@ type 0309, grid 2.5 mm</description>
 <wire x1="66.04" y1="139.7" x2="66.04" y2="142.24" width="0.1524" layer="91"/>
 </segment>
 </net>
+<net name="PB0/XMEGA_AREF" class="0">
+<segment>
+<pinref part="PORTB" gate="G$1" pin="1"/>
+<wire x1="104.14" y1="99.06" x2="109.22" y2="99.06" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="XBEE" gate="G$1" pin="RES@14"/>
+<wire x1="88.9" y1="40.64" x2="93.98" y2="40.64" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="XBEE_RESET" class="0">
+<segment>
+<pinref part="XBEE" gate="G$1" pin="RESET"/>
+<wire x1="48.26" y1="45.72" x2="43.18" y2="45.72" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="PORTD" gate="G$1" pin="5"/>
+<wire x1="78.74" y1="99.06" x2="81.28" y2="99.06" width="0.1524" layer="91"/>
+</segment>
+</net>
 </nets>
 </sheet>
 </sheets>
