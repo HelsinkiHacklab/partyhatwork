@@ -12690,7 +12690,7 @@ type 0309, grid 2.5 mm</description>
 <classes>
 <class number="0" name="default" width="0" drill="0">
 </class>
-<class number="1" name="PWR" width="0.4064" drill="0">
+<class number="1" name="PWR" width="0.3048" drill="0">
 </class>
 </classes>
 <parts>
