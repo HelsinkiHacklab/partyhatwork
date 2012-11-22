@@ -13239,7 +13239,7 @@ type 0309, grid 2.5 mm</description>
 <wire x1="116.84" y1="129.54" x2="116.84" y2="127" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="LED4" class="0">
+<net name="LED4" class="1">
 <segment>
 <pinref part="DRV2" gate="G$1" pin="D"/>
 <wire x1="83.82" y1="162.56" x2="83.82" y2="160.02" width="0.1524" layer="91"/>

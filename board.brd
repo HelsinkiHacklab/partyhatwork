@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="5" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="0.025" altunitdist="inch" altunit="mil"/>
+<grid distance="50" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="0.025" altunitdist="inch" altunit="mil"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
@@ -3154,7 +3154,7 @@ design rules under a new name.</description>
 </pass>
 </autorouter>
 <elements>
-<element name="XBEE" library="SparkFun-RF" package="XBEE-SILK" value="XBEE-1B2" x="21.59" y="37.465" rot="R90"/>
+<element name="XBEE" library="SparkFun-RF" package="XBEE-SILK" value="XBEE-1B2" x="22.86" y="37.465" rot="R90"/>
 <element name="PORTA" library="SparkFun-Connectors" package="1X08" value="" x="33.02" y="21.59" locked="yes" rot="R180"/>
 <element name="PORTC" library="SparkFun-Connectors" package="1X08" value="" x="5.08" y="1.27" locked="yes" smashed="yes">
 <attribute name="NAME" x="13.8938" y="3.0988" size="1.27" layer="25" ratio="10"/>
@@ -3272,7 +3272,7 @@ design rules under a new name.</description>
 <signal name="PDI_RESET/CLK">
 <contactref element="PDI_STACK" pad="5"/>
 <contactref element="XBEE" pad="9"/>
-<wire x1="8.255" y1="8.89" x2="17.59" y2="26.465" width="0" layer="19" extent="1-1"/>
+<wire x1="8.255" y1="8.89" x2="18.86" y2="26.465" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="VXMEGA">
 <contactref element="PDI_STACK" pad="2"/>
@@ -3284,12 +3284,12 @@ design rules under a new name.</description>
 <signal name="XMEGA_RX0">
 <contactref element="PORTD" pad="3"/>
 <contactref element="XBEE" pad="2"/>
-<wire x1="3.59" y1="26.465" x2="30.48" y2="1.27" width="0" layer="19" extent="1-1"/>
+<wire x1="4.86" y1="26.465" x2="30.48" y2="1.27" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="XMEGA_TX0">
 <contactref element="PORTD" pad="4"/>
 <contactref element="XBEE" pad="3"/>
-<wire x1="5.59" y1="26.465" x2="33.02" y2="1.27" width="0" layer="19" extent="1-1"/>
+<wire x1="6.86" y1="26.465" x2="33.02" y2="1.27" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="PE1/SDA">
 <contactref element="PORTE" pad="1"/>
@@ -3523,7 +3523,7 @@ design rules under a new name.</description>
 <contactref element="RLED1" pad="1"/>
 <wire x1="29.96" y1="34.66" x2="30.48" y2="39.79" width="0" layer="19" extent="1-1"/>
 </signal>
-<signal name="LED4">
+<signal name="LED4" class="1">
 <contactref element="DRV2" pad="6"/>
 <contactref element="RLED4" pad="1"/>
 <wire x1="36.08" y1="36.46" x2="38.1" y2="39.79" width="0" layer="19" extent="1-1"/>
@@ -3542,8 +3542,8 @@ design rules under a new name.</description>
 <contactref element="C2" pad="1"/>
 <wire x1="12.7" y1="41.64" x2="22.86" y2="44.196" width="0" layer="19" extent="1-1"/>
 <wire x1="9.45" y1="41.91" x2="12.7" y2="41.64" width="0" layer="19" extent="1-1"/>
-<wire x1="1.59" y1="26.465" x2="9.45" y2="41.91" width="0" layer="19" extent="1-1"/>
-<wire x1="11.938" y1="5.08" x2="1.59" y2="26.465" width="0" layer="19" extent="16-16"/>
+<wire x1="2.86" y1="26.465" x2="9.45" y2="41.91" width="0" layer="19" extent="1-1"/>
+<wire x1="11.938" y1="5.08" x2="2.86" y2="26.465" width="0" layer="19" extent="16-16"/>
 <wire x1="48.26" y1="7.62" x2="11.938" y2="5.08" width="0" layer="19" extent="16-16"/>
 </signal>
 <signal name="LED0R" class="1">
@@ -3596,12 +3596,12 @@ design rules under a new name.</description>
 <contactref element="XBEE" pad="14"/>
 <contactref element="JP2" pad="1"/>
 <wire x1="12.7" y1="21.59" x2="45.72" y2="20.32" width="0" layer="19" extent="1-1"/>
-<wire x1="13.59" y1="48.465" x2="12.7" y2="21.59" width="0" layer="19" extent="1-1"/>
+<wire x1="14.86" y1="48.465" x2="12.7" y2="21.59" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="XBEE_RESET">
 <contactref element="XBEE" pad="5"/>
 <contactref element="PORTD" pad="5"/>
-<wire x1="9.59" y1="26.465" x2="35.56" y2="1.27" width="0" layer="19" extent="1-1"/>
+<wire x1="35.56" y1="1.27" x2="10.86" y2="26.465" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="PB1/VBAT_SENSE">
 <contactref element="PORTB" pad="2"/>
