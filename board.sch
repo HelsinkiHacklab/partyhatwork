@@ -2976,6 +2976,82 @@ Standard 2-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <rectangle x1="-0.125" y1="0.7" x2="0.125" y2="1.05" layer="51"/>
 <rectangle x1="0.525" y1="0.7" x2="0.775" y2="1.05" layer="51"/>
 </package>
+<package name="SOT223-R">
+<description>&lt;b&gt;SOT223&lt;/b&gt; - Reflow soldering</description>
+<wire x1="-3.35" y1="1.8" x2="-3.35" y2="-1.8" width="0.254" layer="51"/>
+<wire x1="-3.35" y1="-1.8" x2="3.35" y2="-1.8" width="0.254" layer="51"/>
+<wire x1="3.35" y1="-1.8" x2="3.35" y2="1.8" width="0.254" layer="51"/>
+<wire x1="3.35" y1="1.8" x2="-3.35" y2="1.8" width="0.254" layer="51"/>
+<wire x1="-3.35" y1="-1.8" x2="-3.35" y2="1.8" width="0.2032" layer="21"/>
+<wire x1="3.35" y1="-1.8" x2="3.35" y2="1.8" width="0.2032" layer="21"/>
+<wire x1="-3.35" y1="1.8" x2="3.35" y2="1.8" width="0.2032" layer="21"/>
+<wire x1="-3.278" y1="-1.8" x2="0.724" y2="-1.8" width="0.2032" layer="21"/>
+<wire x1="0.8" y1="-1.8" x2="3.278" y2="-1.8" width="0.2032" layer="21"/>
+<smd name="1" x="-2.3" y="-3.05" dx="1.3" dy="1.3" layer="1"/>
+<smd name="2" x="0" y="-3.05" dx="1.3" dy="1.3" layer="1"/>
+<smd name="3" x="2.3" y="-3.05" dx="1.3" dy="1.3" layer="1"/>
+<smd name="4" x="0" y="3.05" dx="3.6" dy="1.3" layer="1"/>
+<text x="-2.794" y="0.127" size="0.8128" layer="25" ratio="18">&gt;NAME</text>
+<text x="-2.794" y="-0.635" size="0.4064" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-2.75" y1="-3.45" x2="-1.85" y2="-1.9" layer="51"/>
+<rectangle x1="-0.45" y1="-3.45" x2="0.45" y2="-1.9" layer="51"/>
+<rectangle x1="1.85" y1="-3.45" x2="2.75" y2="-1.9" layer="51"/>
+<rectangle x1="-1.55" y1="1.9" x2="1.55" y2="3.45" layer="51"/>
+</package>
+<package name="SOT223-W">
+<description>&lt;b&gt;SOT223&lt;/b&gt; - Wave soldering</description>
+<wire x1="-3.35" y1="1.8" x2="-3.35" y2="-1.8" width="0.254" layer="51"/>
+<wire x1="-3.35" y1="-1.8" x2="3.35" y2="-1.8" width="0.254" layer="51"/>
+<wire x1="3.35" y1="-1.8" x2="3.35" y2="1.8" width="0.254" layer="51"/>
+<wire x1="3.35" y1="1.8" x2="-3.35" y2="1.8" width="0.254" layer="51"/>
+<wire x1="-3.35" y1="-1.8" x2="-3.35" y2="1.8" width="0.2032" layer="21"/>
+<wire x1="-3.35" y1="1.8" x2="1.85" y2="1.8" width="0.2032" layer="21"/>
+<wire x1="3.35" y1="-1.8" x2="3.35" y2="1.8" width="0.2032" layer="21"/>
+<wire x1="3.35" y1="1.8" x2="1.96" y2="1.8" width="0.2032" layer="21"/>
+<wire x1="1.96" y1="1.8" x2="1.85" y2="1.8" width="0.2032" layer="21"/>
+<wire x1="-3.278" y1="-1.8" x2="0.724" y2="-1.8" width="0.2032" layer="21"/>
+<wire x1="0.8" y1="-1.8" x2="3.278" y2="-1.8" width="0.2032" layer="21"/>
+<smd name="1" x="-2.7" y="-3.1" dx="1.9" dy="1.9" layer="1"/>
+<smd name="2" x="0" y="-3.1" dx="1.1" dy="1.9" layer="1"/>
+<smd name="3" x="2.7" y="-3.1" dx="1.9" dy="1.9" layer="1"/>
+<smd name="4" x="0" y="3.1" dx="6.7" dy="1.9" layer="1"/>
+<text x="-2.794" y="0.254" size="0.8128" layer="25" ratio="18">&gt;NAME</text>
+<text x="-2.794" y="-0.762" size="0.4064" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-2.75" y1="-3.45" x2="-1.85" y2="-1.9" layer="51"/>
+<rectangle x1="-0.45" y1="-3.45" x2="0.45" y2="-1.9" layer="51"/>
+<rectangle x1="1.85" y1="-3.45" x2="2.75" y2="-1.9" layer="51"/>
+<rectangle x1="-1.55" y1="1.9" x2="1.55" y2="3.45" layer="51"/>
+</package>
+<package name="TO252">
+<description>&lt;b&gt;SMALL OUTLINE TRANSISTOR&lt;/b&gt;&lt;p&gt;
+TS-003</description>
+<wire x1="3.2766" y1="3.8354" x2="3.277" y2="-2.159" width="0.2032" layer="21"/>
+<wire x1="3.277" y1="-2.159" x2="-3.277" y2="-2.159" width="0.2032" layer="21"/>
+<wire x1="-3.277" y1="-2.159" x2="-3.2766" y2="3.8354" width="0.2032" layer="21"/>
+<wire x1="-3.277" y1="3.835" x2="3.2774" y2="3.8346" width="0.2032" layer="51"/>
+<wire x1="-2.5654" y1="3.937" x2="-2.5654" y2="4.6482" width="0.2032" layer="51"/>
+<wire x1="-2.5654" y1="4.6482" x2="-2.1082" y2="5.1054" width="0.2032" layer="51"/>
+<wire x1="-2.1082" y1="5.1054" x2="2.1082" y2="5.1054" width="0.2032" layer="51"/>
+<wire x1="2.1082" y1="5.1054" x2="2.5654" y2="4.6482" width="0.2032" layer="51"/>
+<wire x1="2.5654" y1="4.6482" x2="2.5654" y2="3.937" width="0.2032" layer="51"/>
+<wire x1="2.5654" y1="3.937" x2="-2.5654" y2="3.937" width="0.2032" layer="51"/>
+<smd name="3" x="0" y="2.5" dx="5.4" dy="6.2" layer="1"/>
+<smd name="1" x="-2.28" y="-4.8" dx="1" dy="1.6" layer="1"/>
+<smd name="2" x="2.28" y="-4.8" dx="1" dy="1.6" layer="1"/>
+<text x="-3.81" y="-2.54" size="0.8128" layer="25" ratio="18" rot="R90">&gt;NAME</text>
+<text x="5.08" y="-2.54" size="0.4064" layer="27" ratio="10" rot="R90">&gt;VALUE</text>
+<rectangle x1="-2.7178" y1="-5.1562" x2="-1.8542" y2="-2.2606" layer="51"/>
+<rectangle x1="1.8542" y1="-5.1562" x2="2.7178" y2="-2.2606" layer="51"/>
+<rectangle x1="-0.4318" y1="-3.0226" x2="0.4318" y2="-2.2606" layer="21"/>
+<polygon width="0.2032" layer="51">
+<vertex x="-2.5654" y="3.937"/>
+<vertex x="-2.5654" y="4.6482"/>
+<vertex x="-2.1082" y="5.1054"/>
+<vertex x="2.1082" y="5.1054"/>
+<vertex x="2.5654" y="4.6482"/>
+<vertex x="2.5654" y="3.937"/>
+</polygon>
+</package>
 </packages>
 <symbols>
 <symbol name="MOSFET-N">
@@ -3018,6 +3094,20 @@ Standard 2-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <vertex x="2.032" y="-0.762"/>
 </polygon>
 </symbol>
+<symbol name="LM1117">
+<wire x1="-5.08" y1="-5.08" x2="5.08" y2="-5.08" width="0.4064" layer="94"/>
+<wire x1="5.08" y1="-5.08" x2="5.08" y2="2.54" width="0.4064" layer="94"/>
+<wire x1="5.08" y1="2.54" x2="-5.08" y2="2.54" width="0.4064" layer="94"/>
+<wire x1="-5.08" y1="2.54" x2="-5.08" y2="-5.08" width="0.4064" layer="94"/>
+<text x="-5.08" y="3.556" size="1.27" layer="95">&gt;NAME</text>
+<text x="1.016" y="-7.62" size="1.27" layer="96">&gt;VALUE</text>
+<text x="-2.032" y="-4.318" size="1.524" layer="95">ADJ</text>
+<text x="-4.445" y="-0.635" size="1.524" layer="95">IN</text>
+<text x="0.127" y="-0.635" size="1.524" layer="95">OUT</text>
+<pin name="IN" x="-7.62" y="0" visible="off" length="short" direction="in"/>
+<pin name="ADJ" x="0" y="-7.62" visible="off" length="short" direction="in" rot="R90"/>
+<pin name="OUT" x="7.62" y="0" visible="off" length="short" direction="pas" rot="R180"/>
+</symbol>
 </symbols>
 <devicesets>
 <deviceset name="MOSFET-N_DUAL" prefix="Q" uservalue="yes">
@@ -3039,6 +3129,50 @@ Standard 2-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <connect gate="G$2" pin="D" pad="3"/>
 <connect gate="G$2" pin="G" pad="5"/>
 <connect gate="G$2" pin="S" pad="4"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="LM1117" prefix="U" uservalue="yes">
+<description>&lt;b&gt;LM1117 Voltage Regulator&lt;/b&gt;&lt;br&gt;
+&lt;p&gt;LM1117 Adjustable Voltage regulator [Digikey: LM1117IMP-ADJDKR-ND]&lt;br&gt;
+LM1117 3.3V Voltage regulator [AP1117E33GDIDKR-ND]&lt;br&gt;
+LM1117 5.0V Voltage regulator [AP1117E50GDIDKR-ND]&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;SOT223-REFLOW&lt;/b&gt; - SOT223 package for solder paste/reflow ovens&lt;br/&gt;
+&lt;b&gt;SOT223-WAVE&lt;/b&gt; - SOT223 package for hand-soldering (larger pads)&lt;/p&gt;
+&lt;p&gt;Note: For the fixed-voltage regulators, simply set the ADJ pin to GND.&lt;/p&gt;</description>
+<gates>
+<gate name="G$1" symbol="LM1117" x="0" y="0"/>
+</gates>
+<devices>
+<device name="SOT223-REFLOW" package="SOT223-R">
+<connects>
+<connect gate="G$1" pin="ADJ" pad="1"/>
+<connect gate="G$1" pin="IN" pad="3"/>
+<connect gate="G$1" pin="OUT" pad="2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="SOT223-WAVE" package="SOT223-W">
+<connects>
+<connect gate="G$1" pin="ADJ" pad="1"/>
+<connect gate="G$1" pin="IN" pad="3"/>
+<connect gate="G$1" pin="OUT" pad="2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="TO252" package="TO252">
+<connects>
+<connect gate="G$1" pin="ADJ" pad="1"/>
+<connect gate="G$1" pin="IN" pad="2"/>
+<connect gate="G$1" pin="OUT" pad="3"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -12601,6 +12735,11 @@ type 0309, grid 2.5 mm</description>
 <part name="GND9" library="supply1" deviceset="GND" device=""/>
 <part name="C3" library="rcl" deviceset="C-EU" device="C1210"/>
 <part name="JP2" library="pinhead" deviceset="PINHD-2X8" device="/90"/>
+<part name="VREG_3.3" library="microbuilder" deviceset="LM1117" device="SOT223-WAVE"/>
+<part name="GND7" library="supply1" deviceset="GND" device=""/>
+<part name="+3V3" library="supply1" deviceset="+3V3" device=""/>
+<part name="+3.3V_VXMEGA" library="SparkFun-Passives" deviceset="SOLDERJUMPER" device="TRACE"/>
+<part name="C2" library="rcl" deviceset="C-EU" device="C0805K"/>
 </parts>
 <sheets>
 <sheet>
@@ -12659,6 +12798,13 @@ type 0309, grid 2.5 mm</description>
 <instance part="GND9" gate="1" x="33.02" y="86.36"/>
 <instance part="C3" gate="G$1" x="129.54" y="152.4" rot="R90"/>
 <instance part="JP2" gate="A" x="144.78" y="96.52"/>
+<instance part="VREG_3.3" gate="G$1" x="-30.48" y="71.12" rot="R90"/>
+<instance part="GND7" gate="1" x="-17.78" y="71.12" rot="R90"/>
+<instance part="+3V3" gate="G$1" x="-30.48" y="83.82"/>
+<instance part="+3.3V_VXMEGA" gate="1" x="-15.24" y="78.74" smashed="yes">
+<attribute name="NAME" x="-17.78" y="81.28" size="1.778" layer="95"/>
+</instance>
+<instance part="C2" gate="G$1" x="-22.86" y="76.2"/>
 </instances>
 <busses>
 </busses>
@@ -12719,6 +12865,13 @@ type 0309, grid 2.5 mm</description>
 <pinref part="JP2" gate="A" pin="13"/>
 <wire x1="142.24" y1="88.9" x2="137.16" y2="88.9" width="0.1524" layer="91"/>
 </segment>
+<segment>
+<pinref part="VREG_3.3" gate="G$1" pin="ADJ"/>
+<pinref part="GND7" gate="1" pin="GND"/>
+<wire x1="-20.32" y1="71.12" x2="-22.86" y2="71.12" width="0.1524" layer="91"/>
+<pinref part="C2" gate="G$1" pin="2"/>
+<junction x="-22.86" y="71.12"/>
+</segment>
 </net>
 <net name="VBAT" class="1">
 <segment>
@@ -12732,6 +12885,9 @@ type 0309, grid 2.5 mm</description>
 <wire x1="-7.62" y1="48.26" x2="-5.08" y2="48.26" width="0.1524" layer="91"/>
 <wire x1="-5.08" y1="48.26" x2="-5.08" y2="58.42" width="0.1524" layer="91"/>
 <junction x="-5.08" y="58.42"/>
+<wire x1="-5.08" y1="58.42" x2="-5.08" y2="63.5" width="0.1524" layer="91"/>
+<pinref part="VREG_3.3" gate="G$1" pin="IN"/>
+<wire x1="-5.08" y1="63.5" x2="-30.48" y2="63.5" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="P+2" gate="1" pin="V+"/>
@@ -12767,6 +12923,10 @@ type 0309, grid 2.5 mm</description>
 <segment>
 <pinref part="PWR_STACK" gate="G$1" pin="3"/>
 <wire x1="5.08" y1="38.1" x2="10.16" y2="38.1" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="+3.3V_VXMEGA" gate="1" pin="2"/>
+<wire x1="-10.16" y1="78.74" x2="-5.08" y2="78.74" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="XMEGA_RX0" class="0">
@@ -13042,7 +13202,7 @@ type 0309, grid 2.5 mm</description>
 <junction x="127" y="152.4"/>
 </segment>
 </net>
-<net name="+3V3" class="0">
+<net name="+3V3" class="1">
 <segment>
 <pinref part="+3V1" gate="G$1" pin="+3V3"/>
 <wire x1="109.22" y1="160.02" x2="109.22" y2="157.48" width="0.1524" layer="91"/>
@@ -13056,6 +13216,17 @@ type 0309, grid 2.5 mm</description>
 <segment>
 <pinref part="JP2" gate="A" pin="12"/>
 <wire x1="149.86" y1="91.44" x2="157.48" y2="91.44" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="+3V3" gate="G$1" pin="+3V3"/>
+<pinref part="VREG_3.3" gate="G$1" pin="OUT"/>
+<wire x1="-30.48" y1="81.28" x2="-30.48" y2="78.74" width="0.1524" layer="91"/>
+<pinref part="+3.3V_VXMEGA" gate="1" pin="1"/>
+<wire x1="-30.48" y1="78.74" x2="-22.86" y2="78.74" width="0.1524" layer="91"/>
+<junction x="-30.48" y="78.74"/>
+<pinref part="C2" gate="G$1" pin="1"/>
+<wire x1="-22.86" y1="78.74" x2="-20.32" y2="78.74" width="0.1524" layer="91"/>
+<junction x="-22.86" y="78.74"/>
 </segment>
 </net>
 <net name="LED1" class="1">
