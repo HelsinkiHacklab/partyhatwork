@@ -12740,6 +12740,8 @@ type 0309, grid 2.5 mm</description>
 <part name="+3V3" library="supply1" deviceset="+3V3" device=""/>
 <part name="+3.3V_VXMEGA" library="SparkFun-Passives" deviceset="SOLDERJUMPER" device="TRACE"/>
 <part name="C2" library="rcl" deviceset="C-EU" device="C0805K"/>
+<part name="JMP0" library="resistor" deviceset="R-US_" device="R0805"/>
+<part name="JMP1" library="resistor" deviceset="R-US_" device="R0805"/>
 </parts>
 <sheets>
 <sheet>
@@ -12805,6 +12807,8 @@ type 0309, grid 2.5 mm</description>
 <attribute name="NAME" x="-17.78" y="81.28" size="1.778" layer="95"/>
 </instance>
 <instance part="C2" gate="G$1" x="-22.86" y="76.2"/>
+<instance part="JMP0" gate="G$1" x="152.4" y="134.62" rot="R90"/>
+<instance part="JMP1" gate="G$1" x="160.02" y="134.62" rot="R90"/>
 </instances>
 <busses>
 </busses>
@@ -13122,6 +13126,22 @@ type 0309, grid 2.5 mm</description>
 <junction x="22.86" y="88.9"/>
 <pinref part="AGND_GND" gate="1" pin="1"/>
 </segment>
+<segment>
+<pinref part="JMP0" gate="G$1" pin="2"/>
+<wire x1="152.4" y1="139.7" x2="152.4" y2="142.24" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="JMP0" gate="G$1" pin="1"/>
+<wire x1="152.4" y1="129.54" x2="152.4" y2="127" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="JMP1" gate="G$1" pin="2"/>
+<wire x1="160.02" y1="139.7" x2="160.02" y2="142.24" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="JMP1" gate="G$1" pin="1"/>
+<wire x1="160.02" y1="129.54" x2="160.02" y2="127" width="0.1524" layer="91"/>
+</segment>
 </net>
 <net name="PA0" class="0">
 <segment>
@@ -13179,7 +13199,7 @@ type 0309, grid 2.5 mm</description>
 <wire x1="10.16" y1="106.68" x2="15.24" y2="106.68" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="VLED" class="0">
+<net name="VLED" class="1">
 <segment>
 <wire x1="127" y1="152.4" x2="124.46" y2="152.4" width="0.1524" layer="91"/>
 <pinref part="SJ2" gate="G$1" pin="2"/>
