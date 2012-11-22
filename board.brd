@@ -3226,8 +3226,8 @@ design rules under a new name.</description>
 <element name="VREG_3.3" library="microbuilder" package="SOT223-W" value="" x="6.35" y="41.91" rot="R90"/>
 <element name="+3.3V_VXMEGA" library="SparkFun-Passives" package="SJ_2S-TRACE" value="SOLDERJUMPERTRACE" x="2.794" y="24.13" smashed="yes" rot="MR270"/>
 <element name="C2" library="rcl" package="C0805K" value="" x="12.7" y="40.64" rot="R270"/>
-<element name="JMP0" library="resistor" package="R0805" value="" x="35.6616" y="30.099"/>
-<element name="JMP1" library="resistor" package="R0805" value="" x="26.543" y="28.321"/>
+<element name="JMP0" library="resistor" package="R0805" value="0R" x="35.6616" y="30.099"/>
+<element name="JMP1" library="resistor" package="R0805" value="0R" x="26.543" y="28.321"/>
 </elements>
 <signals>
 <signal name="GND" class="1">

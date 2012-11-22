@@ -12740,8 +12740,8 @@ type 0309, grid 2.5 mm</description>
 <part name="+3V3" library="supply1" deviceset="+3V3" device=""/>
 <part name="+3.3V_VXMEGA" library="SparkFun-Passives" deviceset="SOLDERJUMPER" device="TRACE"/>
 <part name="C2" library="rcl" deviceset="C-EU" device="C0805K"/>
-<part name="JMP0" library="resistor" deviceset="R-US_" device="R0805"/>
-<part name="JMP1" library="resistor" deviceset="R-US_" device="R0805"/>
+<part name="JMP0" library="resistor" deviceset="R-US_" device="R0805" value="0R"/>
+<part name="JMP1" library="resistor" deviceset="R-US_" device="R0805" value="0R"/>
 </parts>
 <sheets>
 <sheet>
