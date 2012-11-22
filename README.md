@@ -18,8 +18,14 @@ and XBee) will be brought out to IDC connectors for further use.
   * 2 1x16 2.54mm female header (for XMega)
   * 1 2x3 2.54mm female header (ISP stacking)
   * 1 1x3 2.54mm female header (XMega power connector stacking)
+  * 1 SOT-223 packaged 3.3V regulator (optional but high-powered one is recommended)
+  
+  * TODO: enumerate the SMD resistors
 
-We probably need relatively high-powered 3.3V regulator on board since the one
-on the xmega board might not have a lot of spare juice for the XBee 
-(the leds I guess will have to live with varying battery voltage [note to self,
-put in a resistor divider and bring the voltage to ADC port on the xmega])
+
+## TODO
+
+  * Add li-po charging IC (use XMega VUSB as power source)
+  * Rip out the PGND and AGND, two-layer routing will not work
+    with them properly (the AGND is ripped to shreds, the PGND
+    might still be usefull)
