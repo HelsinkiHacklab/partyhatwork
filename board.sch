@@ -12858,10 +12858,6 @@ type 0309, grid 2.5 mm</description>
 <pinref part="GND9" gate="1" pin="GND"/>
 </segment>
 <segment>
-<pinref part="JP2" gate="A" pin="10"/>
-<wire x1="149.86" y1="93.98" x2="157.48" y2="93.98" width="0.1524" layer="91"/>
-</segment>
-<segment>
 <pinref part="JP2" gate="A" pin="13"/>
 <wire x1="142.24" y1="88.9" x2="137.16" y2="88.9" width="0.1524" layer="91"/>
 </segment>
@@ -12871,6 +12867,10 @@ type 0309, grid 2.5 mm</description>
 <wire x1="-20.32" y1="71.12" x2="-22.86" y2="71.12" width="0.1524" layer="91"/>
 <pinref part="C2" gate="G$1" pin="2"/>
 <junction x="-22.86" y="71.12"/>
+</segment>
+<segment>
+<pinref part="JP2" gate="A" pin="4"/>
+<wire x1="149.86" y1="101.6" x2="154.94" y2="101.6" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="VBAT" class="1">
@@ -12949,14 +12949,14 @@ type 0309, grid 2.5 mm</description>
 <wire x1="48.26" y1="50.8" x2="43.18" y2="50.8" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="PE1/SDA" class="0">
+<net name="PE0/SDA" class="0">
 <segment>
 <pinref part="PORTE" gate="G$1" pin="1"/>
 <wire x1="104.14" y1="81.28" x2="109.22" y2="81.28" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="JP2" gate="A" pin="2"/>
-<wire x1="149.86" y1="104.14" x2="157.48" y2="104.14" width="0.1524" layer="91"/>
+<pinref part="JP2" gate="A" pin="6"/>
+<wire x1="149.86" y1="99.06" x2="154.94" y2="99.06" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="PE1/SCL" class="0">
@@ -12965,8 +12965,8 @@ type 0309, grid 2.5 mm</description>
 <wire x1="104.14" y1="83.82" x2="109.22" y2="83.82" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="JP2" gate="A" pin="4"/>
-<wire x1="149.86" y1="101.6" x2="157.48" y2="101.6" width="0.1524" layer="91"/>
+<pinref part="JP2" gate="A" pin="8"/>
+<wire x1="149.86" y1="96.52" x2="154.94" y2="96.52" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="VXMEGA_USB" class="0">
@@ -13214,10 +13214,6 @@ type 0309, grid 2.5 mm</description>
 <pinref part="+3V2" gate="G$1" pin="+3V3"/>
 </segment>
 <segment>
-<pinref part="JP2" gate="A" pin="12"/>
-<wire x1="149.86" y1="91.44" x2="157.48" y2="91.44" width="0.1524" layer="91"/>
-</segment>
-<segment>
 <pinref part="+3V3" gate="G$1" pin="+3V3"/>
 <pinref part="VREG_3.3" gate="G$1" pin="OUT"/>
 <wire x1="-30.48" y1="81.28" x2="-30.48" y2="78.74" width="0.1524" layer="91"/>
@@ -13227,6 +13223,10 @@ type 0309, grid 2.5 mm</description>
 <pinref part="C2" gate="G$1" pin="1"/>
 <wire x1="-22.86" y1="78.74" x2="-20.32" y2="78.74" width="0.1524" layer="91"/>
 <junction x="-22.86" y="78.74"/>
+</segment>
+<segment>
+<pinref part="JP2" gate="A" pin="2"/>
+<wire x1="149.86" y1="104.14" x2="154.94" y2="104.14" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="LED1" class="1">
@@ -13391,8 +13391,8 @@ type 0309, grid 2.5 mm</description>
 <wire x1="104.14" y1="86.36" x2="109.22" y2="86.36" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="JP2" gate="A" pin="6"/>
-<wire x1="149.86" y1="99.06" x2="157.48" y2="99.06" width="0.1524" layer="91"/>
+<pinref part="JP2" gate="A" pin="10"/>
+<wire x1="149.86" y1="93.98" x2="154.94" y2="93.98" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="PE3" class="0">
@@ -13401,8 +13401,8 @@ type 0309, grid 2.5 mm</description>
 <wire x1="104.14" y1="88.9" x2="109.22" y2="88.9" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="JP2" gate="A" pin="8"/>
-<wire x1="149.86" y1="96.52" x2="157.48" y2="96.52" width="0.1524" layer="91"/>
+<pinref part="JP2" gate="A" pin="12"/>
+<wire x1="149.86" y1="91.44" x2="154.94" y2="91.44" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="PD0" class="0">
