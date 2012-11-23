@@ -4086,6 +4086,28 @@ design rules under a new name.</description>
 <wire x1="38.1" y1="1.27" x2="45.72" y2="2.54" width="0" layer="19" extent="1-1"/>
 </signal>
 </signals>
+<errors>
+<approved hash="3,16,5f77630763835ff3"/>
+<approved hash="7,40,e67ddec96862a8f3"/>
+<approved hash="7,40,dcf79c78be8f0625"/>
+<approved hash="7,40,e64ddfa6690ba8db"/>
+<approved hash="7,40,2a60381838002a78"/>
+<approved hash="7,40,dce39d37bfc2062d"/>
+<approved hash="7,40,3e60061806003e78"/>
+<approved hash="4,1,60966bf6ebf6e096"/>
+<approved hash="5,1,15c99f709b2e1583"/>
+<approved hash="4,1,014a08c288c2814a"/>
+<approved hash="5,1,f9998eff6ca44b34"/>
+<approved hash="5,1,81c4c044a4e340c6"/>
+<approved hash="5,1,bcc57ec4a4e03486"/>
+<approved hash="19,1,ed27458a2b977d31"/>
+<approved hash="19,1,47bc94512e3003d6"/>
+<approved hash="19,16,5f4c6f6bd62599fa"/>
+<approved hash="19,16,d983e192d5ebf45b"/>
+<approved hash="19,16,f02238348c773b99"/>
+<approved hash="19,16,1114a1a4401d8b77"/>
+<approved hash="5,16,b3e087f48308c8cc"/>
+</errors>
 </board>
 </drawing>
 <compatibility>
