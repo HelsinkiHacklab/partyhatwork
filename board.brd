@@ -3273,8 +3273,8 @@ design rules under a new name.</description>
 <element name="+3.3V_VXMEGA" library="SparkFun-Passives" package="SJ_2S-TRACE" value="SOLDERJUMPERTRACE" x="2.286" y="28.956" smashed="yes" rot="MR0"/>
 <element name="C2" library="rcl" package="C0805K" value="" x="12.7" y="40.64" rot="R270"/>
 <element name="U1" library="SparkFun-PowerIC" package="SOT23-5" value="MCP73831" x="11.557" y="14.986" rot="R180"/>
-<element name="R3" library="rcl" package="R0603" value="" x="12.7" y="10.922" rot="R270"/>
-<element name="R4" library="rcl" package="R0603" value="" x="14.986" y="10.922" rot="R270"/>
+<element name="RPROG0" library="rcl" package="R0603" value="10k" x="12.7" y="10.922" rot="R270"/>
+<element name="RPROG1" library="rcl" package="R0603" value="2.8k" x="14.986" y="10.922" rot="R270"/>
 </elements>
 <signals>
 <signal name="GND" class="1">
@@ -3318,7 +3318,7 @@ design rules under a new name.</description>
 <contactref element="XBEE" pad="14"/>
 <via x="43.434" y="42.164" extent="1-16" drill="0.3048"/>
 <contactref element="U1" pad="2"/>
-<contactref element="R3" pad="2"/>
+<contactref element="RPROG0" pad="2"/>
 <wire x1="43.434" y1="42.164" x2="44.196" y2="49.022" width="0" layer="19" extent="1-1"/>
 <wire x1="48.26" y1="43.18" x2="43.434" y2="42.164" width="0" layer="19" extent="1-1"/>
 <wire x1="48.26" y1="40.64" x2="48.26" y2="43.18" width="0" layer="19" extent="1-1"/>
@@ -3382,7 +3382,7 @@ design rules under a new name.</description>
 <contactref element="JP2" pad="8"/>
 <wire x1="48.26" y1="12.7" x2="40.64" y2="21.59" width="0" layer="19" extent="1-1"/>
 </signal>
-<signal name="VXMEGA_USB">
+<signal name="VXMEGA_USB" class="1">
 <contactref element="PWR_STACK" pad="1"/>
 <contactref element="U1" pad="4"/>
 <wire x1="1.27" y1="3.81" x2="10.607" y2="13.6859" width="0" layer="19" extent="1-1"/>
@@ -3676,22 +3676,21 @@ design rules under a new name.</description>
 <contactref element="JP2" pad="11"/>
 <wire x1="27.94" y1="1.27" x2="45.72" y2="7.62" width="0" layer="19" extent="1-1"/>
 </signal>
-<signal name="PD5">
+<signal name="PD5/CHGCTRL">
 <contactref element="PORTD" pad="6"/>
 <contactref element="JP2" pad="15"/>
+<contactref element="RPROG1" pad="2"/>
 <wire x1="38.1" y1="1.27" x2="45.72" y2="2.54" width="0" layer="19" extent="1-1"/>
+<wire x1="14.986" y1="10.072" x2="38.1" y2="1.27" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$1">
 </signal>
 <signal name="RPROG">
 <contactref element="U1" pad="5"/>
-<contactref element="R3" pad="1"/>
-<contactref element="R4" pad="1"/>
+<contactref element="RPROG0" pad="1"/>
+<contactref element="RPROG1" pad="1"/>
 <wire x1="12.7" y1="11.772" x2="12.507" y2="13.6859" width="0" layer="19" extent="1-1"/>
 <wire x1="14.986" y1="11.772" x2="12.7" y2="11.772" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="HIGHCCHG">
-<contactref element="R4" pad="2"/>
 </signal>
 </signals>
 </board>

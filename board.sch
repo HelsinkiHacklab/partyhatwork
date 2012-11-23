@@ -12809,8 +12809,8 @@ http://ww1.microchip.com/downloads/en/DeviceDoc/21984a.pdf</description>
 <part name="+3.3V_VXMEGA" library="SparkFun-Passives" deviceset="SOLDERJUMPER" device="TRACE"/>
 <part name="C2" library="rcl" deviceset="C-EU" device="C0805K"/>
 <part name="U1" library="SparkFun-PowerIC" deviceset="MCP73831" device=""/>
-<part name="R3" library="rcl" deviceset="R-US_" device="R0603"/>
-<part name="R4" library="rcl" deviceset="R-US_" device="R0603"/>
+<part name="RPROG0" library="rcl" deviceset="R-US_" device="R0603" value="10k"/>
+<part name="RPROG1" library="rcl" deviceset="R-US_" device="R0603" value="2.8k"/>
 <part name="GND10" library="supply1" deviceset="GND" device=""/>
 </parts>
 <sheets>
@@ -12875,8 +12875,8 @@ http://ww1.microchip.com/downloads/en/DeviceDoc/21984a.pdf</description>
 </instance>
 <instance part="C2" gate="G$1" x="-22.86" y="76.2"/>
 <instance part="U1" gate="G$1" x="-25.4" y="25.4"/>
-<instance part="R3" gate="G$1" x="-5.08" y="20.32" rot="R270"/>
-<instance part="R4" gate="G$1" x="0" y="20.32" rot="R270"/>
+<instance part="RPROG0" gate="G$1" x="-5.08" y="20.32" rot="R270"/>
+<instance part="RPROG1" gate="G$1" x="5.08" y="20.32" rot="R270"/>
 <instance part="GND10" gate="1" x="-5.08" y="12.7"/>
 </instances>
 <busses>
@@ -12976,7 +12976,7 @@ http://ww1.microchip.com/downloads/en/DeviceDoc/21984a.pdf</description>
 <wire x1="-15.24" y1="22.86" x2="-10.16" y2="22.86" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="R3" gate="G$1" pin="2"/>
+<pinref part="RPROG0" gate="G$1" pin="2"/>
 <pinref part="GND10" gate="1" pin="GND"/>
 </segment>
 </net>
@@ -13080,7 +13080,7 @@ http://ww1.microchip.com/downloads/en/DeviceDoc/21984a.pdf</description>
 <wire x1="149.86" y1="96.52" x2="154.94" y2="96.52" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="VXMEGA_USB" class="0">
+<net name="VXMEGA_USB" class="1">
 <segment>
 <pinref part="PWR_STACK" gate="G$1" pin="1"/>
 <wire x1="5.08" y1="33.02" x2="10.16" y2="33.02" width="0.1524" layer="91"/>
@@ -13508,7 +13508,7 @@ http://ww1.microchip.com/downloads/en/DeviceDoc/21984a.pdf</description>
 <wire x1="142.24" y1="91.44" x2="137.16" y2="91.44" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="PD5" class="0">
+<net name="PD5/CHGCTRL" class="0">
 <segment>
 <pinref part="PORTD" gate="G$1" pin="6"/>
 <wire x1="78.74" y1="101.6" x2="83.82" y2="101.6" width="0.1524" layer="91"/>
@@ -13517,21 +13517,19 @@ http://ww1.microchip.com/downloads/en/DeviceDoc/21984a.pdf</description>
 <pinref part="JP2" gate="A" pin="15"/>
 <wire x1="142.24" y1="86.36" x2="137.16" y2="86.36" width="0.1524" layer="91"/>
 </segment>
+<segment>
+<pinref part="RPROG1" gate="G$1" pin="2"/>
+<wire x1="5.08" y1="15.24" x2="5.08" y2="12.7" width="0.1524" layer="91"/>
+</segment>
 </net>
 <net name="RPROG" class="0">
 <segment>
 <pinref part="U1" gate="G$1" pin="PROG"/>
-<pinref part="R3" gate="G$1" pin="1"/>
+<pinref part="RPROG0" gate="G$1" pin="1"/>
 <wire x1="-15.24" y1="25.4" x2="-5.08" y2="25.4" width="0.1524" layer="91"/>
-<pinref part="R4" gate="G$1" pin="1"/>
-<wire x1="-5.08" y1="25.4" x2="0" y2="25.4" width="0.1524" layer="91"/>
+<pinref part="RPROG1" gate="G$1" pin="1"/>
+<wire x1="-5.08" y1="25.4" x2="5.08" y2="25.4" width="0.1524" layer="91"/>
 <junction x="-5.08" y="25.4"/>
-</segment>
-</net>
-<net name="HIGHCCHG" class="0">
-<segment>
-<pinref part="R4" gate="G$1" pin="2"/>
-<wire x1="0" y1="15.24" x2="0" y2="12.7" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
