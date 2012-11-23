@@ -3479,15 +3479,12 @@ design rules under a new name.</description>
 <contactref element="R1" pad="2"/>
 <contactref element="SJ2" pad="1"/>
 <contactref element="VREG_3.3" pad="3"/>
-<wire x1="3.048" y1="16.24" x2="1.27" y2="16.24" width="0.6096" layer="1"/>
-<wire x1="1.27" y1="16.24" x2="1.27" y2="16.51" width="0.6096" layer="1"/>
-<wire x1="3.048" y1="16.51" x2="3.048" y2="16.24" width="0.3048" layer="1"/>
 <contactref element="U1" pad="3"/>
 <wire x1="9.45" y1="44.61" x2="22.86" y2="47.117" width="0" layer="19" extent="1-16"/>
 <wire x1="7.62" y1="16.83" x2="9.45" y2="44.61" width="0" layer="19" extent="1-16"/>
 <wire x1="6.24" y1="16.24" x2="7.62" y2="16.83" width="0" layer="19" extent="1-16"/>
-<wire x1="3.048" y1="16.24" x2="6.24" y2="16.24" width="0" layer="19" extent="1-1"/>
-<wire x1="10.607" y1="16.2861" x2="1.27" y2="16.24" width="0" layer="19" extent="1-1"/>
+<wire x1="10.607" y1="16.2861" x2="7.62" y2="16.83" width="0" layer="19" extent="1-16"/>
+<wire x1="1.27" y1="16.51" x2="6.24" y2="16.24" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="VBAT_SENSE">
 <contactref element="R1" pad="1"/>
