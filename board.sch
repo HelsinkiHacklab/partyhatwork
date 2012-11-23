@@ -14256,6 +14256,54 @@ Source: www.kingbright.com</description>
 </deviceset>
 </devicesets>
 </library>
+<library name="wirepad">
+<description>&lt;b&gt;Single Pads&lt;/b&gt;&lt;p&gt;
+&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
+<packages>
+<package name="3,81/1,4">
+<description>&lt;b&gt;THROUGH-HOLE PAD&lt;/b&gt;</description>
+<wire x1="1.905" y1="-1.27" x2="1.905" y2="-1.905" width="0.1524" layer="21"/>
+<wire x1="1.905" y1="-1.905" x2="1.27" y2="-1.905" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="-1.905" x2="-1.905" y2="-1.905" width="0.1524" layer="21"/>
+<wire x1="-1.905" y1="-1.905" x2="-1.905" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="-1.905" y1="1.27" x2="-1.905" y2="1.905" width="0.1524" layer="21"/>
+<wire x1="-1.905" y1="1.905" x2="-1.27" y2="1.905" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="1.905" x2="1.905" y2="1.905" width="0.1524" layer="21"/>
+<wire x1="1.905" y1="1.905" x2="1.905" y2="1.27" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="1.27" width="0.1524" layer="51"/>
+<pad name="1" x="0" y="0" drill="1.397" diameter="3.81" shape="octagon"/>
+<text x="-1.905" y="2.286" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="0" y="1.2" size="0.0254" layer="27">&gt;VALUE</text>
+</package>
+</packages>
+<symbols>
+<symbol name="PAD">
+<wire x1="-1.016" y1="1.016" x2="1.016" y2="-1.016" width="0.254" layer="94"/>
+<wire x1="-1.016" y1="-1.016" x2="1.016" y2="1.016" width="0.254" layer="94"/>
+<text x="-1.143" y="1.8542" size="1.778" layer="95">&gt;NAME</text>
+<text x="-1.143" y="-3.302" size="1.778" layer="96">&gt;VALUE</text>
+<pin name="P" x="2.54" y="0" visible="off" length="short" direction="pas" rot="R180"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="3,81/1,4" prefix="PAD" uservalue="yes">
+<description>&lt;b&gt;THROUGH-HOLE PAD&lt;/b&gt;</description>
+<gates>
+<gate name="1" symbol="PAD" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="3,81/1,4">
+<connects>
+<connect gate="1" pin="P" pad="1"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -14321,6 +14369,9 @@ Source: www.kingbright.com</description>
 <part name="LED1" library="led" deviceset="LED" device="CHIP-LED0603"/>
 <part name="RSENSHI" library="rcl" deviceset="R-US_" device="R0603" value="100k"/>
 <part name="RSENSLO" library="rcl" deviceset="R-US_" device="R0603" value="50k"/>
+<part name="PAD1" library="wirepad" deviceset="3,81/1,4" device=""/>
+<part name="GND12" library="supply1" deviceset="GND" device=""/>
+<part name="PAD2" library="wirepad" deviceset="3,81/1,4" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -14391,6 +14442,9 @@ Source: www.kingbright.com</description>
 <instance part="LED1" gate="G$1" x="-35.56" y="17.78" rot="R180"/>
 <instance part="RSENSHI" gate="G$1" x="-27.94" y="114.3" rot="R270"/>
 <instance part="RSENSLO" gate="G$1" x="-27.94" y="101.6" rot="R270"/>
+<instance part="PAD1" gate="1" x="144.78" y="35.56"/>
+<instance part="GND12" gate="1" x="147.32" y="33.02"/>
+<instance part="PAD2" gate="1" x="149.86" y="35.56" rot="R180"/>
 </instances>
 <busses>
 </busses>
@@ -14497,6 +14551,13 @@ Source: www.kingbright.com</description>
 <segment>
 <pinref part="C4" gate="G$1" pin="1"/>
 <pinref part="GND11" gate="1" pin="GND"/>
+</segment>
+<segment>
+<pinref part="PAD1" gate="1" pin="P"/>
+<pinref part="GND12" gate="1" pin="GND"/>
+<pinref part="PAD2" gate="1" pin="P"/>
+<junction x="147.32" y="35.56"/>
+<pinref part="PAD2" gate="1" pin="P"/>
 </segment>
 </net>
 <net name="VBAT" class="1">
