@@ -19,7 +19,7 @@ and XBee) will be brought out to IDC connectors for further use.
   * 1 2x3 2.54mm female header (ISP stacking)
   * 1 1x3 2.54mm female header (XMega power connector stacking)
   * 1 SOT-223 packaged 3.3V regulator (optional but high-powered one is recommended)
-  * 1 MCP73831T LiPo charge controller
+  * 1 MCP73831T LiPo charge controller http://fi.rsdelivers.com/product/microchip/mcp73831t-2dci-ot/charge-controller-li-ion-li-pol/7240599.aspx
   * 1 JST battery connector http://www.digikey.fi/product-detail/en/S2B-PH-SM4-TB%28LF%29%28SN%29/455-1749-1-ND/926846?cur=USD
   * 1 LiPo battery with JST-connector https://www.sparkfun.com/products/8483 or https://www.sparkfun.com/products/8484
   
