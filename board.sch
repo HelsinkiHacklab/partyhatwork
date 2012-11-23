@@ -12890,6 +12890,10 @@ type 0309, grid 2.5 mm</description>
 <pinref part="GND9" gate="1" pin="GND"/>
 <wire x1="33.02" y1="88.9" x2="22.86" y2="88.9" width="0.1524" layer="91"/>
 </segment>
+<segment>
+<pinref part="XBEE" gate="G$1" pin="RES@14"/>
+<wire x1="88.9" y1="40.64" x2="93.98" y2="40.64" width="0.1524" layer="91"/>
+</segment>
 </net>
 <net name="VBAT" class="1">
 <segment>
@@ -13325,10 +13329,6 @@ type 0309, grid 2.5 mm</description>
 <segment>
 <pinref part="PORTB" gate="G$1" pin="1"/>
 <wire x1="104.14" y1="99.06" x2="109.22" y2="99.06" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="XBEE" gate="G$1" pin="RES@14"/>
-<wire x1="88.9" y1="40.64" x2="93.98" y2="40.64" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="JP2" gate="A" pin="1"/>
