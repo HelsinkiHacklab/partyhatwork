@@ -14304,13 +14304,13 @@ Source: www.kingbright.com</description>
 <part name="GND8" library="supply1" deviceset="GND" device=""/>
 <part name="JP3" library="pinhead" deviceset="PINHD-2X6" device="/90"/>
 <part name="GND9" library="supply1" deviceset="GND" device=""/>
-<part name="C3" library="rcl" deviceset="C-EU" device="C1210"/>
+<part name="C3" library="rcl" deviceset="C-EU" device="C1210" value="40uF"/>
 <part name="JP2" library="pinhead" deviceset="PINHD-2X8" device="/90"/>
 <part name="VREG_3.3" library="microbuilder" deviceset="LM1117" device="SOT223-WAVE"/>
 <part name="GND7" library="supply1" deviceset="GND" device=""/>
 <part name="+3V3" library="supply1" deviceset="+3V3" device=""/>
 <part name="+3.3V_VXMEGA" library="SparkFun-Passives" deviceset="SOLDERJUMPER" device="TRACE"/>
-<part name="C2" library="rcl" deviceset="C-EU" device="C0805K"/>
+<part name="C2" library="rcl" deviceset="C-EU" device="C0805K" value="4.7uF"/>
 <part name="U1" library="SparkFun-PowerIC" deviceset="MCP73831" device=""/>
 <part name="RPROG0" library="rcl" deviceset="R-US_" device="R0603" value="10k"/>
 <part name="RPROG1" library="rcl" deviceset="R-US_" device="R0603" value="2.8k"/>
@@ -14434,6 +14434,7 @@ Source: www.kingbright.com</description>
 <wire x1="-27.94" y1="93.98" x2="-22.86" y2="93.98" width="0.1524" layer="91"/>
 <wire x1="-22.86" y1="93.98" x2="-22.86" y2="99.06" width="0.1524" layer="91"/>
 <pinref part="RSENSLO" gate="G$1" pin="2"/>
+<junction x="-27.94" y="93.98"/>
 </segment>
 <segment>
 <pinref part="PGND_GND" gate="1" pin="1"/>
@@ -14479,6 +14480,7 @@ Source: www.kingbright.com</description>
 <junction x="22.86" y="91.44"/>
 <pinref part="GND9" gate="1" pin="GND"/>
 <wire x1="33.02" y1="88.9" x2="22.86" y2="88.9" width="0.1524" layer="91"/>
+<junction x="22.86" y="88.9"/>
 </segment>
 <segment>
 <pinref part="XBEE" gate="G$1" pin="RES@14"/>
@@ -14512,6 +14514,7 @@ Source: www.kingbright.com</description>
 <wire x1="-5.08" y1="58.42" x2="-5.08" y2="63.5" width="0.1524" layer="91"/>
 <pinref part="VREG_3.3" gate="G$1" pin="IN"/>
 <wire x1="-5.08" y1="63.5" x2="-30.48" y2="63.5" width="0.1524" layer="91"/>
+<junction x="0" y="55.88"/>
 </segment>
 <segment>
 <pinref part="P+2" gate="1" pin="V+"/>
@@ -14972,6 +14975,7 @@ Source: www.kingbright.com</description>
 <pinref part="RSENSHI" gate="G$1" pin="2"/>
 <pinref part="RSENSLO" gate="G$1" pin="1"/>
 <junction x="-27.94" y="106.68"/>
+<junction x="-22.86" y="106.68"/>
 </segment>
 </net>
 <net name="PB2" class="0">
@@ -15034,12 +15038,6 @@ Source: www.kingbright.com</description>
 <wire x1="142.24" y1="91.44" x2="137.16" y2="91.44" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="PD5/CHGCTRL" class="0">
-<segment>
-<pinref part="JP2" gate="A" pin="15"/>
-<wire x1="142.24" y1="86.36" x2="137.16" y2="86.36" width="0.1524" layer="91"/>
-</segment>
-</net>
 <net name="RPROG" class="0">
 <segment>
 <pinref part="U1" gate="G$1" pin="PROG"/>
@@ -15068,10 +15066,46 @@ Source: www.kingbright.com</description>
 <pinref part="PORTD" gate="G$1" pin="6"/>
 <wire x1="78.74" y1="101.6" x2="83.82" y2="101.6" width="0.1524" layer="91"/>
 </segment>
+<segment>
+<pinref part="JP2" gate="A" pin="15"/>
+<wire x1="142.24" y1="86.36" x2="137.16" y2="86.36" width="0.1524" layer="91"/>
+</segment>
 </net>
 </nets>
 </sheet>
 </sheets>
+<errors>
+<approved hash="102,1,0,55.88,V+,VBAT,,,,"/>
+<approved hash="102,1,-27.94,121.92,V+,VBAT,,,,"/>
+<approved hash="104,1,48.26,55.88,XBEE,VDD,+3V3,,,"/>
+<approved hash="202,1,88.9,45.72,XBEE,RTS,,,,"/>
+<approved hash="104,1,-35.56,27.94,U1,VIN,VXMEGA_USB,,,"/>
+<approved hash="104,1,-15.24,22.86,U1,VSS,GND,,,"/>
+<approved hash="106,1,5.08,73.66,PDI_DATA,,,,,"/>
+<approved hash="115,1,6.94267,99.2547,PORTA,,,,,"/>
+<approved hash="115,1,47.5827,99.2547,PORTC,,,,,"/>
+<approved hash="115,1,75.5227,99.2547,PORTD,,,,,"/>
+<approved hash="115,1,100.923,104.335,PORTB,,,,,"/>
+<approved hash="115,1,100.923,86.5547,PORTE,,,,,"/>
+<approved hash="115,1,2.73907,37.0247,PWR_STACK,,,,,"/>
+<approved hash="115,1,44.0953,154.94,DRV0,,,,,"/>
+<approved hash="115,1,66.9553,154.94,DRV1,,,,,"/>
+<approved hash="115,1,84.7353,154.94,DRV2,,,,,"/>
+<approved hash="115,1,-12.1073,57.15,BAT,,,,,"/>
+<approved hash="115,1,-10.8373,48.4547,BAT_ALT,,,,,"/>
+<approved hash="115,1,19.0077,99.1912,JP1,,,,,"/>
+<approved hash="115,1,110.161,152.4,SJ2,,,,,"/>
+<approved hash="115,1,113.305,134.62,RLED0,,,,,"/>
+<approved hash="115,1,115.845,134.62,RLED1,,,,,"/>
+<approved hash="115,1,118.385,134.62,RLED2,,,,,"/>
+<approved hash="115,1,120.925,134.62,RLED3,,,,,"/>
+<approved hash="115,1,123.465,134.62,RLED4,,,,,"/>
+<approved hash="115,1,126.005,134.62,RLED5,,,,,"/>
+<approved hash="115,1,119.249,148.548,JP3,,,,,"/>
+<approved hash="115,1,146.008,96.6512,JP2,,,,,"/>
+<approved hash="115,1,-27.1357,71.12,VREG_3.3,,,,,"/>
+<approved hash="115,1,-35.8817,19.05,LED1,,,,,"/>
+</errors>
 </schematic>
 </drawing>
 </eagle>
