@@ -12731,7 +12731,6 @@ type 0309, grid 2.5 mm</description>
 <part name="PGND_GND" library="SparkFun-Passives" deviceset="SOLDERJUMPER" device="TRACE"/>
 <part name="GND8" library="supply1" deviceset="GND" device=""/>
 <part name="JP3" library="pinhead" deviceset="PINHD-2X6" device="/90"/>
-<part name="AGND_GND" library="SparkFun-Passives" deviceset="SOLDERJUMPER" device="TRACE"/>
 <part name="GND9" library="supply1" deviceset="GND" device=""/>
 <part name="C3" library="rcl" deviceset="C-EU" device="C1210"/>
 <part name="JP2" library="pinhead" deviceset="PINHD-2X8" device="/90"/>
@@ -12740,8 +12739,6 @@ type 0309, grid 2.5 mm</description>
 <part name="+3V3" library="supply1" deviceset="+3V3" device=""/>
 <part name="+3.3V_VXMEGA" library="SparkFun-Passives" deviceset="SOLDERJUMPER" device="TRACE"/>
 <part name="C2" library="rcl" deviceset="C-EU" device="C0805K"/>
-<part name="JMP0" library="resistor" deviceset="R-US_" device="R0805" value="0R"/>
-<part name="JMP1" library="resistor" deviceset="R-US_" device="R0805" value="0R"/>
 </parts>
 <sheets>
 <sheet>
@@ -12794,9 +12791,6 @@ type 0309, grid 2.5 mm</description>
 </instance>
 <instance part="GND8" gate="1" x="109.22" y="127"/>
 <instance part="JP3" gate="A" x="119.38" y="147.32" rot="R90"/>
-<instance part="AGND_GND" gate="1" x="27.94" y="88.9" smashed="yes">
-<attribute name="NAME" x="25.4" y="91.44" size="1.778" layer="95"/>
-</instance>
 <instance part="GND9" gate="1" x="33.02" y="86.36"/>
 <instance part="C3" gate="G$1" x="129.54" y="152.4" rot="R90"/>
 <instance part="JP2" gate="A" x="144.78" y="96.52"/>
@@ -12807,8 +12801,6 @@ type 0309, grid 2.5 mm</description>
 <attribute name="NAME" x="-17.78" y="81.28" size="1.778" layer="95"/>
 </instance>
 <instance part="C2" gate="G$1" x="-22.86" y="76.2"/>
-<instance part="JMP0" gate="G$1" x="152.4" y="134.62" rot="R90"/>
-<instance part="JMP1" gate="G$1" x="160.02" y="134.62" rot="R90"/>
 </instances>
 <busses>
 </busses>
@@ -12858,10 +12850,6 @@ type 0309, grid 2.5 mm</description>
 <pinref part="GND8" gate="1" pin="GND"/>
 </segment>
 <segment>
-<pinref part="AGND_GND" gate="1" pin="2"/>
-<pinref part="GND9" gate="1" pin="GND"/>
-</segment>
-<segment>
 <pinref part="JP2" gate="A" pin="13"/>
 <wire x1="142.24" y1="88.9" x2="137.16" y2="88.9" width="0.1524" layer="91"/>
 </segment>
@@ -12875,6 +12863,32 @@ type 0309, grid 2.5 mm</description>
 <segment>
 <pinref part="JP2" gate="A" pin="4"/>
 <wire x1="149.86" y1="101.6" x2="154.94" y2="101.6" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="JP1" gate="A" pin="16"/>
+<pinref part="JP1" gate="A" pin="2"/>
+<wire x1="22.86" y1="88.9" x2="22.86" y2="91.44" width="0.1524" layer="91"/>
+<junction x="22.86" y="106.68"/>
+<pinref part="JP1" gate="A" pin="4"/>
+<junction x="22.86" y="104.14"/>
+<wire x1="22.86" y1="91.44" x2="22.86" y2="93.98" width="0.1524" layer="91"/>
+<wire x1="22.86" y1="93.98" x2="22.86" y2="96.52" width="0.1524" layer="91"/>
+<wire x1="22.86" y1="96.52" x2="22.86" y2="99.06" width="0.1524" layer="91"/>
+<wire x1="22.86" y1="99.06" x2="22.86" y2="101.6" width="0.1524" layer="91"/>
+<wire x1="22.86" y1="101.6" x2="22.86" y2="104.14" width="0.1524" layer="91"/>
+<wire x1="22.86" y1="104.14" x2="22.86" y2="106.68" width="0.1524" layer="91"/>
+<pinref part="JP1" gate="A" pin="6"/>
+<junction x="22.86" y="101.6"/>
+<pinref part="JP1" gate="A" pin="8"/>
+<junction x="22.86" y="99.06"/>
+<pinref part="JP1" gate="A" pin="10"/>
+<junction x="22.86" y="96.52"/>
+<pinref part="JP1" gate="A" pin="12"/>
+<junction x="22.86" y="93.98"/>
+<pinref part="JP1" gate="A" pin="14"/>
+<junction x="22.86" y="91.44"/>
+<pinref part="GND9" gate="1" pin="GND"/>
+<wire x1="33.02" y1="88.9" x2="22.86" y2="88.9" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="VBAT" class="1">
@@ -13097,50 +13111,6 @@ type 0309, grid 2.5 mm</description>
 <wire x1="-22.86" y1="106.68" x2="-27.94" y2="106.68" width="0.1524" layer="91"/>
 <junction x="-27.94" y="106.68"/>
 <wire x1="-22.86" y1="106.68" x2="-15.24" y2="106.68" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="AGND" class="0">
-<segment>
-<pinref part="JP1" gate="A" pin="16"/>
-<pinref part="JP1" gate="A" pin="2"/>
-<wire x1="22.86" y1="88.9" x2="22.86" y2="91.44" width="0.1524" layer="91"/>
-<junction x="22.86" y="106.68"/>
-<pinref part="JP1" gate="A" pin="4"/>
-<junction x="22.86" y="104.14"/>
-<wire x1="22.86" y1="91.44" x2="22.86" y2="93.98" width="0.1524" layer="91"/>
-<wire x1="22.86" y1="93.98" x2="22.86" y2="96.52" width="0.1524" layer="91"/>
-<wire x1="22.86" y1="96.52" x2="22.86" y2="99.06" width="0.1524" layer="91"/>
-<wire x1="22.86" y1="99.06" x2="22.86" y2="101.6" width="0.1524" layer="91"/>
-<wire x1="22.86" y1="101.6" x2="22.86" y2="104.14" width="0.1524" layer="91"/>
-<wire x1="22.86" y1="104.14" x2="22.86" y2="106.68" width="0.1524" layer="91"/>
-<pinref part="JP1" gate="A" pin="6"/>
-<junction x="22.86" y="101.6"/>
-<pinref part="JP1" gate="A" pin="8"/>
-<junction x="22.86" y="99.06"/>
-<pinref part="JP1" gate="A" pin="10"/>
-<junction x="22.86" y="96.52"/>
-<pinref part="JP1" gate="A" pin="12"/>
-<junction x="22.86" y="93.98"/>
-<pinref part="JP1" gate="A" pin="14"/>
-<junction x="22.86" y="91.44"/>
-<junction x="22.86" y="88.9"/>
-<pinref part="AGND_GND" gate="1" pin="1"/>
-</segment>
-<segment>
-<pinref part="JMP0" gate="G$1" pin="2"/>
-<wire x1="152.4" y1="139.7" x2="152.4" y2="142.24" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="JMP0" gate="G$1" pin="1"/>
-<wire x1="152.4" y1="129.54" x2="152.4" y2="127" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="JMP1" gate="G$1" pin="2"/>
-<wire x1="160.02" y1="139.7" x2="160.02" y2="142.24" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="JMP1" gate="G$1" pin="1"/>
-<wire x1="160.02" y1="129.54" x2="160.02" y2="127" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="PA0" class="0">
