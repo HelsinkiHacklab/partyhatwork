@@ -3273,7 +3273,7 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="4.445" y="12.7" size="1.27" layer="27" rot="R90"/>
 </element>
 <element name="C1" library="rcl" package="C0603K" value="0.1uF" x="9.271" y="23.749" smashed="yes" rot="MR0"/>
-<element name="JP1" library="pinhead" package="2X08" value="" x="46.99" y="34.29" smashed="yes" rot="R270">
+<element name="PORTA_OUT" library="pinhead" package="2X08" value="" x="46.99" y="34.29" smashed="yes" rot="R270">
 <attribute name="VALUE" x="42.545" y="44.45" size="1.27" layer="27" rot="R270"/>
 </element>
 <element name="SJ2" library="SparkFun-Passives" package="SJ_2" value="" x="22.86" y="45.593" smashed="yes" rot="MR270">
@@ -3298,13 +3298,13 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="42.926" y="39.878" size="1.27" layer="27" rot="R90"/>
 </element>
 <element name="PGND_GND" library="SparkFun-Passives" package="SJ_2S-TRACE" value="SOLDERJUMPERTRACE" x="23.622" y="35.56" smashed="yes"/>
-<element name="JP3" library="pinhead" package="2X06/90" value="" x="34.29" y="50.8" smashed="yes">
+<element name="LEDS" library="pinhead" package="2X06/90" value="" x="34.29" y="50.8" smashed="yes">
 <attribute name="VALUE" x="43.815" y="46.99" size="1.27" layer="27" rot="R90"/>
 </element>
 <element name="C3" library="rcl" package="C1210" value="40uF" x="25.527" y="45.593" smashed="yes" rot="R270">
 <attribute name="VALUE" x="22.352" y="47.498" size="1.27" layer="27" rot="R270"/>
 </element>
-<element name="JP2" library="pinhead" package="2X08/90" value="" x="52.07" y="11.43" smashed="yes" rot="R270">
+<element name="MISC_OUT" library="pinhead" package="2X08/90" value="" x="52.07" y="11.43" smashed="yes" rot="R270">
 <attribute name="VALUE" x="48.26" y="-0.635" size="1.27" layer="27"/>
 </element>
 <element name="VREG_3.3" library="microbuilder" package="SOT223-W" value="" x="6.35" y="41.91" rot="R90"/>
@@ -3363,20 +3363,20 @@ design rules under a new name.</description>
 <contactref element="BAT_ALT" pad="1"/>
 <contactref element="C1" pad="2"/>
 <contactref element="PGND_GND" pad="1"/>
-<contactref element="JP2" pad="13"/>
+<contactref element="MISC_OUT" pad="13"/>
 <contactref element="VREG_3.3" pad="1"/>
 <contactref element="C2" pad="2"/>
-<contactref element="JP2" pad="4"/>
+<contactref element="MISC_OUT" pad="4"/>
 <via x="22.86" y="48.768" extent="1-16" drill="0.3048" diameter="0.6096"/>
 <via x="44.196" y="49.022" extent="1-16" drill="0.3048" diameter="0.6096"/>
-<contactref element="JP1" pad="16"/>
-<contactref element="JP1" pad="2"/>
-<contactref element="JP1" pad="4"/>
-<contactref element="JP1" pad="6"/>
-<contactref element="JP1" pad="8"/>
-<contactref element="JP1" pad="10"/>
-<contactref element="JP1" pad="12"/>
-<contactref element="JP1" pad="14"/>
+<contactref element="PORTA_OUT" pad="16"/>
+<contactref element="PORTA_OUT" pad="2"/>
+<contactref element="PORTA_OUT" pad="4"/>
+<contactref element="PORTA_OUT" pad="6"/>
+<contactref element="PORTA_OUT" pad="8"/>
+<contactref element="PORTA_OUT" pad="10"/>
+<contactref element="PORTA_OUT" pad="12"/>
+<contactref element="PORTA_OUT" pad="14"/>
 <contactref element="XBEE" pad="14"/>
 <via x="43.434" y="42.164" extent="1-16" drill="0.3048"/>
 <contactref element="U1" pad="2"/>
@@ -3508,14 +3508,14 @@ design rules under a new name.</description>
 </signal>
 <signal name="PE0/SDA">
 <contactref element="PORTE" pad="1"/>
-<contactref element="JP2" pad="6"/>
+<contactref element="MISC_OUT" pad="6"/>
 <wire x1="46.736" y1="16.764" x2="48.26" y2="15.24" width="0.1524" layer="1"/>
 <wire x1="43.18" y1="16.764" x2="46.736" y2="16.764" width="0.1524" layer="1"/>
 <wire x1="43.18" y1="21.59" x2="43.18" y2="16.764" width="0.1524" layer="1"/>
 </signal>
 <signal name="PE1/SCL">
 <contactref element="PORTE" pad="2"/>
-<contactref element="JP2" pad="8"/>
+<contactref element="MISC_OUT" pad="8"/>
 <wire x1="46.736" y1="14.224" x2="48.26" y2="12.7" width="0.1524" layer="1"/>
 <wire x1="40.64" y1="14.224" x2="46.736" y2="14.224" width="0.1524" layer="1"/>
 <wire x1="40.64" y1="21.59" x2="40.64" y2="14.224" width="0.1524" layer="1"/>
@@ -3543,7 +3543,7 @@ design rules under a new name.</description>
 </signal>
 <signal name="XMEGA_TX1">
 <contactref element="PORTC" pad="8"/>
-<contactref element="JP2" pad="16"/>
+<contactref element="MISC_OUT" pad="16"/>
 <wire x1="47.244" y1="3.556" x2="48.26" y2="2.54" width="0.1524" layer="16"/>
 <wire x1="25.146" y1="3.556" x2="47.244" y2="3.556" width="0.1524" layer="16"/>
 <wire x1="24.5872" y1="2.9972" x2="25.146" y2="3.556" width="0.1524" layer="16"/>
@@ -3552,7 +3552,7 @@ design rules under a new name.</description>
 </signal>
 <signal name="XMEGA_RX1">
 <contactref element="PORTC" pad="7"/>
-<contactref element="JP2" pad="14"/>
+<contactref element="MISC_OUT" pad="14"/>
 <wire x1="47.0408" y1="3.8608" x2="48.26" y2="5.08" width="0.1524" layer="16"/>
 <wire x1="22.9108" y1="3.8608" x2="47.0408" y2="3.8608" width="0.1524" layer="16"/>
 <wire x1="20.32" y1="1.27" x2="22.9108" y2="3.8608" width="0.1524" layer="1"/>
@@ -3751,7 +3751,7 @@ design rules under a new name.</description>
 <signal name="AGND">
 </signal>
 <signal name="PA0">
-<contactref element="JP1" pad="15"/>
+<contactref element="PORTA_OUT" pad="15"/>
 <contactref element="PORTA" pad="1"/>
 <wire x1="36.5252" y1="25.4" x2="45.72" y2="25.4" width="0.1524" layer="16"/>
 <wire x1="34.7472" y1="23.622" x2="36.5252" y2="25.4" width="0.1524" layer="16"/>
@@ -3761,7 +3761,7 @@ design rules under a new name.</description>
 </signal>
 <signal name="PA1">
 <contactref element="PORTA" pad="2"/>
-<contactref element="JP1" pad="13"/>
+<contactref element="PORTA_OUT" pad="13"/>
 <wire x1="45.72" y1="26.416" x2="45.72" y2="27.94" width="0.1524" layer="16"/>
 <wire x1="46.1264" y1="26.416" x2="45.72" y2="26.416" width="0.1524" layer="16"/>
 <wire x1="46.736" y1="25.8064" x2="46.1264" y2="26.416" width="0.1524" layer="16"/>
@@ -3770,7 +3770,7 @@ design rules under a new name.</description>
 <wire x1="30.48" y1="21.59" x2="31.6484" y2="22.7584" width="0.1524" layer="16"/>
 </signal>
 <signal name="PA2">
-<contactref element="JP1" pad="11"/>
+<contactref element="PORTA_OUT" pad="11"/>
 <contactref element="PORTA" pad="3"/>
 <wire x1="33.8836" y1="30.48" x2="45.72" y2="30.48" width="0.1524" layer="16"/>
 <wire x1="29.6672" y1="26.2636" x2="33.8836" y2="30.48" width="0.1524" layer="16"/>
@@ -3780,7 +3780,7 @@ design rules under a new name.</description>
 </signal>
 <signal name="PA3">
 <contactref element="PORTA" pad="4"/>
-<contactref element="JP1" pad="9"/>
+<contactref element="PORTA_OUT" pad="9"/>
 <wire x1="44.5008" y1="31.8008" x2="45.72" y2="33.02" width="0.1524" layer="16"/>
 <wire x1="26.9748" y1="31.8008" x2="44.5008" y2="31.8008" width="0.1524" layer="16"/>
 <wire x1="25.4" y1="30.226" x2="26.9748" y2="31.8008" width="0.1524" layer="16"/>
@@ -3788,7 +3788,7 @@ design rules under a new name.</description>
 <via x="25.4" y="30.226" extent="1-16" drill="0.3048"/>
 </signal>
 <signal name="PA4">
-<contactref element="JP1" pad="7"/>
+<contactref element="PORTA_OUT" pad="7"/>
 <contactref element="PORTA" pad="5"/>
 <wire x1="42.2656" y1="32.1056" x2="45.72" y2="35.56" width="0.1524" layer="16"/>
 <wire x1="26.2128" y1="32.1056" x2="42.2656" y2="32.1056" width="0.1524" layer="16"/>
@@ -3798,7 +3798,7 @@ design rules under a new name.</description>
 </signal>
 <signal name="PA5">
 <contactref element="PORTA" pad="6"/>
-<contactref element="JP1" pad="5"/>
+<contactref element="PORTA_OUT" pad="5"/>
 <wire x1="42.7736" y1="35.1536" x2="45.72" y2="38.1" width="0.1524" layer="1"/>
 <wire x1="42.7736" y1="27.7876" x2="42.7736" y2="35.1536" width="0.1524" layer="1"/>
 <wire x1="39.8272" y1="24.8412" x2="42.7736" y2="27.7876" width="0.1524" layer="1"/>
@@ -3808,7 +3808,7 @@ design rules under a new name.</description>
 <via x="39.8272" y="24.8412" extent="1-16" drill="0.3048"/>
 </signal>
 <signal name="PA6">
-<contactref element="JP1" pad="3"/>
+<contactref element="PORTA_OUT" pad="3"/>
 <contactref element="PORTA" pad="7"/>
 <wire x1="42.4688" y1="37.3888" x2="45.72" y2="40.64" width="0.1524" layer="1"/>
 <wire x1="42.4688" y1="32.0548" x2="42.4688" y2="37.3888" width="0.1524" layer="1"/>
@@ -3821,7 +3821,7 @@ design rules under a new name.</description>
 </signal>
 <signal name="PA7">
 <contactref element="PORTA" pad="8"/>
-<contactref element="JP1" pad="1"/>
+<contactref element="PORTA_OUT" pad="1"/>
 <wire x1="45.72" y1="41.656" x2="45.72" y2="43.18" width="0.1524" layer="16"/>
 <wire x1="46.1264" y1="41.656" x2="45.72" y2="41.656" width="0.1524" layer="16"/>
 <wire x1="46.736" y1="41.0464" x2="46.1264" y2="41.656" width="0.1524" layer="16"/>
@@ -3839,12 +3839,12 @@ design rules under a new name.</description>
 <vertex x="43.18" y="53.34"/>
 </polygon>
 <contactref element="SJ2" pad="2"/>
-<contactref element="JP3" pad="2"/>
-<contactref element="JP3" pad="4"/>
-<contactref element="JP3" pad="6"/>
-<contactref element="JP3" pad="8"/>
-<contactref element="JP3" pad="10"/>
-<contactref element="JP3" pad="12"/>
+<contactref element="LEDS" pad="2"/>
+<contactref element="LEDS" pad="4"/>
+<contactref element="LEDS" pad="6"/>
+<contactref element="LEDS" pad="8"/>
+<contactref element="LEDS" pad="10"/>
+<contactref element="LEDS" pad="12"/>
 <contactref element="C3" pad="1"/>
 <wire x1="22.86" y1="45.593" x2="24.127" y2="45.593" width="0.6096" layer="16"/>
 <wire x1="24.127" y1="45.593" x2="25.527" y2="46.993" width="0.6096" layer="16"/>
@@ -3884,7 +3884,7 @@ design rules under a new name.</description>
 <contactref element="VREG_3.3" pad="2"/>
 <contactref element="+3.3V_VXMEGA" pad="1"/>
 <contactref element="C2" pad="1"/>
-<contactref element="JP2" pad="2"/>
+<contactref element="MISC_OUT" pad="2"/>
 <wire x1="9.4996" y1="41.656" x2="12.7" y2="41.656" width="0.3048" layer="1"/>
 <wire x1="9.4996" y1="41.91" x2="9.4996" y2="41.656" width="0.3048" layer="1"/>
 <wire x1="12.7" y1="41.656" x2="12.7" y2="41.64" width="0.3048" layer="1"/>
@@ -3924,32 +3924,32 @@ design rules under a new name.</description>
 </signal>
 <signal name="LED0R" class="1">
 <contactref element="RLED0" pad="2"/>
-<contactref element="JP3" pad="1"/>
+<contactref element="LEDS" pad="1"/>
 <wire x1="27.94" y1="41.49" x2="27.94" y2="44.45" width="0.3048" layer="1"/>
 </signal>
 <signal name="LED1R" class="1">
 <contactref element="RLED1" pad="2"/>
-<contactref element="JP3" pad="3"/>
+<contactref element="LEDS" pad="3"/>
 <wire x1="30.48" y1="41.49" x2="30.48" y2="44.45" width="0.3048" layer="1"/>
 </signal>
 <signal name="LED2R" class="1">
 <contactref element="RLED2" pad="2"/>
-<contactref element="JP3" pad="5"/>
+<contactref element="LEDS" pad="5"/>
 <wire x1="33.02" y1="41.49" x2="33.02" y2="44.45" width="0.3048" layer="1"/>
 </signal>
 <signal name="LED3R" class="1">
 <contactref element="RLED3" pad="2"/>
-<contactref element="JP3" pad="7"/>
+<contactref element="LEDS" pad="7"/>
 <wire x1="35.56" y1="41.49" x2="35.56" y2="44.45" width="0.3048" layer="1"/>
 </signal>
 <signal name="LED4R" class="1">
 <contactref element="RLED4" pad="2"/>
-<contactref element="JP3" pad="9"/>
+<contactref element="LEDS" pad="9"/>
 <wire x1="38.1" y1="41.49" x2="38.1" y2="44.45" width="0.3048" layer="1"/>
 </signal>
 <signal name="LED5R" class="1">
 <contactref element="RLED5" pad="2"/>
-<contactref element="JP3" pad="11"/>
+<contactref element="LEDS" pad="11"/>
 <wire x1="40.64" y1="41.49" x2="40.64" y2="44.45" width="0.3048" layer="1"/>
 </signal>
 <signal name="LED0" class="1">
@@ -3982,7 +3982,7 @@ design rules under a new name.</description>
 </signal>
 <signal name="PB0/XMEGA_AREF">
 <contactref element="PORTB" pad="1"/>
-<contactref element="JP2" pad="1"/>
+<contactref element="MISC_OUT" pad="1"/>
 <contactref element="RPROG1" pad="2"/>
 <wire x1="17.2212" y1="13.0556" x2="17.2212" y2="12.0904" width="0.1524" layer="16"/>
 <wire x1="16.6116" y1="13.0556" x2="17.2212" y2="13.0556" width="0.1524" layer="16"/>
@@ -4013,7 +4013,7 @@ design rules under a new name.</description>
 </signal>
 <signal name="PB1/VBAT_SENSE">
 <contactref element="PORTB" pad="2"/>
-<contactref element="JP2" pad="3"/>
+<contactref element="MISC_OUT" pad="3"/>
 <contactref element="C1" pad="1"/>
 <contactref element="RSENSHI" pad="2"/>
 <contactref element="RSENSLO" pad="1"/>
@@ -4032,7 +4032,7 @@ design rules under a new name.</description>
 </signal>
 <signal name="PB2">
 <contactref element="PORTB" pad="3"/>
-<contactref element="JP2" pad="5"/>
+<contactref element="MISC_OUT" pad="5"/>
 <wire x1="43.4848" y1="17.4752" x2="45.72" y2="15.24" width="0.1524" layer="16"/>
 <wire x1="11.43" y1="17.4752" x2="43.4848" y2="17.4752" width="0.1524" layer="16"/>
 <wire x1="11.0236" y1="17.8816" x2="11.43" y2="17.4752" width="0.1524" layer="16"/>
@@ -4043,7 +4043,7 @@ design rules under a new name.</description>
 </signal>
 <signal name="PB3">
 <contactref element="PORTB" pad="4"/>
-<contactref element="JP2" pad="7"/>
+<contactref element="MISC_OUT" pad="7"/>
 <wire x1="19.2532" y1="12.7" x2="45.72" y2="12.7" width="0.1524" layer="16"/>
 <wire x1="17.526" y1="10.9728" x2="19.2532" y2="12.7" width="0.1524" layer="16"/>
 <wire x1="11.938" y1="10.9728" x2="17.526" y2="10.9728" width="0.1524" layer="16"/>
@@ -4055,14 +4055,14 @@ design rules under a new name.</description>
 </signal>
 <signal name="PE2">
 <contactref element="PORTE" pad="3"/>
-<contactref element="JP2" pad="10"/>
+<contactref element="MISC_OUT" pad="10"/>
 <wire x1="46.8376" y1="11.5824" x2="48.26" y2="10.16" width="0.1524" layer="1"/>
 <wire x1="38.1" y1="11.5824" x2="46.8376" y2="11.5824" width="0.1524" layer="1"/>
 <wire x1="38.1" y1="21.59" x2="38.1" y2="11.5824" width="0.1524" layer="1"/>
 </signal>
 <signal name="PE3">
 <contactref element="PORTE" pad="4"/>
-<contactref element="JP2" pad="12"/>
+<contactref element="MISC_OUT" pad="12"/>
 <wire x1="46.736" y1="7.62" x2="48.26" y2="7.62" width="0.1524" layer="1"/>
 <wire x1="46.736" y1="8.0264" x2="46.736" y2="7.62" width="0.1524" layer="1"/>
 <wire x1="46.0248" y1="8.7376" x2="46.736" y2="8.0264" width="0.1524" layer="1"/>
@@ -4071,7 +4071,7 @@ design rules under a new name.</description>
 </signal>
 <signal name="PD0">
 <contactref element="PORTD" pad="1"/>
-<contactref element="JP2" pad="9"/>
+<contactref element="MISC_OUT" pad="9"/>
 <wire x1="40.64" y1="5.08" x2="45.72" y2="10.16" width="0.1524" layer="16"/>
 <wire x1="29.21" y1="5.08" x2="40.64" y2="5.08" width="0.1524" layer="16"/>
 <wire x1="25.4" y1="1.27" x2="29.21" y2="5.08" width="0.1524" layer="1"/>
@@ -4079,7 +4079,7 @@ design rules under a new name.</description>
 </signal>
 <signal name="PD1">
 <contactref element="PORTD" pad="2"/>
-<contactref element="JP2" pad="11"/>
+<contactref element="MISC_OUT" pad="11"/>
 <wire x1="42.6212" y1="4.5212" x2="45.72" y2="7.62" width="0.1524" layer="16"/>
 <wire x1="29.9212" y1="4.5212" x2="42.6212" y2="4.5212" width="0.1524" layer="16"/>
 <wire x1="27.94" y1="2.54" x2="29.9212" y2="4.5212" width="0.1524" layer="1"/>
@@ -4125,38 +4125,12 @@ design rules under a new name.</description>
 </signal>
 <signal name="PD5">
 <contactref element="PORTD" pad="6"/>
-<contactref element="JP2" pad="15"/>
+<contactref element="MISC_OUT" pad="15"/>
 <wire x1="45.6184" y1="2.4384" x2="45.72" y2="2.54" width="0.1524" layer="16"/>
 <wire x1="39.2684" y1="2.4384" x2="45.6184" y2="2.4384" width="0.1524" layer="16"/>
 <wire x1="38.1" y1="1.27" x2="39.2684" y2="2.4384" width="0.1524" layer="16"/>
 </signal>
 </signals>
-<errors>
-<approved hash="3,16,5f77630763835ff3"/>
-<approved hash="7,40,e67ddec96862a8f3"/>
-<approved hash="7,40,dcf79c78be8f0625"/>
-<approved hash="7,40,e64ddfa6690ba8db"/>
-<approved hash="7,40,2a60381838002a78"/>
-<approved hash="7,40,dce39d37bfc2062d"/>
-<approved hash="7,40,3e60061806003e78"/>
-<approved hash="4,1,60966bf6ebf6e096"/>
-<approved hash="5,1,15c99f709b2e1583"/>
-<approved hash="4,1,014a08c288c2814a"/>
-<approved hash="4,1,8a894ae24def5384"/>
-<approved hash="5,1,f9998eff6ca44b34"/>
-<approved hash="5,1,81c4c044a4e340c6"/>
-<approved hash="5,1,bcc57ec4a4e03486"/>
-<approved hash="19,1,ed27458a2b977d31"/>
-<approved hash="19,1,47bc94512e3003d6"/>
-<approved hash="4,1,e1ec8753872be14a"/>
-<approved hash="4,16,8a894ae24def5384"/>
-<approved hash="19,16,5f4c6f6bd62599fa"/>
-<approved hash="19,16,d983e192d5ebf45b"/>
-<approved hash="19,16,f02238348c773b99"/>
-<approved hash="19,16,1114a1a4401d8b77"/>
-<approved hash="5,16,b3e087f48308c8cc"/>
-<approved hash="4,16,e1ec8753872be14a"/>
-</errors>
 </board>
 </drawing>
 </eagle>
