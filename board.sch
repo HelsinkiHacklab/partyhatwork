@@ -14428,7 +14428,9 @@ Source: www.kingbright.com</description>
 <instance part="RLED3" gate="G$1" x="147.32" y="134.62" rot="R90"/>
 <instance part="RLED4" gate="G$1" x="149.86" y="134.62" rot="R90"/>
 <instance part="RLED5" gate="G$1" x="152.4" y="134.62" rot="R90"/>
-<instance part="+3V2" gate="G$1" x="55.88" y="60.96"/>
+<instance part="+3V2" gate="G$1" x="55.88" y="60.96" smashed="yes">
+<attribute name="VALUE" x="55.88" y="63.5" size="1.778" layer="96"/>
+</instance>
 <instance part="PGND_GND" gate="1" x="111.76" y="129.54" smashed="yes" rot="R180">
 <attribute name="NAME" x="114.3" y="127" size="1.778" layer="95" rot="R180"/>
 </instance>
@@ -14440,9 +14442,7 @@ Source: www.kingbright.com</description>
 <instance part="VREG_3.3" gate="G$1" x="-30.48" y="71.12" rot="R90"/>
 <instance part="GND7" gate="1" x="-17.78" y="71.12" rot="R90"/>
 <instance part="+3V3" gate="G$1" x="-30.48" y="83.82"/>
-<instance part="+3.3V_VXMEGA" gate="1" x="-15.24" y="78.74" smashed="yes">
-<attribute name="NAME" x="-17.78" y="81.28" size="1.778" layer="95"/>
-</instance>
+<instance part="+3.3V_VXMEGA" gate="1" x="-15.24" y="78.74" smashed="yes"/>
 <instance part="C2" gate="G$1" x="-22.86" y="76.2"/>
 <instance part="U1" gate="G$1" x="-25.4" y="25.4"/>
 <instance part="RPROG0" gate="G$1" x="7.62" y="20.32" rot="R270"/>
@@ -14626,13 +14626,14 @@ Source: www.kingbright.com</description>
 <segment>
 <pinref part="XBEE" gate="G$1" pin="DTR"/>
 <wire x1="60.96" y1="38.1" x2="58.42" y2="38.1" width="0.1524" layer="91"/>
-<label x="38.1" y="38.1" size="1.778" layer="95"/>
+<label x="35.56" y="38.1" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="VXMEGA" class="0">
 <segment>
 <pinref part="PDI_STACK" gate="G$1" pin="2"/>
 <wire x1="22.86" y1="73.66" x2="27.94" y2="73.66" width="0.1524" layer="91"/>
+<label x="30.48" y="73.66" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="PWR_STACK" gate="G$1" pin="3"/>
@@ -14642,6 +14643,7 @@ Source: www.kingbright.com</description>
 <segment>
 <pinref part="+3.3V_VXMEGA" gate="1" pin="2"/>
 <wire x1="-10.16" y1="78.74" x2="-5.08" y2="78.74" width="0.1524" layer="91"/>
+<label x="-7.62" y="81.28" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="XMEGA_RX0" class="0">
@@ -14653,6 +14655,7 @@ Source: www.kingbright.com</description>
 <segment>
 <pinref part="XBEE" gate="G$1" pin="DOUT"/>
 <wire x1="60.96" y1="55.88" x2="55.88" y2="55.88" width="0.1524" layer="91"/>
+<label x="38.1" y="55.88" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="XMEGA_TX0" class="0">
@@ -15222,35 +15225,39 @@ Source: www.kingbright.com</description>
 </sheets>
 <errors>
 <approved hash="102,1,0,55.88,V+,VBAT,,,,"/>
-<approved hash="102,1,-27.94,121.92,V+,VBAT,,,,"/>
-<approved hash="104,1,48.26,55.88,XBEE,VDD,+3V3,,,"/>
-<approved hash="202,1,88.9,45.72,XBEE,RTS,,,,"/>
+<approved hash="102,1,-53.34,121.92,V+,VBAT,,,,"/>
+<approved hash="104,1,60.96,58.42,XBEE,VDD,+3V3,,,"/>
 <approved hash="104,1,-35.56,27.94,U1,VIN,VXMEGA_USB,,,"/>
 <approved hash="104,1,-15.24,22.86,U1,VSS,GND,,,"/>
 <approved hash="106,1,5.08,73.66,PDI_DATA,,,,,"/>
 <approved hash="115,1,6.94267,99.2547,PORTA,,,,,"/>
 <approved hash="115,1,47.5827,99.2547,PORTC,,,,,"/>
-<approved hash="115,1,75.5227,99.2547,PORTD,,,,,"/>
-<approved hash="115,1,100.923,104.335,PORTB,,,,,"/>
-<approved hash="115,1,100.923,86.5547,PORTE,,,,,"/>
+<approved hash="115,1,80.6027,99.2547,PORTD,,,,,"/>
+<approved hash="115,1,113.623,104.335,PORTB,,,,,"/>
+<approved hash="115,1,113.623,86.5547,PORTE,,,,,"/>
 <approved hash="115,1,2.73907,37.0247,PWR_STACK,,,,,"/>
-<approved hash="115,1,44.0953,154.94,DRV0,,,,,"/>
-<approved hash="115,1,66.9553,154.94,DRV1,,,,,"/>
-<approved hash="115,1,84.7353,154.94,DRV2,,,,,"/>
+<approved hash="115,1,39.5351,162.56,DRV0,,,,,"/>
+<approved hash="115,1,62.3951,162.56,DRV1,,,,,"/>
+<approved hash="115,1,87.7951,162.56,DRV2,,,,,"/>
 <approved hash="115,1,-12.1073,57.15,BAT,,,,,"/>
 <approved hash="115,1,-10.8373,48.4547,BAT_ALT,,,,,"/>
-<approved hash="115,1,19.0077,99.1912,JP1,,,,,"/>
-<approved hash="115,1,110.161,152.4,SJ2,,,,,"/>
-<approved hash="115,1,113.305,134.62,RLED0,,,,,"/>
-<approved hash="115,1,115.845,134.62,RLED1,,,,,"/>
-<approved hash="115,1,118.385,134.62,RLED2,,,,,"/>
-<approved hash="115,1,120.925,134.62,RLED3,,,,,"/>
-<approved hash="115,1,123.465,134.62,RLED4,,,,,"/>
-<approved hash="115,1,126.005,134.62,RLED5,,,,,"/>
-<approved hash="115,1,119.249,148.548,JP3,,,,,"/>
-<approved hash="115,1,146.008,96.6512,JP2,,,,,"/>
+<approved hash="115,1,19.0077,99.1912,PORTA_OUT,,,,,"/>
+<approved hash="115,1,127.677,152.4,SJ2,,,,,"/>
+<approved hash="115,1,138.705,134.62,RLED0,,,,,"/>
+<approved hash="115,1,141.245,134.62,RLED1,,,,,"/>
+<approved hash="115,1,143.785,134.62,RLED2,,,,,"/>
+<approved hash="115,1,146.325,134.62,RLED3,,,,,"/>
+<approved hash="115,1,148.865,134.62,RLED4,,,,,"/>
+<approved hash="115,1,151.405,134.62,RLED5,,,,,"/>
+<approved hash="115,1,144.649,148.548,LEDS,,,,,"/>
+<approved hash="115,1,161.248,43.3112,MISC_OUT,,,,,"/>
 <approved hash="115,1,-27.1357,71.12,VREG_3.3,,,,,"/>
 <approved hash="115,1,-35.8817,19.05,LED1,,,,,"/>
+<approved hash="115,1,-53.6194,46.8926,PAD1,,,,,"/>
+<approved hash="115,1,-53.0606,44.5474,PAD2,,,,,"/>
+<approved hash="117,1,54.61,157.48,PGND,,,,,"/>
+<approved hash="117,1,2.54,68.58,PDI_RESET/CLK,,,,,"/>
+<approved hash="117,1,-12.7,27.94,VBAT,,,,,"/>
 </errors>
 </schematic>
 </drawing>
