@@ -12,6 +12,9 @@ and XBee) will be brought out to IDC connectors for further use.
 ## BOM
 
   * 1 https://raw.github.com/HelsinkiHacklab/XMega-boards/master/Xmega32A4U.jpg
+    * Flash with [atxmega32a4u_104_PD5.hex](xmegabootloaders/atxmega32a4u_104_PD5.hex) to use PD5 to activate DFU.
+      * Convert hex to bin for avrdude: avr-objcopy -I ihex -O binary atxmega32a4u_104_PD5.hex atxmega32a4u_104.bin
+      * program with AVRISPmkII: avrdude -e -c avrisp2 -P usb -p x32a4 -U boot:w:atxmega32a4u_104.bin
   * 3 Dual- N-Channel MOSFETs http://fi.rsdelivers.com/product/vishay/si1912edh-t1-e3/mosfet-n-channel-20v-113a-sc-70-6/7103235.aspx
   * 1 XBee (Series 2)
   * 2 1x10 2.0mm female header (for XBee) http://fi.rsdelivers.com/product/harwin/m22-7131042/10w-sil-vertical-pcb-skt/6058796.aspx | http://www.digikey.fi/product-detail/en/M22-7131042/952-1354-5-ND/2264335?cur=USD
