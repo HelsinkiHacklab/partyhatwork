@@ -88,6 +88,9 @@ static const uint8_t SDA = 2;
 static const uint8_t SCL = 3;
 static const uint8_t LED_BUILTIN = 13;
 
+// TODO: Map correctly
+#define SPI_PORT	SPID
+
 static const uint8_t A0 = 5;
 static const uint8_t A1 = 6;
 static const uint8_t A2 = 7;
@@ -104,13 +107,14 @@ static const uint8_t A11 = 16;
 #define Wire xmWireC
 #define Wire1 xmWireE
 
-#define SPI_PORT	SPID
 
 // TODO: Fix these mapping macros
+/*
 #define digitalPinToPCICR(p)    (((p) >= 0 && (p) <= 21) ? (&PCICR) : ((uint8_t *)0))
 #define digitalPinToPCICRbit(p) (((p) <= 7) ? 2 : (((p) <= 13) ? 0 : 1))
 #define digitalPinToPCMSK(p)    (((p) <= 7) ? (&PCMSK2) : (((p) <= 13) ? (&PCMSK0) : (((p) <= 21) ? (&PCMSK1) : ((uint8_t *)0))))
 #define digitalPinToPCMSKbit(p) (((p) <= 7) ? (p) : (((p) <= 13) ? ((p) - 8) : ((p) - 14)))
+*/
 
 #ifdef ARDUINO_MAIN
 
@@ -297,36 +301,25 @@ const TC1_t* PROGMEM timer_to_tc1_PGM[] = {
 
 // TODO: Map correctly
 const uint8_t PROGMEM timer_to_channel_PGM[] = {
-	0   	, 
-	1   	, 
-	2   	, 
-	3   	,   // 5
-	NOT_ON_TIMER	, 
-	NOT_ON_TIMER	, 
-	NOT_ON_TIMER	, 
-	NOT_ON_TIMER	, 
-	NOT_ON_TIMER	, 
-	NOT_ON_TIMER	, 
-	NOT_ON_TIMER	, 
-	NOT_ON_TIMER	, 
-	NOT_ON_TIMER	, // 13
-	NOT_ON_TIMER	, 
-	NOT_ON_TIMER	, 
-	NOT_ON_TIMER	, 
-	0   	,  // 17 
-	1   	, 
-	2   	, 
-	3   	, 
-	0   	, 
-	1   	, 
-	NOT_ON_TIMER	, 
-	NOT_ON_TIMER	, 
-	0       ,  // 25
-	1       , 
-	2       , 
-	3       , 
-	0       , 
-	1       , 
+    NOT_ON_TIMER,
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
 };
 
 
