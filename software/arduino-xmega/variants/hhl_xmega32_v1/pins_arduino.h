@@ -49,11 +49,6 @@ Port A is ADC, ANALOG0 -> PA0 ANALOG7 -> PA7
 */
 
 
-
-
-
-
-
 #ifndef Pins_Arduino_h
 #define Pins_Arduino_h
 
@@ -71,11 +66,14 @@ Port A is ADC, ANALOG0 -> PA0 ANALOG7 -> PA7
 #define analogInputToDigitalPin(p)  ((p < 6) ? (p) + 22 : -1)
 #define digitalPinHasPWM(p)         (((p) >= 2 && (p) <= 6) || ((p) >= 9 && (p)<= 11) || ((p) >= 14 && (p)<= 19))
 
+
+// TODO: Map correctly
 static const uint8_t SS    = 6;
 static const uint8_t MOSI  = 11;
 static const uint8_t MISO  = 12;
 static const uint8_t SCK   = 13;
 
+// TODO: Map correctly
 static const uint8_t SDA = 2;
 static const uint8_t SCL = 3;
 static const uint8_t LED_BUILTIN = 13;
