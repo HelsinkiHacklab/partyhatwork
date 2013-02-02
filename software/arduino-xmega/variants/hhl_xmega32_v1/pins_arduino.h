@@ -190,10 +190,13 @@ const uint8_t PROGMEM digital_pin_to_bit_mask_PGM[] = {
 		_BV( 5 ),
 };
 
-// TODO: Map correctly
 const uint8_t PROGMEM digital_pin_to_timer_PGM[] = {
 	// TIMERS		
 	// -------------------------------------------		
+	TIMER_E0A   	, 
+	TIMER_E0B   	, 
+	TIMER_E0C   	, 
+	TIMER_E0D   	,   // 5
 	NOT_ON_TIMER	, 
 	NOT_ON_TIMER	, 
 	NOT_ON_TIMER	, 
@@ -202,28 +205,24 @@ const uint8_t PROGMEM digital_pin_to_timer_PGM[] = {
 	NOT_ON_TIMER	, 
 	NOT_ON_TIMER	, 
 	NOT_ON_TIMER	, 
+	NOT_ON_TIMER	, // 13
 	NOT_ON_TIMER	, 
 	NOT_ON_TIMER	, 
 	NOT_ON_TIMER	, 
+	TIMER_C0A   	,  // 17 
+	TIMER_C0B   	, 
+	TIMER_C0C   	, 
+	TIMER_C0D   	, 
+	TIMER_C1A   	, 
+	TIMER_C1B   	, 
 	NOT_ON_TIMER	, 
 	NOT_ON_TIMER	, 
-	NOT_ON_TIMER	, 
-	NOT_ON_TIMER	, 
-	NOT_ON_TIMER	, 
-	NOT_ON_TIMER	, 
-	NOT_ON_TIMER	, 
-	NOT_ON_TIMER	, 
-	NOT_ON_TIMER	, 
-	NOT_ON_TIMER	, 
-	NOT_ON_TIMER	, 
-	NOT_ON_TIMER	, 
-	NOT_ON_TIMER	, 
-	NOT_ON_TIMER	, 
-	NOT_ON_TIMER	, 
-	NOT_ON_TIMER	, 
-	NOT_ON_TIMER	, 
-	NOT_ON_TIMER	, 
-	NOT_ON_TIMER	, 
+	TIMER_D0A       ,  // 25
+	TIMER_D0B       , 
+	TIMER_D0C       , 
+	TIMER_D0D       , 
+	TIMER_D1A       , 
+	TIMER_D1B       , 
 };
 
 // TODO: Map correctly
