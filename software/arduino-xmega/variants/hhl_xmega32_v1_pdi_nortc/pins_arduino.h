@@ -234,92 +234,79 @@ const uint8_t PROGMEM digital_pin_to_timer_PGM[] = {
 };
 
 const TC0_t* PROGMEM timer_to_tc0_PGM[] = {
-	&TCE0   	, 
-	&TCE0   	, 
-	&TCE0   	, 
-	&TCE0   	,   // 5
-	NULL	, 
-	NULL    , 
-	NULL    , 
-	NULL    , 
-	NULL    , 
-	NULL    , 
-	NULL    , 
-	NULL    , 
-	NULL    , // 13
-	NULL    , 
-	NULL    , 
-	NULL    , 
-	&TCC0   	,  // 17 
-	&TCC0   	, 
-	&TCC0   	, 
-	&TCC0   	, 
-	NULL   	, 
-	NULL   	, 
-	NULL	, 
-	NULL    , 
-	&TCD0       ,  // 25
-	&TCD0       , 
-	&TCD0       , 
-	&TCD0       , 
-	NULL       , 
-	NULL       , 
+	NULL,
+
+	&TCC0,
+	&TCC0,
+	&TCC0,
+	&TCC0,
+	NULL,
+	NULL,
+
+	&TCD0,
+	&TCD0,
+	&TCD0,
+	&TCD0,
+	NULL,
+	NULL,
+
+	&TCE0,
+	&TCE0,
+	&TCE0,
+	&TCE0,
+	NULL,
+	NULL,
 	};
 
 const TC1_t* PROGMEM timer_to_tc1_PGM[] = {
-	NULL   	, 
-	NULL   	, 
-	NULL   	, 
-	NULL   	,   // 5
-	NULL	, 
-	NULL    , 
-	NULL    , 
-	NULL    , 
-	NULL    , 
-	NULL    , 
-	NULL    , 
-	NULL    , 
-	NULL    , // 13
-	NULL    , 
-	NULL    , 
-	NULL    , 
-	NULL   	,  // 17 
-	NULL   	, 
-	NULL   	, 
-	NULL   	, 
-	&TCC1   	, 
-	&TCC1   	, 
-	NULL	, 
-	NULL    , 
-	NULL    ,  // 25
-	NULL    , 
-	NULL    , 
-	NULL    , 
-	&TCD1       , 
-	&TCD1       , 
+	NULL,
+
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	&TCC1,
+	&TCC1,
+
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	&TCD1,
+	&TCD1,
+
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
 };
 
-// TODO: Map correctly
+
 const uint8_t PROGMEM timer_to_channel_PGM[] = {
-    NOT_ON_TIMER,
+	NOT_ON_TIMER,
+
     0,
     1,
     2,
     3,
-    4,
-    5,
+    0,
+    1,
+
     0,
     1,
     2,
     3,
-    4,
-    5,
+    0,
+    1,
+
     0,
     1,
     2,
     3,
-    4,
-    5,
+    0,
+    1,
 };
 
 
