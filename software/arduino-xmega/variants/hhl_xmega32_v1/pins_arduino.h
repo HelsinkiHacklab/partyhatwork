@@ -44,7 +44,14 @@
    15   PB2     PC1   18
    16   PB3     PC0   17
 
-Port A is ADC, ANALOG0 -> PA0 ANALOG7 -> PA7
+Port A&B is ADC, ANALOG0 -> PB3 ANALOG7 -> PA11
+
+USARTS
+
+  Serial = 19 (RX) & 20 (TX)
+  Serial1 = 23 (RX) & 24 (TX)
+  Serial2 = 27 (RX) & 28 (TX)
+  Serial3 = 3 (RX) & 4 (TX)
 
 */
 
@@ -86,6 +93,10 @@ static const uint8_t A4 = 9;
 static const uint8_t A5 = 10;
 static const uint8_t A6 = 11;
 static const uint8_t A7 = 12;
+static const uint8_t A8 = 14;
+static const uint8_t A9 = 14;
+static const uint8_t A10 = 15;
+static const uint8_t A11 = 16;
 
 #define Wire xmWireC
 #define Wire1 xmWireE
@@ -303,6 +314,10 @@ const uint8_t PROGMEM adc_to_channel_PGM[] = {
     5,
     6,
     7,
+    8,
+    9,
+    10,
+    11,
 };
 
 #endif

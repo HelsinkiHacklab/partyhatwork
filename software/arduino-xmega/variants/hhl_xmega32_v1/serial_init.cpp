@@ -35,5 +35,5 @@ HardwareSerial name (&name##rx_buffer, &USART##usart_port##port_nr, &PORT##usart
 SERIAL_DEFINE(Serial, C, 0);
 SERIAL_DEFINE(Serial1, C, 1);
 SERIAL_DEFINE(Serial2, D, 0);
-SERIAL_DEFINE(Serial3, D, 1);
-SERIAL_DEFINE(Serial4, E, 0);
+/* SERIAL_DEFINE(Serial3, D, 1);  This is USB */
+SERIAL_DEFINE(Serial3, E, 0);

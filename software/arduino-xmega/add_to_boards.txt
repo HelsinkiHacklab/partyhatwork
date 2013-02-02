@@ -2,7 +2,7 @@
 # http://kirjoitusalusta.fi/hacklab-xmega
 #
 
-hhl_xmega32_v1.name=HHL Xmega32 rev 1
+hhl_xmega32_v1.name=HHL Xmega32 rev 1 (PDI)
 
 hhl_xmega32_v1.build.mcu=atxmega32a4
 hhl_xmega32_v1.build.f_cpu=32000000L
