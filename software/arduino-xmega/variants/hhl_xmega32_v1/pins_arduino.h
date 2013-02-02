@@ -293,31 +293,39 @@ const TC1_t* PROGMEM timer_to_tc1_PGM[] = {
 
 // TODO: Map correctly
 const uint8_t PROGMEM timer_to_channel_PGM[] = {
-	NOT_ON_TIMER,
-
-    0,
-    1,
-    2,
-    3,
-    0,
-    1,
-
-    0,
-    1,
-    2,
-    3,
-    0,
-    1,
-
-    0,
-    1,
-    2,
-    3,
-    0,
-    1,
+	0   	, 
+	1   	, 
+	2   	, 
+	3   	,   // 5
+	NOT_ON_TIMER	, 
+	NOT_ON_TIMER	, 
+	NOT_ON_TIMER	, 
+	NOT_ON_TIMER	, 
+	NOT_ON_TIMER	, 
+	NOT_ON_TIMER	, 
+	NOT_ON_TIMER	, 
+	NOT_ON_TIMER	, 
+	NOT_ON_TIMER	, // 13
+	NOT_ON_TIMER	, 
+	NOT_ON_TIMER	, 
+	NOT_ON_TIMER	, 
+	0   	,  // 17 
+	1   	, 
+	2   	, 
+	3   	, 
+	0   	, 
+	1   	, 
+	NOT_ON_TIMER	, 
+	NOT_ON_TIMER	, 
+	0       ,  // 25
+	1       , 
+	2       , 
+	3       , 
+	0       , 
+	1       , 
 };
 
-// TODO: Map correctly
+
 const uint8_t PROGMEM adc_to_channel_PGM[] = {
     0,
     1,
