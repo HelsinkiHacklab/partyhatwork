@@ -72,6 +72,7 @@ USARTS
 #define NUM_ANALOG_INPUTS           8
 #define EXTERNAL_NUM_INTERRUPTS     36 // PORTA to PORTE 3
 
+// TODO: Fix this mapping macro
 #define analogInputToDigitalPin(p)  ((p < 6) ? (p) + 22 : -1)
 #define digitalPinHasPWM(p)         (((p) >= 2 && (p) <= 6) || ((p) >= 9 && (p)<= 11) || ((p) >= 14 && (p)<= 19))
 
@@ -105,6 +106,7 @@ static const uint8_t A11 = 16;
 
 #define SPI_PORT	SPID
 
+// TODO: Fix these mapping macros
 #define digitalPinToPCICR(p)    (((p) >= 0 && (p) <= 21) ? (&PCICR) : ((uint8_t *)0))
 #define digitalPinToPCICRbit(p) (((p) <= 7) ? 2 : (((p) <= 13) ? 0 : 1))
 #define digitalPinToPCMSK(p)    (((p) <= 7) ? (&PCMSK2) : (((p) <= 13) ? (&PCMSK0) : (((p) <= 21) ? (&PCMSK1) : ((uint8_t *)0))))
