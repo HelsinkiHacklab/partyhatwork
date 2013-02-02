@@ -2,21 +2,21 @@
 # http://kirjoitusalusta.fi/hacklab-xmega
 #
 
-hhl_xmega32_v1_pdi_nortc.name=HHL Xmega32 rev 1 (PDI, NORTC)
+hhl_xmega32_v1_pdi.name=HHL Xmega32 rev 1 (PDI)
 
-hhl_xmega32_v1_pdi_nortc.build.mcu=atxmega32a4
-hhl_xmega32_v1_pdi_nortc.build.f_cpu=32000000L
-hhl_xmega32_v1_pdi_nortc.build.core=xmega
-hhl_xmega32_v1_pdi_nortc.build.variant=hhl_xmega32_v1_pdi_nortc
+hhl_xmega32_v1_pdi.build.mcu=atxmega32a4
+hhl_xmega32_v1_pdi.build.f_cpu=32000000L
+hhl_xmega32_v1_pdi.build.core=xmega
+hhl_xmega32_v1_pdi.build.variant=hhl_xmega32_v1_pdi
 
-hhl_xmega32_v1_pdi_nortc.upload.using=avrisppdi
-hhl_xmega32_v1_pdi_nortc.upload.maximum_size=32768
+hhl_xmega32_v1_pdi.upload.using=avrisppdi
+hhl_xmega32_v1_pdi.upload.maximum_size=32768
 
-#hhl_xmega32_v1_pdi_nortc.bootloader.path=hhl_xmega32_v1_pdi_nortc
-#hhl_xmega32_v1_pdi_nortc.bootloader.file=hhl_xmega32_v1_pdi_nortc-boot.hex
+#hhl_xmega32_v1_pdi.bootloader.path=hhl_xmega32_v1_pdi
+#hhl_xmega32_v1_pdi.bootloader.file=hhl_xmega32_v1_pdi-boot.hex
 
-hhl_xmega32_v1_pdi_nortc.bootloader.fuse1=0x00
-hhl_xmega32_v1_pdi_nortc.bootloader.fuse2=0x9F
-hhl_xmega32_v1_pdi_nortc.bootloader.fuse4=0xFF
-hhl_xmega32_v1_pdi_nortc.bootloader.fuse5=0xF0
+hhl_xmega32_v1_pdi.bootloader.fuse1=0x00
+hhl_xmega32_v1_pdi.bootloader.fuse2=0x9F
+hhl_xmega32_v1_pdi.bootloader.fuse4=0xFF
+hhl_xmega32_v1_pdi.bootloader.fuse5=0xF0
 
