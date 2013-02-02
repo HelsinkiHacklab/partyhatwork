@@ -59,14 +59,13 @@ Port A is ADC, ANALOG0 -> PA0 ANALOG7 -> PA7
 
 #include <avr/pgmspace.h>
 
-#define USE_RTC // Use RTC for millis etc.
 
 #define REPEAT8(x) x, x, x, x, x, x, x, x
 #define BV0TO7 _BV(0), _BV(1), _BV(2), _BV(3), _BV(4), _BV(5), _BV(6), _BV(7)
 #define BV7TO0 _BV(7), _BV(6), _BV(5), _BV(4), _BV(3), _BV(2), _BV(1), _BV(0)
 
-#define NUM_DIGITAL_PINS            28
-#define NUM_ANALOG_INPUTS           6
+#define NUM_DIGITAL_PINS            30
+#define NUM_ANALOG_INPUTS           8
 #define EXTERNAL_NUM_INTERRUPTS     36 // PORTA to PORTE 3
 
 #define analogInputToDigitalPin(p)  ((p < 6) ? (p) + 22 : -1)
@@ -81,12 +80,14 @@ static const uint8_t SDA = 2;
 static const uint8_t SCL = 3;
 static const uint8_t LED_BUILTIN = 13;
 
-static const uint8_t A0 = 22;
-static const uint8_t A1 = 23;
-static const uint8_t A2 = 24;
-static const uint8_t A3 = 25;
-static const uint8_t A4 = 26;
-static const uint8_t A5 = 27;
+static const uint8_t A0 = 5;
+static const uint8_t A1 = 6;
+static const uint8_t A2 = 7;
+static const uint8_t A3 = 8;
+static const uint8_t A4 = 9;
+static const uint8_t A5 = 10;
+static const uint8_t A6 = 11;
+static const uint8_t A7 = 12;
 
 #define Wire xmWireC
 #define Wire1 xmWireE
@@ -113,96 +114,102 @@ const uint16_t PROGMEM port_to_PGM[] = {
 };
 
 const uint8_t PROGMEM digital_pin_to_port_PGM[] = {
-		// PORTLIST
-		PC,/* 0 */
-		PC,
-		PC,
-		PC,
-		PD,
-		PD,
-		PD,
-		PB,
-		PB,/* 8 */
-		PC,
-		PC,
-		PD,
-		PD,
-		PD,
-		PE,/* 14 */
-		PE,
-		PE,
-		PE,
-		PD,
-		PD,
-		PC,
-		PC, /* 21 */
-		PA, /* A0 */
-		PA,
-		PA,
-		PA,
-		PA,
-		PA,
+    PE,
+    PE,
+    PE,
+    PE,
+    PA,
+    PA,
+    PA,
+    PA,
+    PA,
+    PA,
+    PA,
+    PA,
+    PB,
+    PB,
+    PB,
+    PB,
+    PC,
+    PC,
+    PC,
+    PC,
+    PC,
+    PC,
+    PC,
+    PC,
+    PD,
+    PD,
+    PD,
+    PD,
+    PD,
+    PD,
 };
 
 const uint8_t PROGMEM digital_pin_to_bit_mask_PGM[] = {
 		// PIN IN PORT		
 		// -------------------------------------------		
-		_BV( 2 ), // 0
+		_BV( 0 ), 
+		_BV( 1 ),
+		_BV( 2 ),
 		_BV( 3 ),
 		_BV( 0 ),
 		_BV( 1 ),
 		_BV( 2 ),
 		_BV( 3 ),
-		_BV( 4 ),
-		_BV( 2 ),
-		_BV( 3 ), // 8
-		_BV( 4 ),
-		_BV( 5 ),
+		_BV( 4 ), 
 		_BV( 5 ),
 		_BV( 6 ),
 		_BV( 7 ),
-		_BV( 0 ), // 14
+		_BV( 0 ),
 		_BV( 1 ),
-		_BV( 2 ),
+		_BV( 2 ), 
 		_BV( 3 ),
 		_BV( 0 ),
 		_BV( 1 ),
-		_BV( 6 ),
-		_BV( 7 ), // 21
-		_BV( 1 ), // A0
+		_BV( 2 ),
+		_BV( 3 ),
+		_BV( 4 ),
+		_BV( 5 ), 
+		_BV( 6 ), 
+		_BV( 7 ),
+		_BV( 0 ),
+		_BV( 1 ),
 		_BV( 2 ),
 		_BV( 3 ),
 		_BV( 4 ),
 		_BV( 5 ),
-		_BV( 6 ),
 };
 
+// TODO: Map correctly
 const uint8_t PROGMEM digital_pin_to_timer_PGM[] = {
 	// TIMERS		
 	// -------------------------------------------		
-	TIMER_C0C	, // 0
-	TIMER_C0D	, 
-	TIMER_C0A	, 
-	TIMER_C0B	, 
-	TIMER_D0C	, 
-	TIMER_D0D	, 
-	TIMER_D1A	, 
 	NOT_ON_TIMER	, 
 	NOT_ON_TIMER	, 
-	TIMER_C1A	, // 8
-	TIMER_C1B	, 
-	TIMER_D1B	, 
 	NOT_ON_TIMER	, 
 	NOT_ON_TIMER	, 
-	TIMER_E0A	, // 14
-	TIMER_E0B	, 
-	TIMER_E0C	, 
-	TIMER_E0D	, 
-	TIMER_D0A	, 
-	TIMER_D0B	, 
 	NOT_ON_TIMER	, 
-	NOT_ON_TIMER	, // 21
-	NOT_ON_TIMER	, // A0
+	NOT_ON_TIMER	, 
+	NOT_ON_TIMER	, 
+	NOT_ON_TIMER	, 
+	NOT_ON_TIMER	, 
+	NOT_ON_TIMER	, 
+	NOT_ON_TIMER	, 
+	NOT_ON_TIMER	, 
+	NOT_ON_TIMER	, 
+	NOT_ON_TIMER	, 
+	NOT_ON_TIMER	, 
+	NOT_ON_TIMER	, 
+	NOT_ON_TIMER	, 
+	NOT_ON_TIMER	, 
+	NOT_ON_TIMER	, 
+	NOT_ON_TIMER	, 
+	NOT_ON_TIMER	, 
+	NOT_ON_TIMER	, 
+	NOT_ON_TIMER	, 
+	NOT_ON_TIMER	, 
+	NOT_ON_TIMER	, 
 	NOT_ON_TIMER	, 
 	NOT_ON_TIMER	, 
 	NOT_ON_TIMER	, 
@@ -210,6 +217,7 @@ const uint8_t PROGMEM digital_pin_to_timer_PGM[] = {
 	NOT_ON_TIMER	, 
 };
 
+// TODO: Map correctly
 const TC0_t* PROGMEM timer_to_tc0_PGM[] = {
 	NULL,
 
@@ -235,6 +243,7 @@ const TC0_t* PROGMEM timer_to_tc0_PGM[] = {
 	NULL,
 	};
 
+// TODO: Map correctly
 const TC1_t* PROGMEM timer_to_tc1_PGM[] = {
 	NULL,
 
@@ -260,6 +269,7 @@ const TC1_t* PROGMEM timer_to_tc1_PGM[] = {
 	NULL,
 };
 
+// TODO: Map correctly
 const uint8_t PROGMEM timer_to_channel_PGM[] = {
 	NOT_ON_TIMER,
 
@@ -285,6 +295,7 @@ const uint8_t PROGMEM timer_to_channel_PGM[] = {
     1,
 };
 
+// TODO: Map correctly
 const uint8_t PROGMEM adc_to_channel_PGM[] = {
     0,
     1,
@@ -292,6 +303,8 @@ const uint8_t PROGMEM adc_to_channel_PGM[] = {
     3,
     4,
     5,
+    6,
+    7,
 };
 
 #endif
