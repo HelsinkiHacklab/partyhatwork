@@ -1,0 +1,22 @@
+##############################################################
+# http://kirjoitusalusta.fi/hacklab-xmega
+#
+
+hhl_xmega32_v1.name=HHL Xmega32 rev 1
+
+hhl_xmega32_v1.build.mcu=atxmega32a4
+hhl_xmega32_v1.build.f_cpu=32000000L
+hhl_xmega32_v1.build.core=xmega
+hhl_xmega32_v1.build.variant=hhl_xmega32_v1
+
+xplain_pdi.upload.using=avrisppdi
+hhl_xmega32_v1.upload.maximum_size=32768
+
+#hhl_xmega32_v1.bootloader.path=hhl_xmega32_v1
+#hhl_xmega32_v1.bootloader.file=hhl_xmega32_v1-boot.hex
+
+hhl_xmega32_v1.bootloader.fuse1=0x00
+hhl_xmega32_v1.bootloader.fuse2=0x9F
+hhl_xmega32_v1.bootloader.fuse4=0xFF
+hhl_xmega32_v1.bootloader.fuse5=0xF0
+
