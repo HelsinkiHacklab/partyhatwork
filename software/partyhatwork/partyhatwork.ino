@@ -33,6 +33,10 @@
 
 #include <XBee.h>
 XBee xbee = XBee();
+XBeeResponse response = XBeeResponse();
+// create reusable response objects for responses we expect to handle 
+ZBRxResponse rx = ZBRxResponse();
+ModemStatusResponse msr = ModemStatusResponse();
 
 void setup()
 {
@@ -61,7 +65,64 @@ void reset_xbee()
     digitalWrite(XBEE_RESET, HIGH);
 }
 
+/**
+ * Adjusts the PWM widht based on battery voltage
+ *
+ * TODO: Implement some actual adjustment curve
+ */
+uint8_t pwmlimit(uint8_t pwm)
+{
+    // This removes a quater from the value
+    return pwm - (pwm << 2);
+}
+
+/**
+ * Generic setter for 3 consequtve PWM pins
+ */
+void setRGB(uint8_t startpin, uint8_t r, uint8_t g, uint8_t b)
+{
+    analogWrite(startpin, pwmlimit(r));
+    analogWrite(startpin+1, pwmlimit(g));
+    analogWrite(startpin+2, pwmlimit(b));
+}
+
+/**
+ * Set the first set of built-in drivers
+ */
+inline void setRGB0(uint8_t r, uint8_t g, uint8_t b)
+{
+    setRGB(17, r,g,b);
+}
+
+/**
+ * Set the second set of built-in drivers
+ */
+inline void setRGB1(uint8_t r, uint8_t g, uint8_t b)
+{
+    setRGB(20, r,g,b);
+}
+
 
 void loop()
 {
+    xbee.readPacket();
+    if (xbee.getResponse().isAvailable())
+    {
+        // got something
+        if (xbee.getResponse().getApiId() == ZB_RX_RESPONSE)
+        {
+            // got a zb rx packet
+            xbee.getResponse().getZBRxResponse(rx);
+        }
+        uint8_t led = rx.getData(0);
+        if (led == 1)
+        {
+            setRGB1(rx.getData(1),rx.getData(2),rx.getData(3));
+        }
+        else
+        {
+            setRGB0(rx.getData(1),rx.getData(2),rx.getData(3));
+        }
+    }
+
 }
