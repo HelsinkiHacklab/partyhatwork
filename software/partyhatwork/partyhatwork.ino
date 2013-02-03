@@ -1,5 +1,5 @@
 /**
- * Partyhatwork firmware reference implementation, you will need XMega compatible Arduino IDE, see https://github.com/HelsinkiHacklab/partyhatwork/tree/master/software/arduino-xmega
+ * Partyhatwork firmware reference implementation, you will need XMega compatible Arduino IDE, see https://github.com/HelsinkiHacklab/XMega-boards/tree/master/software/arduino-xmega
  * 
  * Ge the XBee library from http://code.google.com/p/xbee-arduino/
  * 
