@@ -41,7 +41,7 @@ ModemStatusResponse msr = ModemStatusResponse();
 void setup()
 {
     // Initialize the 6 PWM with MOSFETs
-    for (byte i=17; i < 23; i++)
+    for (byte i=16; i < 23; i++)
     {
         pinMode(i, OUTPUT);
     }
@@ -91,7 +91,7 @@ void setRGB(uint8_t startpin, uint8_t r, uint8_t g, uint8_t b)
  */
 inline void setRGB0(uint8_t r, uint8_t g, uint8_t b)
 {
-    setRGB(17, r,g,b);
+    setRGB(16, r,g,b);
 }
 
 /**
@@ -99,7 +99,7 @@ inline void setRGB0(uint8_t r, uint8_t g, uint8_t b)
  */
 inline void setRGB1(uint8_t r, uint8_t g, uint8_t b)
 {
-    setRGB(20, r,g,b);
+    setRGB(19, r,g,b);
 }
 
 
