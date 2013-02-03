@@ -1,6 +1,7 @@
 /**
  * Partyhatwork firmware reference implementation, you will need XMega compatible Arduino IDE, see https://github.com/HelsinkiHacklab/partyhatwork/tree/master/software/arduino-xmega
  * 
+ * Ge the XBee library from http://code.google.com/p/xbee-arduino/
  * 
    Arduino Pin map
 
@@ -30,6 +31,9 @@
 #define HIGH_CURRENT_CHG 12
 #define XBEE_RESET 28
 
+#include <XBee.h>
+XBee xbee = XBee();
+
 void setup()
 {
     // Initialize the 6 PWM with MOSFETs
@@ -41,8 +45,9 @@ void setup()
     pinMode(XBEE_RESET, OUTPUT);
     reset_xbee();
 
-    // This is the XBee serial port
+    // Initialize the XBee wrapper
     Serial2.begin(57600);
+    xbee.begin(Serial2);
     
 }
 
