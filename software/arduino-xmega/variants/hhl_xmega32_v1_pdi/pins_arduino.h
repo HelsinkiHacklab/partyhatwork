@@ -27,22 +27,22 @@
  *
 
             USB
-    1   PE0     GND
-    2   PE1     GND
-    3   PE2     PD5   30
-    4   PE3     PD4   29
-    5   PA0     PD3   28
-    6   PA1     PD2   27
-    7   PA2     PD1   26
-    8   PA3     PD0   25
-    9   PA4     PC7   24
-   10   PA5     PC6   23
-   11   PA6     PC5   22
-   12   PA7     PC4   21
-   13   PB0     PC3   20
-   14   PB1     PC2   19
-   15   PB2     PC1   18
-   16   PB3     PC0   17
+    0   PE0     GND
+    1   PE1     GND
+    2   PE2     PD5   29
+    3   PE3     PD4   28
+    4   PA0     PD3   27
+    5   PA1     PD2   26
+    6   PA2     PD1   25
+    7   PA3     PD0   24
+    8   PA4     PC7   23
+    9   PA5     PC6   22
+   10   PA6     PC5   21
+   11   PA7     PC4   20
+   12   PB0     PC3   19
+   13   PB1     PC2   18
+   14   PB2     PC1   17
+   15   PB3     PC0   16
 
 Port A&B is ADC, ANALOG0 -> PB3 ANALOG7 -> PA11
 
