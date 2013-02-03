@@ -72,7 +72,8 @@ void reset_xbee()
  */
 uint8_t pwmlimit(uint8_t pwm)
 {
-    // This removes a quater from the value
+    return pwm;
+    // This removes a quater from the value (and has some overlow problem or something...)
     return pwm - (pwm << 2);
 }
 
