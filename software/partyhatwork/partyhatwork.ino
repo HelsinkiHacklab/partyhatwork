@@ -100,8 +100,8 @@ void loop()
     xbeereader.callback = &xbee_api;
 
     // Tasks are in priority order, only one task is run per tick
-    Task *tasks[] = { &batterymonitor, };
-    //Task *tasks[] = { &xbeereader, &batterymonitor, };
+    //Task *tasks[] = { &batterymonitor, };
+    Task *tasks[] = { &xbeereader, &batterymonitor, };
     TaskScheduler sched(tasks, NUM_TASKS(tasks));
 
     // Run the scheduler - never returns.
