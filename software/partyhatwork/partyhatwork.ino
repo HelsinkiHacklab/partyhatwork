@@ -41,8 +41,10 @@ SERIAL_DEFINE(Serial3, E, 0); -> PE2/PE3 == 2/3
 #include <Task.h>
 #include <TaskScheduler.h>
 
+/*
 #include "batterymonitor.h"
 BatteryMonitor batterymonitor(BAT_SENSE_PIN);
+*/
 
 // RGB helpers
 #include "rgb.h"
@@ -101,7 +103,8 @@ void loop()
 
     // Tasks are in priority order, only one task is run per tick
     //Task *tasks[] = { &batterymonitor, };
-    Task *tasks[] = { &xbeereader, &batterymonitor, };
+    //Task *tasks[] = { &xbeereader, &batterymonitor, };
+    Task *tasks[] = { &xbeereader, };
     TaskScheduler sched(tasks, NUM_TASKS(tasks));
 
     // Run the scheduler - never returns.
