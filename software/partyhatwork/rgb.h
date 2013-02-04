@@ -7,6 +7,7 @@
  */
 uint8_t pwmlimit(uint8_t pwm)
 {
+    //int foo = batterymonitor.bat_mv;
     return pwm - (pwm >> 2);
 }
 

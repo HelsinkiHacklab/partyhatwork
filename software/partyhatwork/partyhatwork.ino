@@ -41,12 +41,16 @@ SERIAL_DEFINE(Serial3, E, 0); -> PE2/PE3 == 2/3
 #include <Task.h>
 #include <TaskScheduler.h>
 
+#include "batterymonitor.h"
+BatteryMonitor batterymonitor(BAT_SENSE_PIN);
+
 #include "rgb.h"
 
 // Get this library from http://code.google.com/p/xbee-arduino/
 #include <XBee.h>
 #include "xbee_tasks.h"
 
+/*
 void xbee_api(ZBRxResponse rx)
 {
     // Check first byte
@@ -70,6 +74,9 @@ void xbee_api(ZBRxResponse rx)
         }
     }
 }
+// Init the reader task and set callback
+//XBeeRead xbeereader(&xbee_api);
+*/
 
 
 void setup()
@@ -91,13 +98,10 @@ void setup()
 
 void loop()
 {
-    // Init the reader task and set callback
-    XBeeRead xbeereader;
-    xbeereader.callback = &xbee_api;
-
 
     // Tasks are in priority order, only one task is run per tick
-    Task *tasks[] = { &xbeereader, };
+    Task *tasks[] = { &batterymonitor, };
+    //Task *tasks[] = { &xbeereader, &batterymonitor, };
     TaskScheduler sched(tasks, NUM_TASKS(tasks));
 
     // Run the scheduler - never returns.
