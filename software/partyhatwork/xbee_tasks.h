@@ -26,7 +26,8 @@ typedef void (*XBeeReadvoidFuncPtr)(ZBRxResponse);
 class XBeeRead : public Task
 {
 public:
-    XBeeRead(XBeeReadvoidFuncPtr _callback);
+//    XBeeRead(XBeeReadvoidFuncPtr _callback);
+    XBeeRead();
     virtual void run(uint32_t now);
     virtual bool canRun(uint32_t now);
     XBeeReadvoidFuncPtr callback;
@@ -34,9 +35,15 @@ private:
     uint8_t yield_counter; // Incremented on each canRun call, used to yield to other tasks.
 };
 
+/*
 XBeeRead::XBeeRead(XBeeReadvoidFuncPtr _callback)
 : Task(),
   callback(_callback)
+{
+}
+*/
+XBeeRead::XBeeRead()
+: Task()
 {
 }
 
