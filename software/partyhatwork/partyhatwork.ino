@@ -25,6 +25,9 @@
    14   PB2     PC1   17
    15   PB3     PC0   16
 
+From serial_init.cpp:
+SERIAL_DEFINE(Serial2, D, 0); -> PD2/PD3 == 26/27
+SERIAL_DEFINE(Serial3, E, 0); -> PE2/PE3 == 2/3
 
  * 
  */
@@ -83,8 +86,6 @@ void setup()
     // Initialize the XBee wrapper
     Serial2.begin(57600);
     xbee.begin(Serial2);
-
-
 
 }
 
