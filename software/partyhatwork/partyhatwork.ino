@@ -2,7 +2,7 @@
  * Partyhatwork firmware reference implementation, you will need XMega compatible Arduino IDE, see https://github.com/HelsinkiHacklab/XMega-boards/tree/master/software/arduino-xmega
  * 
  * Ge the XBee library from http://code.google.com/p/xbee-arduino/
- * Get the Task library from http://bleaklow.com/files/2010/Task.tar.gz 
+ * Get the Task library from http://bleaklow.com/files/2010/Task.tar.gz (and fix WProgram.h -> Arduino.h)
  * 
  
    Arduino Pin map
