@@ -1,4 +1,7 @@
 #ifndef BATTERYMONITOR_H
+#ifndef BAT_SENSE_PIN
+#error "BAT_SENSE_PIN not defined"
+#endif
 #define BATTERYMONITOR_H
 #include <Arduino.h>
 #include <Task.h>
@@ -30,5 +33,8 @@ void BatteryMonitor::run(uint32_t now)
     // TODO: Map the value to mV
     // TODO: keep a running average for less noisy voltage
 }
+
+extern BatteryMonitor batterymonitor(BAT_SENSE_PIN);
+
 
 #endif

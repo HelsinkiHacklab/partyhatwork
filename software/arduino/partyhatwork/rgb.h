@@ -2,6 +2,7 @@
 #define RGB_H
 #include <Arduino.h>
 #include "gammaramp.h"
+#include "batterymonitor.h"
 
 /**
  * Adjusts the PWM width based on battery voltage
@@ -10,7 +11,8 @@
  */
 uint8_t pwmlimit(uint8_t pwm)
 {
-    //int foo = batterymonitor.bat_mv;
+    // TODO: precalculate the limit factor (possibly in batterymonitor.h)
+    int foo = batterymonitor.bat_mv;
     return pwm - (pwm >> 2);
 }
 

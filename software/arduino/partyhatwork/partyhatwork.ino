@@ -41,10 +41,8 @@ SERIAL_DEFINE(Serial3, E, 0); -> PE2/PE3 == 2/3
 #include <Task.h>
 #include <TaskScheduler.h>
 
-/*
+// This defines the variable batterymonitor (a task instance) via extern
 #include "batterymonitor.h"
-BatteryMonitor batterymonitor(BAT_SENSE_PIN);
-*/
 
 // RGB helpers
 #include "gammaramp.h"
@@ -81,6 +79,8 @@ void xbee_api(ZBRxResponse rx)
 //XBeeRead xbeereader(&xbee_api);
 XBeeRead xbeereader;
 
+
+
 void setup()
 {
     // Initialize the 6 PWM with MOSFETs
@@ -104,8 +104,8 @@ void loop()
 
     // Tasks are in priority order, only one task is run per tick
     //Task *tasks[] = { &batterymonitor, };
-    //Task *tasks[] = { &xbeereader, &batterymonitor, };
-    Task *tasks[] = { &xbeereader, };
+    Task *tasks[] = { &xbeereader, &batterymonitor, };
+    //Task *tasks[] = { &xbeereader, };
     TaskScheduler sched(tasks, NUM_TASKS(tasks));
 
     // Run the scheduler - never returns.
