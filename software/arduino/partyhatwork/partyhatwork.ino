@@ -79,7 +79,8 @@ void xbee_api(ZBRxResponse rx)
 //XBeeRead xbeereader(&xbee_api);
 XBeeRead xbeereader;
 
-
+#include "sleep_task.h"
+SleepTask sleeper;
 
 void setup()
 {
@@ -103,9 +104,8 @@ void loop()
     xbeereader.callback = &xbee_api;
 
     // Tasks are in priority order, only one task is run per tick
-    //Task *tasks[] = { &batterymonitor, };
-    Task *tasks[] = { &xbeereader, &batterymonitor, };
-    //Task *tasks[] = { &xbeereader, };
+    // Task *tasks[] = { &xbeereader, &batterymonitor };
+    Task *tasks[] = { &xbeereader, &batterymonitor, &sleeper};
     TaskScheduler sched(tasks, NUM_TASKS(tasks));
 
     // Run the scheduler - never returns.
