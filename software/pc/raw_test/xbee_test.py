@@ -1,4 +1,16 @@
 #!/usr/bin/python
+import ConfigParser, os
+
+import ConfigParser
+config = ConfigParser.SafeConfigParser()
+if not os.path.isfile('xbee.ini'):
+    config.add_section('modem')
+    config.set('modem', 'port', '/dev/whatever')
+    with open('xbee.ini', 'wb') as configfile:
+        config.write(configfile)
+config.read('xbee.ini')
+
+
 
 from xbee import ZigBee
 import serial
@@ -8,7 +20,7 @@ import time
 def cb(x):
 	print x
 
-ser = serial.Serial('/dev/tty.usbserial-A900N5XU', 57600)
+ser = serial.Serial(config.get('modem', 'port'), 57600)
 xb = ZigBee(ser,callback=cb,escaped=True)
 
 daddr = pack('>Q',0x13A20040300000) # set 64-bit address here
