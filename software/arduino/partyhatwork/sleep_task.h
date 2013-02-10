@@ -3,6 +3,7 @@
 #include <Arduino.h>
 #include <Task.h>
 #include <avr/sleep.h>
+#include <avr/interrupt.h>
 
 class SleepTask : public Task
 {
@@ -31,7 +32,7 @@ void SleepTask::run(uint32_t now)
     sleep_enable();
     sei(); // TODO: doublecheck this, it is from an example but the QP framework uses an assembler macro to make sure the enabling interrupts and going to sleep is atomic (so nothing can disable them in between)
     sleep_cpu();
-    // Disable sleep when coming out, just a safety.
+    // Disable sleep when coming out, this is recommended by the documentation
     sleep_disable();
 }
 
