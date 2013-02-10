@@ -35,7 +35,10 @@ SERIAL_DEFINE(Serial3, E, 0); -> PE2/PE3 == 2/3
 #define BAT_SENSE_PIN A9
 #define HIGH_CURRENT_CHG_PIN 12
 #define XBEE_RESET_PIN 28
+// This will be HIGH whenever we are *not* sleeping
 #define SLEEP_DEBUG_PIN 4
+// This will just blink every second
+#define BLINKER_PIN 5
 
 // Get this library from http://bleaklow.com/files/2010/Task.tar.gz (and fix WProgram.h -> Arduino.h)
 // and read http://bleaklow.com/2010/07/20/a_very_simple_arduino_task_manager.html for background and instructions
@@ -83,6 +86,9 @@ XBeeRead xbeereader;
 #include "sleep_task.h"
 SleepTask sleeper;
 
+#include "blinker.h"
+
+
 void setup()
 {
     // Initialize the 6 PWM with MOSFETs
@@ -110,9 +116,13 @@ void loop()
 {
     xbeereader.callback = &xbee_api;
 
+    Blinker blinker(BLINKER_PIN, 1000);
+    blinker.on_time = 250;
+
+
     // Tasks are in priority order, only one task is run per tick, be sure to keep sleeper as last task if you use it.
      //Task *tasks[] = { &xbeereader, &batterymonitor };
-    Task *tasks[] = { &xbeereader, &batterymonitor, &sleeper};
+    Task *tasks[] = { &xbeereader, &blinker, &batterymonitor, &sleeper };
     TaskScheduler sched(tasks, NUM_TASKS(tasks));
 
     // Run the scheduler - never returns.
