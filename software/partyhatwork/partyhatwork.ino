@@ -47,6 +47,7 @@ BatteryMonitor batterymonitor(BAT_SENSE_PIN);
 */
 
 // RGB helpers
+#include "gammaramp.h"
 #include "rgb.h"
 
 // Get this library from http://code.google.com/p/xbee-arduino/
