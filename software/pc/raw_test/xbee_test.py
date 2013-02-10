@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import ConfigParser, os
+import ConfigParser, os, sys
 
 config = ConfigParser.SafeConfigParser()
 if not os.path.isfile('xbee.ini'):
@@ -7,6 +7,8 @@ if not os.path.isfile('xbee.ini'):
     config.set('modem', 'port', '/dev/whatever')
     with open('xbee.ini', 'wb') as configfile:
         config.write(configfile)
+    print "Edit xbee.ini for your modem port"
+    sys.exit(1)
 config.read('xbee.ini')
 
 class Unbuffered:
