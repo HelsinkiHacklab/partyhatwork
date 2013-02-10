@@ -1,3 +1,5 @@
+#ifndef XBEE_TASKS_H
+#define XBEE_TASKS_H
 #include <Arduino.h>
 #include <Task.h>
 #include <XBee.h>
@@ -69,3 +71,4 @@ void XBeeRead::run(uint32_t now)
     }
 }
 
+#endif

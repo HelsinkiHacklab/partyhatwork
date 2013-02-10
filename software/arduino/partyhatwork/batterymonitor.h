@@ -1,3 +1,5 @@
+#ifndef BATTERYMONITOR_H
+#define BATTERYMONITOR_H
 #include <Arduino.h>
 #include <Task.h>
 
@@ -29,3 +31,4 @@ void BatteryMonitor::run(uint32_t now)
     // TODO: keep a running average for less noisy voltage
 }
 
+#endif

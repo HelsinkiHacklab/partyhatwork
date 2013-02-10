@@ -1,3 +1,5 @@
+#ifndef RGB_H
+#define RGB_H
 #include <Arduino.h>
 #include "gammaramp.h"
 
@@ -43,3 +45,5 @@ inline void setRGB1(uint8_t r, uint8_t g, uint8_t b)
     setRGB(19, r,g,b);
 }
 
+
+#endif
