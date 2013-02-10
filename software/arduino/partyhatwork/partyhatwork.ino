@@ -35,6 +35,7 @@ SERIAL_DEFINE(Serial3, E, 0); -> PE2/PE3 == 2/3
 #define BAT_SENSE_PIN A9
 #define HIGH_CURRENT_CHG_PIN 12
 #define XBEE_RESET_PIN 28
+#define SLEEP_DEBUG_PIN 4
 
 // Get this library from http://bleaklow.com/files/2010/Task.tar.gz (and fix WProgram.h -> Arduino.h)
 // and read http://bleaklow.com/2010/07/20/a_very_simple_arduino_task_manager.html for background and instructions
@@ -97,6 +98,12 @@ void setup()
     Serial2.begin(57600);
     xbee.begin(Serial2);
 
+#ifdef SLEEP_DEBUG_PIN
+    pinMode(SLEEP_DEBUG_PIN, OUTPUT);
+    // We keep the pin high whenever the sketch is running
+    digitalWrite(SLEEP_DEBUG_PIN, HIGH);
+#endif
+
 }
 
 void loop()
@@ -104,7 +111,7 @@ void loop()
     xbeereader.callback = &xbee_api;
 
     // Tasks are in priority order, only one task is run per tick, be sure to keep sleeper as last task if you use it.
-    // Task *tasks[] = { &xbeereader, &batterymonitor };
+     //Task *tasks[] = { &xbeereader, &batterymonitor };
     Task *tasks[] = { &xbeereader, &batterymonitor, &sleeper};
     TaskScheduler sched(tasks, NUM_TASKS(tasks));
 

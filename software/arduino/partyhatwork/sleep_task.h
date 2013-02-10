@@ -25,6 +25,9 @@ bool SleepTask::canRun(uint32_t now)
 
 void SleepTask::run(uint32_t now)
 {
+#ifdef SLEEP_DEBUG_PIN
+    digitalWrite(SLEEP_DEBUG_PIN, LOW);
+#endif
     // Idle sleep, it saves relatively little power but any other mode will disable way too many clocks
     // (at some point if we want to be really smart we can start checking our state and power down more if there is nothing to do)
     set_sleep_mode(SLEEP_MODE_IDLE);
@@ -34,6 +37,9 @@ void SleepTask::run(uint32_t now)
     sleep_cpu();
     // Disable sleep when coming out, this is recommended by the documentation
     sleep_disable();
+#ifdef SLEEP_DEBUG_PIN
+    digitalWrite(SLEEP_DEBUG_PIN, HIGH);
+#endif
 }
 
 
