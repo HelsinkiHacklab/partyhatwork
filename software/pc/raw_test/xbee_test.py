@@ -1,9 +1,12 @@
 #!/usr/bin/python
-import ConfigParser, os, sys
+import ConfigParser, os, sys, binascii
 config = ConfigParser.SafeConfigParser()
 if not os.path.isfile('xbee.ini'):
     config.add_section('modem')
     config.set('modem', 'port', '/dev/whatever')
+    config.add_section('node')
+    config.set('node', 'short_addr', '0x4916')
+    config.set('node', 'long_addr', '0x13A200403AA07A')
     with open('xbee.ini', 'wb') as configfile:
         config.write(configfile)
     print "Edit xbee.ini for your modem port"
@@ -28,6 +31,7 @@ import sys
 sys.stdout=Unbuffered(sys.stdout)
 
 
+
 from xbee import ZigBee
 import serial
 from struct import pack
@@ -40,11 +44,20 @@ def scb(x):
     print "Start"
     print x
 
+
+short_int = eval(config.get('node','short_addr'))
+short_daddr = pack(">H", short_int)
+long_daddr = pack('>Q',eval(config.get('node','long_addr'))) # set 64-bit address here
+
+print "short_daddr=%s\n" % repr(short_daddr)
+print "long_daddr=%s\n" % repr(long_daddr)
+
+
 ser = serial.Serial(config.get('modem', 'port'), 57600)
 xb = ZigBee(ser,callback=cb,escaped=True,start_callback=scb)
 xb.start()
 
-daddr = pack('>Q',0x13A20040300000) # set 64-bit address here
+
 
 print xb.at(command='ND')
 
@@ -53,12 +66,11 @@ if 0:
         print "one"
         for x in range(0xFF):
             data = pack('BBBB', 0, x,x,x)
-            xb.tx( dest_addr = '\xff\xfe', dest_addr_long = daddr, data = data )
+            xb.tx( dest_addr = short_daddr , dest_addr_long = long_daddr, data = data )
             time.sleep(0.1)
 
 if 0:
     print "foo"
     data = pack('BBBB', 0, 0xff,0xff,0xff)
-    xb.tx( dest_addr = '\xff\xfe', dest_addr_long = daddr, data = data )
+    xb.tx( dest_addr = short_daddr, dest_addr_long = long_daddr, data = data )
 
-print "bar"

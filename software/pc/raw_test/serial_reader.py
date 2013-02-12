@@ -26,6 +26,11 @@ class Unbuffered:
 import sys
 sys.stdout=Unbuffered(sys.stdout)
 
+# Distin raakadatan purkusetti ircistä
+def parse_packet(datastring):
+    print "%x %x %x %02X%02X%02X%02X%02X%02X%02X%02X%02X %X%X" % struct.unpack('>BHBBBBBBBBBBBB', datastring[:15])
+
+
 
 while True:
     if not port.inWaiting():
