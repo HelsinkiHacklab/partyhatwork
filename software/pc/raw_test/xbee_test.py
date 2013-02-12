@@ -17,7 +17,7 @@ import logging
 logger = logging.getLogger('ZigBee')
 logger.setLevel(logging.DEBUG)
 
-def inify_address(addr)
+def inify_address(addr):
     return "0x%s" % binascii.hexlify(addrd).upper()
 
 
