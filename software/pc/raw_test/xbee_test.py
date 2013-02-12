@@ -1,6 +1,5 @@
 #!/usr/bin/python
 import ConfigParser, os, sys
-
 config = ConfigParser.SafeConfigParser()
 if not os.path.isfile('xbee.ini'):
     config.add_section('modem')
@@ -10,6 +9,11 @@ if not os.path.isfile('xbee.ini'):
     print "Edit xbee.ini for your modem port"
     sys.exit(1)
 config.read('xbee.ini')
+
+import logging
+logger = logging.getLogger('ZigBee')
+logger.setLevel(logging.DEBUG)
+
 
 class Unbuffered:
    def __init__(self, stream):
@@ -32,8 +36,13 @@ import time
 def cb(x):
     print x
 
+def scb(x):
+    print "Start"
+    print x
+
 ser = serial.Serial(config.get('modem', 'port'), 57600)
-xb = ZigBee(ser,callback=cb,escaped=True)
+xb = ZigBee(ser,callback=cb,escaped=True,start_callback=scb)
+xb.start()
 
 daddr = pack('>Q',0x13A20040300000) # set 64-bit address here
 
