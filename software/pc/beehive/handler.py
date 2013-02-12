@@ -46,4 +46,5 @@ class handler(object):
         self.xb.at(command='ND')
 
     def ping_nodes(self):
+        """Ping each known node to make sure it's still alive, if not remove from node list (or maybe just mark dead somehow)"""
         pass        

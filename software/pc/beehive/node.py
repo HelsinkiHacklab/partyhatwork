@@ -1,6 +1,8 @@
+from struct import pack, unpack
 
 
 class XbeeNode(object):
+    """Simple encapsulation for an XBee node, makes it less painfull to handle all the bookkeeping"""
     node_identifier = None
     short_addr = None
     long_addr = None
@@ -13,7 +15,6 @@ class XbeeNode(object):
         self.long_addr = kwargs['long_addr']
         self.node_identifier = kwargs['node_identifier']
 
-    def tx(self, data):
-        """Send ready packed data string"""
-        self.xb.tx( dest_addr = self.short_addr, dest_addr_long = self.long_addr, data = data )
+    def tx(self, data_packed):
+        self.xb.tx( dest_addr = self.short_addr, dest_addr_long = self.long_addr, data = data_packed )
 
