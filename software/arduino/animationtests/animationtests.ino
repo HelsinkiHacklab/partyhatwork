@@ -22,7 +22,7 @@ uint8_t foo_frames[] = {
   0xff, 0x0, 0x0,    0x0, 0x0, 0xff,    0x5, 0xdc,
 };
 
-const Animation foo_anim = {
+Animation foo_anim = {
     0x0,
     0x3, // leds 0 & 1
     0x6,
@@ -30,6 +30,8 @@ const Animation foo_anim = {
     foo_frames
 };
 
+
+AnimationRunner anim_runner;
 
 
 void setup()
@@ -46,8 +48,10 @@ void setup()
 
 void loop()
 {
+    anim_runner.set_animation(&foo_anim);
+  
     // Tasks are in priority order, only one task is run per tick, be sure to keep sleeper as last task if you use it.
-    Task *tasks[] = { &sleeper };
+    Task *tasks[] = { &anim_runner, &sleeper };
     TaskScheduler sched(tasks, NUM_TASKS(tasks));
 
     // Run the scheduler - never returns.

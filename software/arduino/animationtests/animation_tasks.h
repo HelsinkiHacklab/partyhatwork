@@ -19,16 +19,38 @@ typedef struct {
 class AnimationRunner : public TimedTask
 {
 public:
-    // Create a new blinker for the specified pin and rate.
+    // Base methods
     AnimationRunner();
     virtual void run(uint32_t now);
-//    Animation* current_animation;
+    // My own methods
+    virtual void set_animation(Animation* anim);
     
 
 private:
+    Animation* current_animation;
     uint8_t frame_size;
     uint8_t current_step;
 };
+
+AnimationRunner::AnimationRunner()
+: TimedTask(millis())
+{
+}
+
+
+void AnimationRunner::set_animation(Animation* anim)
+{
+    current_animation = anim;
+    Serial.println(F("Animation switched"));
+    Serial.print(F("leds=0x"));
+    Serial.println(current_animation->leds, HEX);
+    Serial.print(F("length="));
+    Serial.println(current_animation->length, DEC);
+    Serial.print(F("first_frame (address)=0x"));
+    Serial.println((uint16_t)&current_animation->first_frame, HEX);
+}
+
+
 
 void AnimationRunner::run(uint32_t now)
 {
