@@ -40,7 +40,20 @@ AnimationRunner::AnimationRunner()
 
 void AnimationRunner::set_animation(Animation* anim)
 {
+    current_step = 0;
     current_animation = anim;
+    uint8_t num_leds = 0;
+    for (uint8_t i=0; i < 8; i++)
+    {
+        if (current_animation->leds & _BV(i))
+        {
+            num_leds++;
+        }
+    }
+    frame_size = (num_leds*3)+2;
+    
+    
+    
     Serial.println(F("Animation switched"));
     Serial.print(F("leds=0x"));
     Serial.println(current_animation->leds, HEX);
@@ -48,6 +61,12 @@ void AnimationRunner::set_animation(Animation* anim)
     Serial.println(current_animation->length, DEC);
     Serial.print(F("first_frame (address)=0x"));
     Serial.println((uint16_t)&current_animation->first_frame, HEX);
+
+    Serial.print(F("num_leds="));
+    Serial.println(num_leds, DEC);
+    Serial.print(F("frame_size="));
+    Serial.println(frame_size, DEC);
+
 }
 
 
