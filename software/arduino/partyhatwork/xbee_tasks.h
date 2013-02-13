@@ -1,7 +1,8 @@
 #ifndef XBEE_TASKS_H
 #ifndef XBEE_RESET_PIN
 #error "XBEE_RESET_PIN not defined"
-#endif#define XBEE_TASKS_H
+#endif
+#define XBEE_TASKS_H
 #include <Arduino.h>
 #include <Task.h>
 #include <XBee.h>

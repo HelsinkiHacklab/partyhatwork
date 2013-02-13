@@ -52,6 +52,9 @@ SERIAL_DEFINE(Serial3, E, 0); -> PE2/PE3 == 2/3
 #include "gammaramp.h"
 #include "rgb.h"
 
+// Animations
+#include "animation_tasks.h"
+
 // Get this library from http://code.google.com/p/xbee-arduino/
 #include <XBee.h>
 #include "xbee_tasks.h"
