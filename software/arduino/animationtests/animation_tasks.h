@@ -30,7 +30,7 @@ public:
     boolean running;
 
 private:
-    virtual void unpack_frame(uint8_t **start_of_frame);
+    virtual void unpack_frame(uint8_t *start_of_frame);
 
 
     uint8_t leds[7][3];
@@ -53,7 +53,7 @@ bool AnimationRunner::canRun(uint32_t now)
     return running;
 }
 
-void AnimationRunner::unpack_frame(uint8_t **start_of_frame)
+void AnimationRunner::unpack_frame(uint8_t *start_of_frame)
 {
     uint8_t frame_position = 0;
     for (uint8_t i=0; i < 8; i++)
@@ -67,6 +67,25 @@ void AnimationRunner::unpack_frame(uint8_t **start_of_frame)
         }
     }
     wait_ms = (start_of_frame[frame_position] << 9) + start_of_frame[frame_position+1];
+
+    for (uint8_t i=0; i < 8; i++)
+    {
+        if (current_animation->leds & _BV(i))
+        {
+            Serial.print(F("LED"));
+            Serial.print(i, DEC);
+            Serial.print(F(" values:"));
+            Serial.print(F(" 0x"));
+            Serial.print(leds[i][0], HEX);
+            Serial.print(F(" 0x"));
+            Serial.print(leds[i][1], HEX);
+            Serial.print(F(" 0x"));
+            Serial.println(leds[i][2], HEX);
+        }
+    }
+    Serial.print(F("wait_time="));
+    Serial.println(wait_ms, DEC);
+    
 }
 
 void AnimationRunner::set_animation(Animation* anim)
@@ -96,7 +115,7 @@ void AnimationRunner::set_animation(Animation* anim)
     Serial.print(F("frame_size="));
     Serial.println(frame_size, DEC);
 
-    this->unpack_frame(&current_animation->first_frame);
+    this->unpack_frame(current_animation->first_frame);
 
     running = true;
 }
@@ -105,7 +124,18 @@ void AnimationRunner::set_animation(Animation* anim)
 
 void AnimationRunner::run(uint32_t now)
 {
-    // TODO implement
+    Serial.print(F("Running step "));
+    Serial.println(current_step, DEC);
+
+    // TODO: Set the LED values
+
+    incRunTime(wait_ms);
+    current_step++;
+    if (current_step > current_animation->length)
+    {
+        current_step = 0;
+    }
+    unpack_frame(current_animation->first_frame+(current_step*frame_size));
 }
 
 
