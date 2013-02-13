@@ -22,9 +22,13 @@ public:
     // Base methods
     AnimationRunner();
     virtual void run(uint32_t now);
+    virtual bool canRun(uint32_t now);
     // My own methods
     virtual void set_animation(Animation* anim);
-    
+
+
+    boolean running;
+
 private:
     virtual void unpack_frame(uint8_t *start_of_frame);
 
@@ -43,6 +47,16 @@ AnimationRunner::AnimationRunner()
 : TimedTask(millis())
 {
 }
+
+bool AnimationRunner::canRun(uint32_t now)
+{
+    if (!running)
+    {
+        return false;
+    }
+    return TimedTask::canRun(now);
+}
+
 
 void AnimationRunner::unpack_frame(uint8_t *start_of_frame)
 {
@@ -107,6 +121,7 @@ void AnimationRunner::set_animation(Animation* anim)
     Serial.println(frame_size, DEC);
 
     this->unpack_frame(current_animation->first_frame);
+    running = true;
 }
 
 
@@ -120,7 +135,7 @@ void AnimationRunner::run(uint32_t now)
 
     incRunTime(wait_ms);
     current_step++;
-    if (current_step > current_animation->length)
+    if (current_step >= current_animation->length)
     {
         current_step = 0;
     }
