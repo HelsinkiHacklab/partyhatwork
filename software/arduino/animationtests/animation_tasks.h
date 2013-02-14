@@ -71,7 +71,7 @@ void AnimationRunner::unpack_frame(uint8_t *start_of_frame)
             frame_position += 3;
         }
     }
-    wait_ms = (start_of_frame[frame_position] << 9) + start_of_frame[frame_position+1];
+    wait_ms = (start_of_frame[frame_position] << 8) + start_of_frame[frame_position+1];
 
     for (uint8_t i=0; i < 8; i++)
     {
