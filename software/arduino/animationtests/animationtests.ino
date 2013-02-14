@@ -5,6 +5,7 @@
 
 #define SLEEP_DEBUG_PIN A0
 
+#define FIRST_ANIMATION bar_anim 
 
 // Animations
 #include "animation_tasks.h"
@@ -27,11 +28,63 @@ Animation foo_anim = {
     0x3, // leds 0 & 1
     0x6,
     0x0,
-    foo_frames
+    foo_frames  // Array name is always a pointer so no need for &
+};
+
+uint8_t bar_frames[] = { 
+  0x0,  0x0,  0x0,    0x0, 0x0,  0x0,    0x1, 0xf4, // First frame, RGB values for two leds and unsigned interget wait time in ms
+  0x0,  0xff, 0x0,    0x0, 0x0,  0x0,    0x1, 0xf4,
+  0x0,  0x0,  0x0,    0x0, 0xff, 0x0,    0x1, 0xf4,
+  0x0,  0xff, 0x0,    0x0, 0x0,  0x0,    0x1, 0xf4,
+  0x0,  0x0,  0x0,    0x0, 0xff, 0x0,    0x1, 0xf4,
+  0x0,  0xff, 0x0,    0x0, 0xff, 0x0,    0x5, 0xdc,
 };
 
 
+Animation bar_anim = {
+    &foo_anim, // Pointer to the next animation in the chain
+    0x3, // leds 0 & 1
+    0x6,
+    0x0,
+    bar_frames // Array name is always a pointer so no need for &
+};
+
 AnimationRunner anim_runner;
+
+void load_nth_animation(uint8_t n)
+{
+    Serial.print(F("load_nth_animation() called with n="));
+    Serial.println(n, DEC);
+    Animation *tmpanim;
+    tmpanim = &FIRST_ANIMATION;
+    uint8_t i = 0;
+    while (true)
+    {
+        Serial.print(F("i="));
+        Serial.println(i, DEC);
+
+        if (i == n)
+        {
+            anim_runner.set_animation(tmpanim);
+            break;
+        }
+
+        Serial.print(F("Next (address)=0x"));
+        Serial.println((uint16_t)&tmpanim->Next, HEX);
+
+        if (!tmpanim->Next)
+        {
+            Serial.print(F("No Next animation defined, aborting at i="));
+            Serial.println(i, DEC);
+            break;
+        }
+
+        tmpanim = (Animation*)tmpanim->Next;
+        i++;
+    }
+    Serial.println(F("load_nth_animation() exiting"));
+}
+
 
 
 void setup()
@@ -48,7 +101,9 @@ void setup()
 
 void loop()
 {
-    anim_runner.set_animation(&foo_anim);
+    //anim_runner.set_animation(&foo_anim);
+    load_nth_animation(1);
+    load_nth_animation(0);
   
     // Tasks are in priority order, only one task is run per tick, be sure to keep sleeper as last task if you use it.
     Task *tasks[] = { &anim_runner, &sleeper };
