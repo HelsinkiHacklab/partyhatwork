@@ -8,7 +8,7 @@ and XBee) will be brought out to IDC connectors for further use.
 
 ## BOM
 
-  * 1 https://raw.github.com/HelsinkiHacklab/XMega-boards/master/Xmega32A4U_v1.jpg (v2 is perfectly fine as well)
+  * 1 https://github.com/HelsinkiHacklab/XMega-boards/blob/master/XmegaA4U_v1.jpg (v2 is perfectly fine as well)
     * Flash with [atxmega32a4u_104_PD5.hex](xmegabootloaders/atxmega32a4u_104_PD5.hex) to use PD5 to activate DFU.
       * Convert hex to bin for avrdude: `avr-objcopy -I ihex -O binary atxmega32a4u_104_PD5.hex atxmega32a4u_104_PD5.bin`
       * program with AVRISPmkII: `avrdude -e -c avrisp2 -P usb -p x32a4 -U boot:w:atxmega32a4u_104_PD5.bin`
