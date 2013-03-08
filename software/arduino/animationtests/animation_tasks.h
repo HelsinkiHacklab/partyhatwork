@@ -6,7 +6,7 @@
 #include <avr/pgmspace.h>
 
 typedef struct {
-    void *Next; // Pointer to next animation
+    const void *Next; // Pointer to next animation
     uint8_t leds; // bits for led 0-7
     uint8_t length; // Frames
     uint8_t modes; // Bit flags, will be later to used to indicate fade mode etc
@@ -14,6 +14,17 @@ typedef struct {
     
 } Animation;
 
+Animation animation_buffer;
+extern Animation animation_buffer;
+
+void load_animation_to_buffer(const Animation& src)
+{
+    //memcpy_P(&animation_buffer, src, sizeof(Animation));
+}
+void load_animation_to_buffer(const Animation& src, Animation* tgt)
+{
+    //memcpy_P(tgt, src, sizeof(Animation));
+}
 
 
 class AnimationRunner : public TimedTask
@@ -25,6 +36,7 @@ public:
     virtual bool canRun(uint32_t now);
     // My own methods
     virtual void set_animation(Animation* anim);
+    //virtual void set_animation(const Animation* anim);
 
 
     boolean running;
@@ -35,7 +47,7 @@ private:
 
     uint8_t leds[7][3];
 
-    Animation* current_animation;
+    const Animation* current_animation;
     uint8_t frame_size;
     uint8_t current_step;
     uint8_t num_leds;
@@ -57,7 +69,9 @@ bool AnimationRunner::canRun(uint32_t now)
     return TimedTask::canRun(now);
 }
 
-
+/**
+ * Frame loader loading from SRAM
+ */
 void AnimationRunner::unpack_frame(uint8_t *start_of_frame)
 {
     uint8_t frame_position = 0;
@@ -93,6 +107,9 @@ void AnimationRunner::unpack_frame(uint8_t *start_of_frame)
     
 }
 
+/**
+ * Frame loader loading from PROGMEM
+ */
 void AnimationRunner::unpack_frame(const uint8_t *start_of_frame)
 {
     uint8_t frame_position = 0;
@@ -129,8 +146,9 @@ void AnimationRunner::unpack_frame(const uint8_t *start_of_frame)
     
 }
 
-
-
+/**
+ * Load animation struct from SRAM
+ */
 void AnimationRunner::set_animation(Animation* anim)
 {
     current_step = 0;
@@ -162,6 +180,17 @@ void AnimationRunner::set_animation(Animation* anim)
     running = true;
 }
 
+/**
+ * Load animation struct from PROGMEM
+ */
+ /*
+void AnimationRunner::set_animation(const Animation* anim)
+{
+    load_animation_to_buffer(anim);
+    set_animation(animation_buffer);
+}
+
+*/
 
 
 void AnimationRunner::run(uint32_t now)
