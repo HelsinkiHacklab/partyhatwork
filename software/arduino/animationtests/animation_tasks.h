@@ -17,13 +17,13 @@ typedef struct {
 Animation animation_buffer;
 extern Animation animation_buffer;
 
-void load_animation_to_buffer(const Animation& src)
+void load_animation_to_buffer(const Animation* src)
 {
-    //memcpy_P(&animation_buffer, src, sizeof(Animation));
+    memcpy_P(&animation_buffer, src, sizeof(Animation));
 }
-void load_animation_to_buffer(const Animation& src, Animation* tgt)
+void load_animation_to_buffer(const Animation* src, Animation* tgt)
 {
-    //memcpy_P(tgt, src, sizeof(Animation));
+    memcpy_P(tgt, src, sizeof(Animation));
 }
 
 
@@ -36,7 +36,7 @@ public:
     virtual bool canRun(uint32_t now);
     // My own methods
     virtual void set_animation(Animation* anim);
-    //virtual void set_animation(const Animation* anim);
+    virtual void set_animation(const Animation* anim);
 
 
     boolean running;
@@ -183,14 +183,11 @@ void AnimationRunner::set_animation(Animation* anim)
 /**
  * Load animation struct from PROGMEM
  */
- /*
 void AnimationRunner::set_animation(const Animation* anim)
 {
     load_animation_to_buffer(anim);
-    set_animation(animation_buffer);
+    set_animation(&animation_buffer);
 }
-
-*/
 
 
 void AnimationRunner::run(uint32_t now)

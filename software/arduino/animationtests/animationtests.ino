@@ -102,13 +102,12 @@ void setup()
 
 void loop()
 {
-    //load_animation_to_buffer(foo_anim);
-    //anim_runner.set_animation(&foo_anim);
+    //load_animation_to_buffer(&foo_anim);
+    anim_runner.set_animation(&foo_anim);
     /*
     load_nth_animation(1);
     load_nth_animation(0);
     */
-  /*
     // Tasks are in priority order, only one task is run per tick, be sure to keep sleeper as last task if you use it.
     Task *tasks[] = { &anim_runner, &sleeper };
     TaskScheduler sched(tasks, NUM_TASKS(tasks));
@@ -117,5 +116,4 @@ void loop()
     Serial.println(F("Scheduler starting"));
     sched.run();
     Serial.println(F("Scheduler exited (this should NOT happen)"));
-    */
 }
