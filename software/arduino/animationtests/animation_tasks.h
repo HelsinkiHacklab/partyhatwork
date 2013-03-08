@@ -10,7 +10,7 @@ typedef struct {
     uint8_t leds; // bits for led 0-7
     uint8_t length; // Frames
     uint8_t modes; // Bit flags, will be later to used to indicate fade mode etc
-    uint8_t *first_frame;
+    const uint8_t *first_frame;
     
 } Animation;
 
@@ -31,7 +31,7 @@ public:
 
 private:
     virtual void unpack_frame(uint8_t *start_of_frame);
-
+    virtual void unpack_frame(const uint8_t *start_of_frame);
 
     uint8_t leds[7][3];
 
@@ -92,6 +92,44 @@ void AnimationRunner::unpack_frame(uint8_t *start_of_frame)
     Serial.println(wait_ms, DEC);
     
 }
+
+void AnimationRunner::unpack_frame(const uint8_t *start_of_frame)
+{
+    uint8_t frame_position = 0;
+    for (uint8_t i=0; i < 8; i++)
+    {
+        if (current_animation->leds & _BV(i))
+        {
+            leds[i][0] = pgm_read_byte(start_of_frame+frame_position+0);
+            leds[i][1] = pgm_read_byte(start_of_frame+frame_position+1);
+            leds[i][2] = pgm_read_byte(start_of_frame+frame_position+2);
+            frame_position += 3;
+        }
+    }
+    //wait_ms = pgm_read_word(start_of_frame+frame_position);
+    wait_ms = (pgm_read_byte(start_of_frame+frame_position) << 8) + pgm_read_byte(start_of_frame+frame_position+1);
+
+    for (uint8_t i=0; i < 8; i++)
+    {
+        if (current_animation->leds & _BV(i))
+        {
+            Serial.print(F("LED"));
+            Serial.print(i, DEC);
+            Serial.print(F(" values:"));
+            Serial.print(F(" 0x"));
+            Serial.print(leds[i][0], HEX);
+            Serial.print(F(" 0x"));
+            Serial.print(leds[i][1], HEX);
+            Serial.print(F(" 0x"));
+            Serial.println(leds[i][2], HEX);
+        }
+    }
+    Serial.print(F("wait_time="));
+    Serial.println(wait_ms, DEC);
+    
+}
+
+
 
 void AnimationRunner::set_animation(Animation* anim)
 {

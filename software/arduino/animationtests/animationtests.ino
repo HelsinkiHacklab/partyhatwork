@@ -14,7 +14,7 @@
 SleepTask sleeper;
 
 // TODO: convert to PROGMEM when the general concept is working
-uint8_t foo_frames[] = { 
+const uint8_t foo_frames[] PROGMEM = { 
   0x0,  0x0, 0x0,    0x0, 0x0, 0x0,     0x1, 0xf4, // First frame, RGB values for two leds and unsigned interget wait time in ms
   0xff, 0x0, 0x0,    0x0, 0x0, 0x0,     0x1, 0xf4,
   0x0,  0x0, 0x0,    0x0, 0x0, 0xff,    0x1, 0xf4,
@@ -31,7 +31,7 @@ Animation foo_anim = {
     foo_frames  // Array name is always a pointer so no need for &
 };
 
-uint8_t bar_frames[] = { 
+const uint8_t bar_frames[] PROGMEM = { 
   0x0,  0x0,  0x0,    0x0, 0x0,  0x0,    0x1, 0xf4, // First frame, RGB values for two leds and unsigned interget wait time in ms
   0x0,  0xff, 0x0,    0x0, 0x0,  0x0,    0x1, 0xf4,
   0x0,  0x0,  0x0,    0x0, 0xff, 0x0,    0x1, 0xf4,
@@ -103,7 +103,7 @@ void loop()
 {
     //anim_runner.set_animation(&foo_anim);
     load_nth_animation(1);
-    load_nth_animation(0);
+    //load_nth_animation(0);
   
     // Tasks are in priority order, only one task is run per tick, be sure to keep sleeper as last task if you use it.
     Task *tasks[] = { &anim_runner, &sleeper };
