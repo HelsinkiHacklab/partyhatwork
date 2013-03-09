@@ -112,7 +112,7 @@ void AnimationRunner::unpack_frame(const uint8_t *start_of_frame, frame_data& tg
     {
         if (current_animation->leds & _BV(i))
         {
-            Serial.print(F("LED"));
+            Serial.print(F("unpacked LED"));
             Serial.print(i, DEC);
             Serial.print(F(" values:"));
             Serial.print(F(" 0x"));
@@ -195,7 +195,7 @@ void AnimationRunner::interpolate_fade()
                 }
                 else
                 {
-                    fade_frame.leds[i][ii] = ((tmpval2 - tmpval1)/num_fade_steps) * fade_step;
+                    fade_frame.leds[i][ii] = tmpval2 - (((tmpval2 - tmpval1) / num_fade_steps) * fade_step);
                 }
             }
             Serial.print(F("(fade)LED"));
@@ -218,23 +218,32 @@ void AnimationRunner::set_leds(frame_data& src)
     {
         if (current_animation->leds & _BV(i))
         {
-            for (uint8_t ii=0; i < 3; i++)
+            for (uint8_t ii=0; ii < 3; ii++)
             {
                 dummy = src.leds[i][ii];
             }
+            Serial.print(F("set LED"));
+            Serial.print(i, DEC);
+            Serial.print(F(" values:"));
+            Serial.print(F(" 0x"));
+            Serial.print(src.leds[i][0], HEX);
+            Serial.print(F(" 0x"));
+            Serial.print(src.leds[i][1], HEX);
+            Serial.print(F(" 0x"));
+            Serial.println(src.leds[i][2], HEX);
         }
     }
 }
 
 void AnimationRunner::run(uint32_t now)
 {
-    Serial.print(F("Running step "));
-    Serial.println(current_step, DEC);
 
     switch (state)
     {
         case RUNNING:
         {
+            Serial.print(F("Running step "));
+            Serial.println(current_step, DEC);
             set_leds(current_frame);
           
             if (current_animation->modes == 0x1) // Fade mode animation
