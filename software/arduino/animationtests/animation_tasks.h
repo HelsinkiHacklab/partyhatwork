@@ -174,11 +174,14 @@ void AnimationRunner::set_animation(const Animation* anim)
 
 void AnimationRunner::interpolate_fade()
 {
+    Serial.print(F("fade_step "));
+    Serial.println(fade_step, DEC);
+
     for (uint8_t i=0; i < 8; i++)
     {
         if (current_animation->leds & _BV(i))
         {
-            for (uint8_t ii=0; i < 3; i++)
+            for (uint8_t ii=0; ii < 3; ii++)
             {
                 uint8_t tmpval1 = leds.leds[i][ii];
                 uint8_t tmpval2 = next_leds.leds[i][ii];
@@ -196,6 +199,15 @@ void AnimationRunner::interpolate_fade()
                     fade_leds.leds[i][ii] = ((tmpval2 - tmpval1)/num_fade_steps) * fade_step;
                 }
             }
+            Serial.print(F("(fade)LED"));
+            Serial.print(i, DEC);
+            Serial.print(F(" values:"));
+            Serial.print(F(" 0x"));
+            Serial.print(fade_leds.leds[i][0], HEX);
+            Serial.print(F(" 0x"));
+            Serial.print(fade_leds.leds[i][1], HEX);
+            Serial.print(F(" 0x"));
+            Serial.println(fade_leds.leds[i][2], HEX);
         }
     }
 }
@@ -266,6 +278,10 @@ void AnimationRunner::run(uint32_t now)
             // Set next runtime before all the heavy calculcations
             incRunTime(fade_wait_ms);
 
+            Serial.print(F("fade_wait_ms="));
+            Serial.println(fade_wait_ms, DEC);
+
+
             // Calculate largest difference between values to interpolate
             uint8_t largest_diff = 0;
             for (uint8_t i=0; i < 8; i++)
@@ -301,6 +317,10 @@ void AnimationRunner::run(uint32_t now)
             {
                 num_fade_steps = fade_max_steps;
             }
+
+            Serial.print(F("num_fade_steps="));
+            Serial.println(num_fade_steps, DEC);
+
             fade_step = 0;
             interpolate_fade();
             state = FADING;

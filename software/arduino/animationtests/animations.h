@@ -17,7 +17,7 @@ const Animation foo_anim PROGMEM = {
     0x0,
     0x3, // leds 0 & 1
     0x6,
-    0x0,
+    0x1,
     foo_frames  // Array name is always a pointer so no need for &
 };
 
@@ -35,7 +35,7 @@ const Animation bar_anim PROGMEM = {
     &foo_anim, // Pointer to the next animation in the chain
     0x3, // leds 0 & 1
     0x6,
-    0x0,
+    0x1,
     bar_frames // Array name is always a pointer so no need for &
 };
 
