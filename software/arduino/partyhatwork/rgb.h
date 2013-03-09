@@ -23,9 +23,9 @@ uint8_t pwmlimit(uint8_t pwm)
  */
 void setRGB(uint8_t startpin, uint8_t r, uint8_t g, uint8_t b)
 {
-    byte rgamma = gammaRamp256(r);
-    byte bgamma = gammaRamp256(b);
-    byte ggamma = gammaRamp256(g);
+    byte rgamma = gamma256to256(r);
+    byte bgamma = gamma256to256(b);
+    byte ggamma = gamma256to256(g);
     analogWrite(startpin, pwmlimit(rgamma));
     analogWrite(startpin+1, pwmlimit(ggamma));
     analogWrite(startpin+2, pwmlimit(bgamma));
