@@ -26,6 +26,14 @@ void load_animation_to_buffer(const Animation* src, Animation* tgt)
     memcpy_P(tgt, src, sizeof(Animation));
 }
 
+enum AnimationState { 
+    STOPPED,
+    RUNNING,
+    FADING_START,
+    FADING,
+    FADING_END
+};
+
 
 class AnimationRunner : public TimedTask
 {
@@ -38,11 +46,7 @@ public:
     virtual void set_animation(Animation* anim);
     virtual void set_animation(const Animation* anim);
 
-
-    boolean running;
-
 private:
-    virtual void unpack_frame(uint8_t *start_of_frame);
     virtual void unpack_frame(const uint8_t *start_of_frame);
 
     uint8_t leds[7][3];
@@ -53,16 +57,20 @@ private:
     uint8_t num_leds;
     uint16_t wait_ms;
 
+
+    AnimationState state;
+    
 };
 
 AnimationRunner::AnimationRunner()
 : TimedTask(millis())
 {
+    state = STOPPED;
 }
 
 bool AnimationRunner::canRun(uint32_t now)
 {
-    if (!running)
+    if (state> STOPPED)
     {
         return false;
     }
@@ -138,7 +146,7 @@ void AnimationRunner::set_animation(Animation* anim)
     Serial.println(frame_size, DEC);
 
     this->unpack_frame(current_animation->first_frame);
-    running = true;
+    state = RUNNING;
 }
 
 /**
