@@ -133,11 +133,11 @@ void AnimationRunner::set_animation(Animation* anim)
     state = STOPPED;
 }
 
-void start()
+void AnimationRunner::start()
 {
     state = RUNNING;
 }
-void stop()
+void AnimationRunner::stop()
 {
     // Reset the animation
     set_animation(current_animation);

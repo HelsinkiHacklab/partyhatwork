@@ -106,11 +106,11 @@ void xbee_api(ZBRxResponse rx)
         }
         case 0x3:
         {
-            anim_runner->start();
+            anim_runner.start();
         }
         case 0x4:
         {
-            anim_runner->stop();
+            anim_runner.stop();
         }
         case 0x58: // Ascii X
         {

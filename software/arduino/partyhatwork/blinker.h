@@ -1,5 +1,6 @@
 #ifndef BLINKER_H
 #define BLINKER_H
+#include <Arduino.h>
 #include <Task.h>
 
 // Timed task to blink a LED.
