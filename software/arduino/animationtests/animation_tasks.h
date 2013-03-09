@@ -35,6 +35,10 @@ enum AnimationState {
 };
 
 
+typedef struct {
+    uint8_t leds[7][3];
+} ledtable;
+
 class AnimationRunner : public TimedTask
 {
 public:
@@ -47,16 +51,18 @@ public:
     virtual void set_animation(const Animation* anim);
 
 private:
-    virtual void unpack_frame(const uint8_t *start_of_frame);
+    virtual void unpack_frame(const uint8_t *start_of_frame, ledtable& tgt , uint16_t* tgt_wait_ms);
 
-    uint8_t leds[7][3];
+    ledtable leds;
+    ledtable next_leds;
+    ledtable fade_leds;
 
     const Animation* current_animation;
     uint8_t frame_size;
     uint8_t current_step;
     uint8_t num_leds;
     uint16_t wait_ms;
-
+    uint16_t next_wait_ms;
 
     AnimationState state;
     
@@ -79,21 +85,21 @@ bool AnimationRunner::canRun(uint32_t now)
 /**
  * Frame loader loading from PROGMEM
  */
-void AnimationRunner::unpack_frame(const uint8_t *start_of_frame)
+void AnimationRunner::unpack_frame(const uint8_t *start_of_frame, ledtable& tgt, uint16_t* tgt_wait_ms)
 {
     uint8_t frame_position = 0;
     for (uint8_t i=0; i < 8; i++)
     {
         if (current_animation->leds & _BV(i))
         {
-            leds[i][0] = pgm_read_byte(start_of_frame+frame_position+0);
-            leds[i][1] = pgm_read_byte(start_of_frame+frame_position+1);
-            leds[i][2] = pgm_read_byte(start_of_frame+frame_position+2);
+            tgt.leds[i][0] = pgm_read_byte(start_of_frame+frame_position+0);
+            tgt.leds[i][1] = pgm_read_byte(start_of_frame+frame_position+1);
+            tgt.leds[i][2] = pgm_read_byte(start_of_frame+frame_position+2);
             frame_position += 3;
         }
     }
     //wait_ms = pgm_read_word(start_of_frame+frame_position);
-    wait_ms = (pgm_read_byte(start_of_frame+frame_position) << 8) + pgm_read_byte(start_of_frame+frame_position+1);
+    *tgt_wait_ms = (pgm_read_byte(start_of_frame+frame_position) << 8) + pgm_read_byte(start_of_frame+frame_position+1);
 
     for (uint8_t i=0; i < 8; i++)
     {
@@ -103,15 +109,15 @@ void AnimationRunner::unpack_frame(const uint8_t *start_of_frame)
             Serial.print(i, DEC);
             Serial.print(F(" values:"));
             Serial.print(F(" 0x"));
-            Serial.print(leds[i][0], HEX);
+            Serial.print(tgt.leds[i][0], HEX);
             Serial.print(F(" 0x"));
-            Serial.print(leds[i][1], HEX);
+            Serial.print(tgt.leds[i][1], HEX);
             Serial.print(F(" 0x"));
-            Serial.println(leds[i][2], HEX);
+            Serial.println(tgt.leds[i][2], HEX);
         }
     }
     Serial.print(F("wait_time="));
-    Serial.println(wait_ms, DEC);
+    Serial.println(*tgt_wait_ms, DEC);
     
 }
 
@@ -145,7 +151,7 @@ void AnimationRunner::set_animation(Animation* anim)
     Serial.print(F("frame_size="));
     Serial.println(frame_size, DEC);
 
-    this->unpack_frame(current_animation->first_frame);
+    this->unpack_frame(current_animation->first_frame, leds, &wait_ms);
     state = RUNNING;
 }
 
@@ -172,7 +178,7 @@ void AnimationRunner::run(uint32_t now)
     {
         current_step = 0;
     }
-    unpack_frame(current_animation->first_frame+(current_step*frame_size));
+    unpack_frame(current_animation->first_frame+(current_step*frame_size), leds, &wait_ms);
 }
 
 
