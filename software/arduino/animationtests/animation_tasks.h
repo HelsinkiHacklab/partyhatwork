@@ -331,7 +331,7 @@ void AnimationRunner::run(uint32_t now)
             Serial.print(F("num_fade_steps="));
             Serial.println(num_fade_steps, DEC);
 
-            fade_step = 0;
+            fade_step = 1;
             interpolate_fade();
             state = FADING;
             break;
