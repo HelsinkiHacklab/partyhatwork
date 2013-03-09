@@ -41,3 +41,4 @@ and XBee) will be brought out to IDC connectors for further use.
   * without the "optional" regulator battery cannot power the XMega board
     (you could also jumper VBAT to VUSB but that will cause trouble when you connect the USB cable)
   * The 3.3V regulator has weird pinout (whyever eagle has more parts with that one than with the logical and actually more easily available one beats me)
+  * The LiPo charge current control resistor pads form a square, making it easy to accidentally place resistors in wrong orientation.

@@ -137,6 +137,19 @@ SleepTask sleeper;
 
 #include "blinker.h"
 
+void high_current_chg(boolean mode)
+{
+    if (mode)
+    {
+        pinMode(HIGH_CURRENT_CHG_PIN, OUTPUT);
+        digitalWrite(HIGH_CURRENT_CHG_PIN, LOW);
+    }
+    else
+    {
+        pinMode(HIGH_CURRENT_CHG_PIN, INPUT);
+    }
+}
+
 
 void setup()
 {
@@ -158,7 +171,7 @@ void setup()
     // We keep the pin high whenever the sketch is running
     digitalWrite(SLEEP_DEBUG_PIN, HIGH);
 #endif
-
+    high_current_chg(true);
 }
 
 void loop()
