@@ -68,45 +68,6 @@ bool AnimationRunner::canRun(uint32_t now)
     }
     return TimedTask::canRun(now);
 }
-
-/**
- * Frame loader loading from SRAM
- */
-void AnimationRunner::unpack_frame(uint8_t *start_of_frame)
-{
-    uint8_t frame_position = 0;
-    for (uint8_t i=0; i < 8; i++)
-    {
-        if (current_animation->leds & _BV(i))
-        {
-            leds[i][0] = start_of_frame[frame_position+0];
-            leds[i][1] = start_of_frame[frame_position+1];
-            leds[i][2] = start_of_frame[frame_position+2];
-            frame_position += 3;
-        }
-    }
-    wait_ms = (start_of_frame[frame_position] << 8) + start_of_frame[frame_position+1];
-
-    for (uint8_t i=0; i < 8; i++)
-    {
-        if (current_animation->leds & _BV(i))
-        {
-            Serial.print(F("LED"));
-            Serial.print(i, DEC);
-            Serial.print(F(" values:"));
-            Serial.print(F(" 0x"));
-            Serial.print(leds[i][0], HEX);
-            Serial.print(F(" 0x"));
-            Serial.print(leds[i][1], HEX);
-            Serial.print(F(" 0x"));
-            Serial.println(leds[i][2], HEX);
-        }
-    }
-    Serial.print(F("wait_time="));
-    Serial.println(wait_ms, DEC);
-    
-}
-
 /**
  * Frame loader loading from PROGMEM
  */
