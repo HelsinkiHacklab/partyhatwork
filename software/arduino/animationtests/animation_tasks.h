@@ -191,11 +191,11 @@ void AnimationRunner::interpolate_fade()
                 }
                 if (tmpval1 > tmpval2)
                 {
-                    fade_frame.leds[i][ii] = ((tmpval1 - tmpval2) / num_fade_steps) * fade_step;
+                    fade_frame.leds[i][ii] = tmpval2 - (((tmpval1 - tmpval2) / num_fade_steps) * fade_step);
                 }
                 else
                 {
-                    fade_frame.leds[i][ii] = tmpval2 - (((tmpval2 - tmpval1) / num_fade_steps) * fade_step);
+                    fade_frame.leds[i][ii] = (((tmpval2 - tmpval1) / num_fade_steps) * fade_step);
                 }
             }
             /*
