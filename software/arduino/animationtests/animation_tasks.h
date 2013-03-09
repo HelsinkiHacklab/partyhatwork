@@ -198,6 +198,7 @@ void AnimationRunner::interpolate_fade()
                     fade_frame.leds[i][ii] = tmpval2 - (((tmpval2 - tmpval1) / num_fade_steps) * fade_step);
                 }
             }
+            /*
             Serial.print(F("(fade)LED"));
             Serial.print(i, DEC);
             Serial.print(F(" values:"));
@@ -207,6 +208,7 @@ void AnimationRunner::interpolate_fade()
             Serial.print(fade_frame.leds[i][1], HEX);
             Serial.print(F(" 0x"));
             Serial.println(fade_frame.leds[i][2], HEX);
+            */
         }
     }
 }
