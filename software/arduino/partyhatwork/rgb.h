@@ -47,5 +47,18 @@ inline void setRGB1(uint8_t r, uint8_t g, uint8_t b)
     setRGB(19, r,g,b);
 }
 
+inline void setStdRGB(uint8_t ledno, uint8_t r, uint8_t g, uint8_t b)
+{
+    switch(ledno)
+    {
+        case 0x0:
+          setRGB0(r,g,b);
+          break;
+        case 0x1:
+          setRGB1(r,g,b);
+          break;
+    }
+}
+
 
 #endif

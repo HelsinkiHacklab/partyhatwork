@@ -54,6 +54,30 @@ SERIAL_DEFINE(Serial3, E, 0); -> PE2/PE3 == 2/3
 
 // Animations
 #include "animation_tasks.h"
+#include "animations.h"
+AnimationRunner anim_runner;
+
+void load_nth_animation(uint8_t n)
+{
+    load_animation_to_buffer(&FIRST_ANIMATION);
+    uint8_t i = 0;
+    while (true)
+    {
+        if (i == n)
+        {
+            anim_runner.set_animation(&animation_buffer);
+            break;
+        }
+
+        if (!animation_buffer.Next)
+        {
+            break;
+        }
+        load_animation_to_buffer((const Animation*)animation_buffer.Next);
+        i++;
+    }
+}
+
 
 // Get this library from http://code.google.com/p/xbee-arduino/
 #include <XBee.h>
@@ -74,6 +98,19 @@ void xbee_api(ZBRxResponse rx)
         {
             setRGB1(rx.getData(1),rx.getData(2),rx.getData(3));
             break;
+        }
+        case 0x2:
+        {
+            load_nth_animation(rx.getData(1));
+            break;
+        }
+        case 0x3:
+        {
+            anim_runner->start();
+        }
+        case 0x4:
+        {
+            anim_runner->stop();
         }
         case 0x58: // Ascii X
         {
@@ -125,7 +162,7 @@ void loop()
 
     // Tasks are in priority order, only one task is run per tick, be sure to keep sleeper as last task if you use it.
      //Task *tasks[] = { &xbeereader, &batterymonitor };
-    Task *tasks[] = { &xbeereader, &blinker, &batterymonitor, &sleeper };
+    Task *tasks[] = { &xbeereader, &anim_runner, &blinker, &batterymonitor, &sleeper };
     TaskScheduler sched(tasks, NUM_TASKS(tasks));
 
     // Run the scheduler - never returns.
