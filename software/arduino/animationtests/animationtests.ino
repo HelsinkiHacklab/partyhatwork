@@ -51,13 +51,11 @@ const Animation bar_anim PROGMEM = {
 
 AnimationRunner anim_runner;
 
-/*
 void load_nth_animation(uint8_t n)
 {
     Serial.print(F("load_nth_animation() called with n="));
     Serial.println(n, DEC);
-    Animation *tmpanim;
-    load_animation_to_buffer(&FIRST_ANIMATION, tmpanim);
+    load_animation_to_buffer(&FIRST_ANIMATION);
     uint8_t i = 0;
     while (true)
     {
@@ -66,27 +64,24 @@ void load_nth_animation(uint8_t n)
 
         if (i == n)
         {
-            anim_runner.set_animation(tmpanim);
+            anim_runner.set_animation(&animation_buffer);
             break;
         }
 
         Serial.print(F("Next (address)=0x"));
-        Serial.println((uint16_t)&tmpanim->Next, HEX);
+        Serial.println((uint16_t)&animation_buffer.Next, HEX);
 
-        if (!tmpanim->Next)
+        if (!animation_buffer.Next)
         {
             Serial.print(F("No Next animation defined, aborting at i="));
             Serial.println(i, DEC);
             break;
         }
-
-        tmpanim = (Animation*)tmpanim->Next;
+        load_animation_to_buffer((const Animation*)animation_buffer.Next);
         i++;
     }
     Serial.println(F("load_nth_animation() exiting"));
 }
-*/
-
 
 void setup()
 {
@@ -103,11 +98,9 @@ void setup()
 void loop()
 {
     //load_animation_to_buffer(&foo_anim);
-    anim_runner.set_animation(&foo_anim);
-    /*
+    //anim_runner.set_animation(&foo_anim);
     load_nth_animation(1);
-    load_nth_animation(0);
-    */
+//    load_nth_animation(0);
     // Tasks are in priority order, only one task is run per tick, be sure to keep sleeper as last task if you use it.
     Task *tasks[] = { &anim_runner, &sleeper };
     TaskScheduler sched(tasks, NUM_TASKS(tasks));
