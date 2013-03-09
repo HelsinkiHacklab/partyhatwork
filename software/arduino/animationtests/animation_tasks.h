@@ -70,7 +70,7 @@ AnimationRunner::AnimationRunner()
 
 bool AnimationRunner::canRun(uint32_t now)
 {
-    if (state> STOPPED)
+    if (state == STOPPED)
     {
         return false;
     }
