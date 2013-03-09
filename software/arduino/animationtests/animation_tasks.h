@@ -39,7 +39,8 @@ enum AnimationState {
 // Pack this matrix to a stuct to make pointer passing saner
 typedef struct {
     uint8_t leds[7][3];
-} ledtable;
+    uint16_t wait_ms;
+} frame_data;
 
 class AnimationRunner : public TimedTask
 {
@@ -53,24 +54,22 @@ public:
     virtual void set_animation(const Animation* anim);
 
 private:
-    virtual void unpack_frame(const uint8_t *start_of_frame, ledtable& tgt , uint16_t* tgt_wait_ms);
+    virtual void unpack_frame(const uint8_t *start_of_frame, frame_data& tgt);
     void interpolate_fade();
-    void set_leds(ledtable& src);
+    void set_leds(frame_data& src);
 
-    ledtable leds;
 
     const Animation* current_animation;
     uint8_t frame_size;
     uint8_t current_step;
     uint8_t num_leds;
-    uint16_t wait_ms;
+    frame_data current_frame;
 
-    ledtable next_leds;
-    uint16_t next_wait_ms;
-    ledtable fade_leds;
+
+    frame_data next_frame;
+    frame_data fade_frame;
     uint8_t fade_step;
     uint8_t num_fade_steps;
-    uint8_t fade_wait_ms; // This will always fit to single byte, worst (and totally insane case) would be 257 as value
 
     AnimationState state;
     
@@ -93,7 +92,7 @@ bool AnimationRunner::canRun(uint32_t now)
 /**
  * Frame loader loading from PROGMEM
  */
-void AnimationRunner::unpack_frame(const uint8_t *start_of_frame, ledtable& tgt, uint16_t* tgt_wait_ms)
+void AnimationRunner::unpack_frame(const uint8_t *start_of_frame, frame_data& tgt)
 {
     uint8_t frame_position = 0;
     for (uint8_t i=0; i < 8; i++)
@@ -107,7 +106,7 @@ void AnimationRunner::unpack_frame(const uint8_t *start_of_frame, ledtable& tgt,
         }
     }
     //wait_ms = pgm_read_word(start_of_frame+frame_position);
-    *tgt_wait_ms = (pgm_read_byte(start_of_frame+frame_position) << 8) + pgm_read_byte(start_of_frame+frame_position+1);
+    tgt.wait_ms = (pgm_read_byte(start_of_frame+frame_position) << 8) + pgm_read_byte(start_of_frame+frame_position+1);
 
     for (uint8_t i=0; i < 8; i++)
     {
@@ -125,7 +124,7 @@ void AnimationRunner::unpack_frame(const uint8_t *start_of_frame, ledtable& tgt,
         }
     }
     Serial.print(F("wait_time="));
-    Serial.println(*tgt_wait_ms, DEC);
+    Serial.println(tgt.wait_ms, DEC);
     
 }
 
@@ -159,7 +158,7 @@ void AnimationRunner::set_animation(Animation* anim)
     Serial.print(F("frame_size="));
     Serial.println(frame_size, DEC);
 
-    this->unpack_frame(current_animation->first_frame, leds, &wait_ms);
+    this->unpack_frame(current_animation->first_frame, current_frame);
     state = RUNNING;
 }
 
@@ -183,36 +182,36 @@ void AnimationRunner::interpolate_fade()
         {
             for (uint8_t ii=0; ii < 3; ii++)
             {
-                uint8_t tmpval1 = leds.leds[i][ii];
-                uint8_t tmpval2 = next_leds.leds[i][ii];
+                uint8_t tmpval1 = current_frame.leds[i][ii];
+                uint8_t tmpval2 = next_frame.leds[i][ii];
                 if (tmpval1 == tmpval2)
                 {
-                    fade_leds.leds[i][ii] = tmpval2;
+                    fade_frame.leds[i][ii] = tmpval2;
                     continue;
                 }
                 if (tmpval1 > tmpval2)
                 {
-                    fade_leds.leds[i][ii] = ((tmpval1 - tmpval2) / num_fade_steps) * fade_step;
+                    fade_frame.leds[i][ii] = ((tmpval1 - tmpval2) / num_fade_steps) * fade_step;
                 }
                 else
                 {
-                    fade_leds.leds[i][ii] = ((tmpval2 - tmpval1)/num_fade_steps) * fade_step;
+                    fade_frame.leds[i][ii] = ((tmpval2 - tmpval1)/num_fade_steps) * fade_step;
                 }
             }
             Serial.print(F("(fade)LED"));
             Serial.print(i, DEC);
             Serial.print(F(" values:"));
             Serial.print(F(" 0x"));
-            Serial.print(fade_leds.leds[i][0], HEX);
+            Serial.print(fade_frame.leds[i][0], HEX);
             Serial.print(F(" 0x"));
-            Serial.print(fade_leds.leds[i][1], HEX);
+            Serial.print(fade_frame.leds[i][1], HEX);
             Serial.print(F(" 0x"));
-            Serial.println(fade_leds.leds[i][2], HEX);
+            Serial.println(fade_frame.leds[i][2], HEX);
         }
     }
 }
 
-void AnimationRunner::set_leds(ledtable& src)
+void AnimationRunner::set_leds(frame_data& src)
 {
     uint8_t dummy;
     for (uint8_t i=0; i < 8; i++)
@@ -236,7 +235,7 @@ void AnimationRunner::run(uint32_t now)
     {
         case RUNNING:
         {
-            set_leds(leds);
+            set_leds(current_frame);
           
             if (current_animation->modes == 0x1) // Fade mode animation
             {
@@ -247,13 +246,13 @@ void AnimationRunner::run(uint32_t now)
 
 
             // The default hard-switch handler, load next frame and wait.
-            incRunTime(wait_ms);
+            incRunTime(current_frame.wait_ms);
             current_step++;
             if (current_step >= current_animation->length)
             {
                 current_step = 0;
             }
-            unpack_frame(current_animation->first_frame+(current_step*frame_size), leds, &wait_ms);
+            unpack_frame(current_animation->first_frame+(current_step*frame_size), current_frame);
 
             break;
         }
@@ -266,20 +265,20 @@ void AnimationRunner::run(uint32_t now)
             {
                 next_step = 0;
             }
-            unpack_frame(current_animation->first_frame+(next_step*frame_size), next_leds, &next_wait_ms);
+            unpack_frame(current_animation->first_frame+(next_step*frame_size), next_frame);
             // Figure out step time and max number of steps we can take within the constraints
-            fade_wait_ms = FADE_MIN_TIME;
-            uint16_t fade_max_steps = wait_ms/FADE_MIN_TIME;
+            fade_frame.wait_ms = FADE_MIN_TIME;
+            uint16_t fade_max_steps = current_frame.wait_ms/FADE_MIN_TIME;
             if (fade_max_steps > 255)
             {
                 fade_max_steps = 255;
-                fade_wait_ms = wait_ms/255;
+                fade_frame.wait_ms = current_frame.wait_ms/255;
             }
             // Set next runtime before all the heavy calculcations
-            incRunTime(fade_wait_ms);
+            incRunTime(fade_frame.wait_ms);
 
-            Serial.print(F("fade_wait_ms="));
-            Serial.println(fade_wait_ms, DEC);
+            Serial.print(F("fade_frame.wait_ms="));
+            Serial.println(fade_frame.wait_ms, DEC);
 
 
             // Calculate largest difference between values to interpolate
@@ -290,8 +289,8 @@ void AnimationRunner::run(uint32_t now)
                 {
                     for (uint8_t ii=0; ii < 3; ii++)
                     {
-                        uint8_t tmpval1 = leds.leds[i][ii];
-                        uint8_t tmpval2 = next_leds.leds[i][ii];
+                        uint8_t tmpval1 = current_frame.leds[i][ii];
+                        uint8_t tmpval2 = next_frame.leds[i][ii];
                         uint8_t tmpdiff;
                         if (tmpval1 > tmpval2)
                         {
@@ -328,10 +327,10 @@ void AnimationRunner::run(uint32_t now)
         }
         case FADING:
         {
-            set_leds(fade_leds);
+            set_leds(fade_frame);
 
             // Set next runtime before all the heavy calculcations
-            incRunTime(fade_wait_ms);
+            incRunTime(fade_frame.wait_ms);
             if (fade_step >= num_fade_steps)
             {
                 state = FADING_END;
@@ -343,9 +342,9 @@ void AnimationRunner::run(uint32_t now)
         }
         case FADING_END:
         {
-            set_leds(fade_leds);
+            set_leds(fade_frame);
             
-            incRunTime(fade_wait_ms);
+            incRunTime(fade_frame.wait_ms);
             state = RUNNING;
 
             current_step++;
@@ -355,8 +354,7 @@ void AnimationRunner::run(uint32_t now)
             }
             //unpack_frame(current_animation->first_frame+(current_step*frame_size), leds, &wait_ms);
             // We already unpacked the next frame to calculate the interpolations, so just switch them over.
-            leds = next_leds;
-            wait_ms = next_wait_ms;
+            current_frame = next_frame;
             
             break;
         }
