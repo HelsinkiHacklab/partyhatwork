@@ -174,6 +174,30 @@ void AnimationRunner::set_animation(const Animation* anim)
 
 void AnimationRunner::interpolate_fade()
 {
+    for (uint8_t i=0; i < 8; i++)
+    {
+        if (current_animation->leds & _BV(i))
+        {
+            for (uint8_t ii=0; i < 3; i++)
+            {
+                uint8_t tmpval1 = leds.leds[i][ii];
+                uint8_t tmpval2 = next_leds.leds[i][ii];
+                if (tmpval1 == tmpval2)
+                {
+                    fade_leds.leds[i][ii] = tmpval2;
+                    continue;
+                }
+                if (tmpval1 > tmpval2)
+                {
+                    fade_leds.leds[i][ii] = ((tmpval1 - tmpval2) / num_fade_steps) * fade_step;
+                }
+                else
+                {
+                    fade_leds.leds[i][ii] = ((tmpval2 - tmpval1)/num_fade_steps) * fade_step;
+                }
+            }
+        }
+    }
 }
 
 void AnimationRunner::set_leds(ledtable& src)
