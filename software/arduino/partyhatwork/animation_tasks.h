@@ -183,7 +183,6 @@ void AnimationRunner::interpolate_fade()
 
 void AnimationRunner::set_leds(frame_data& src)
 {
-    uint8_t dummy;
     for (uint8_t i=0; i < 8; i++)
     {
         if (current_animation->leds & _BV(i))

@@ -32,6 +32,9 @@ SERIAL_DEFINE(Serial3, E, 0); -> PE2/PE3 == 2/3
  * 
  */
 
+// Get this library from http://code.google.com/p/xbee-arduino/
+#include <XBee.h>
+
 #define BAT_SENSE_PIN A9
 #define HIGH_CURRENT_CHG_PIN 12
 #define XBEE_RESET_PIN 28
@@ -79,11 +82,9 @@ void load_nth_animation(uint8_t n)
 }
 
 
-// Get this library from http://code.google.com/p/xbee-arduino/
-#include <XBee.h>
 #include "xbee_tasks.h"
 
-void xbee_api(ZBRxResponse rx)
+void xbee_api_callback(ZBRxResponse rx)
 {
     // Check first byte
     switch(rx.getData(0))
@@ -154,10 +155,14 @@ void setup()
 
 void loop()
 {
-    xbeereader.callback = &xbee_api;
+    xbeereader.callback = &xbee_api_callback;
 
     Blinker blinker(BLINKER_PIN, 1000);
     blinker.on_time = 250;
+    
+    // Start a "demo mode"
+    load_nth_animation(0);
+    anim_runner.start();
 
 
     // Tasks are in priority order, only one task is run per tick, be sure to keep sleeper as last task if you use it.

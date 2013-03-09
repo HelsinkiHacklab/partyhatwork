@@ -34,7 +34,7 @@ void BatteryMonitor::run(uint32_t now)
     // TODO: keep a running average for less noisy voltage
 }
 
-extern BatteryMonitor batterymonitor(BAT_SENSE_PIN);
+BatteryMonitor batterymonitor(BAT_SENSE_PIN);
 
 
 #endif
