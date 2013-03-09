@@ -115,6 +115,12 @@ void xbee_api_callback(ZBRxResponse rx)
             anim_runner.stop_animation();
             break;
         }
+        case 0x5:
+        {
+            load_nth_animation(rx.getData(1));
+            anim_runner.start_animation();
+            break;
+        }
         case 0x58: // Ascii X
         {
             // Your extended protocol goes here

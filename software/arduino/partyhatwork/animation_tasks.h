@@ -118,6 +118,7 @@ void AnimationRunner::unpack_frame(const uint8_t *start_of_frame, frame_data& tg
  */
 void AnimationRunner::set_animation(Animation* anim)
 {
+    leds_off();
     current_step = 0;
     current_animation = anim;
     num_leds = 0;
@@ -131,6 +132,7 @@ void AnimationRunner::set_animation(Animation* anim)
     frame_size = (num_leds*3)+2;
 
     this->unpack_frame(current_animation->first_frame, current_frame);
+    this->setRunTime(millis());
     state = STOPPED;
 }
 
@@ -166,7 +168,6 @@ void AnimationRunner::leds_off()
  */
 void AnimationRunner::set_animation(const Animation* anim)
 {
-    leds_off();
     load_animation_to_buffer(anim);
     set_animation(&animation_buffer);
 }
