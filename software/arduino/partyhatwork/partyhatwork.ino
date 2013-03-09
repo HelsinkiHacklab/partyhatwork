@@ -107,11 +107,13 @@ void xbee_api_callback(ZBRxResponse rx)
         }
         case 0x3:
         {
-            anim_runner.start();
+            anim_runner.start_animation();
+            break;
         }
         case 0x4:
         {
-            anim_runner.stop();
+            anim_runner.stop_animation();
+            break;
         }
         case 0x58: // Ascii X
         {
@@ -162,7 +164,7 @@ void loop()
     
     // Start a "demo mode"
     load_nth_animation(0);
-    anim_runner.start();
+    anim_runner.start_animation();
 
 
     // Tasks are in priority order, only one task is run per tick, be sure to keep sleeper as last task if you use it.

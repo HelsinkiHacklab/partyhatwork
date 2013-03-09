@@ -52,14 +52,15 @@ public:
     // My own methods
     virtual void set_animation(Animation* anim);
     virtual void set_animation(const Animation* anim);
-    virtual void start();
-    virtual void stop();
+    virtual void start_animation();
+    virtual void stop_animation();
     
 
 private:
     virtual void unpack_frame(const uint8_t *start_of_frame, frame_data& tgt);
     void interpolate_fade();
     void set_leds(frame_data& src);
+    void leds_off();
 
 
     const Animation* current_animation;
@@ -133,22 +134,39 @@ void AnimationRunner::set_animation(Animation* anim)
     state = STOPPED;
 }
 
-void AnimationRunner::start()
+void AnimationRunner::start_animation()
 {
     state = RUNNING;
 }
-void AnimationRunner::stop()
+
+void AnimationRunner::stop_animation()
 {
     // Reset the animation
     set_animation(current_animation);
+    /**
+     * This will get called by set_animation
+    leds_off();
+     */
 }
 
+void AnimationRunner::leds_off()
+{
+    // Clear all leds
+    for (uint8_t i=0; i < 8; i++)
+    {
+        if (current_animation->leds & _BV(i))
+        {
+            setStdRGB(i, 0x0, 0x0, 0x0);
+        }
+    }
+}
 
 /**
  * Load animation struct from PROGMEM
  */
 void AnimationRunner::set_animation(const Animation* anim)
 {
+    leds_off();
     load_animation_to_buffer(anim);
     set_animation(&animation_buffer);
 }
