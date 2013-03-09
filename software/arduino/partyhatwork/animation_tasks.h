@@ -144,11 +144,12 @@ void AnimationRunner::start_animation()
 void AnimationRunner::stop_animation()
 {
     // Reset the animation
+    /** 
+     * Seems this fscks some pointer up
     set_animation(current_animation);
-    /**
-     * This will get called by set_animation
-    leds_off();
      */
+    state = STOPPED;
+    leds_off();
 }
 
 void AnimationRunner::leds_off()
