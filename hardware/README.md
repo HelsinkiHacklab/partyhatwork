@@ -1,3 +1,3 @@
 # Hardware
 
-See the board revision directories for details, current revision is [rev1](./rev1/).
+See directories for details, current board revision is [rev1](./board_rev1/).
