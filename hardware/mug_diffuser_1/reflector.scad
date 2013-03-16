@@ -43,24 +43,35 @@ module half_mug()
 module reflector()
 {
     $fn=100;
-    union()
+    difference()
     {
-        // Two mug halves mirrored
-        half_mug_maincurve();
-        translate([0,0.5,0])
+        union()
         {
-            mirror([0,1,0])
+            // Two mug halves mirrored
+            half_mug_maincurve();
+            translate([0,0.5,0])
             {
-                half_mug_maincurve();
+                mirror([0,1,0])
+                {
+                    half_mug_maincurve();
+                }
+            }
+            // The semicircle that will be bent 90degrees to form the bottom of the reflector
+            translate([0,0.25,0])
+            {
+                cylinder(r=measured_points[0][1]-0.25, h=gHeight);
             }
         }
-        // The semicircle that will be bent 90degrees to form the bottom of the reflector
-        translate([0,0.25,0])
+        // Two small notches to indicate the bend-line
+        translate([-0.5, measured_points[0][1]-2, -0.5])
         {
-            cylinder(r=measured_points[0][1]-0.25, h=gHeight);
+            cube([1, 2.5, gHeight+1], center = false);
+        }
+        translate([-0.5, (-1*measured_points[0][1]), -0.5])
+        {
+            cube([1, 2.5, gHeight+1], center = false);
         }
     }
-    // TODO: add small nothes to mark the bend-line
 }
 
 // Output the shape, TODO: project to 2D (since we will be exporting DXF for CNC)
