@@ -1,24 +1,58 @@
 include <bezier.scad>
 
 measured_points = [
-    [0, 82.0/2], // x,y (mug sideways, opening to left, tracking *outside* dimensions)
-    [114, 50.0/2],
-    [114.0/2, 75.0/2],
-    [114.0/4, 78.0/2],
-    [114.0/4*3, 63.0/2],
+    [0, 80.0/2], // x,y (mug sideways, opening to left, tracking *outside* dimensions)
+    [110, 46.0/2],
+    [110.0/2, 73.0/2],
+    [110.0/4, 76.0/2],
+    [110.0/4*3, 61.0/2],
 ];
 
-// The fitted points from curve_fitting.py
-//    (65, 40), # P1
-//    (95, 30), # P2
-
+/**
+ * The fitted control points from curve_fitting.py
+ *
+    (62, 41), # P1
+    (97, 27), # P2
+ */
+/**
+ * This is the main shape of half a mug, lacking the steep curve at the very bottom
+ */
+module half_mug_maincurve()
+{
+    // Calculate and cache results, will speed up rendering especially when modifying other parameters.
+    render()
+    {
+        union()
+        {
+            BezCubicFillet([measured_points[0], [62, 41], [97, 27], measured_points[1] ], [0,0]);
+            cube([measured_points[1][0], measured_points[1][1], gHeight], center = false);
+        }
+    }
+}
+/**
+ * Half a mug
+ */
 module half_mug()
+{
+    half_mug_maincurve();
+    // TODO: Add union for the last curve and a few mm more of x-dimension lenght
+}
+
+module reflector()
 {
     union()
     {
-        BezCubicFillet([measured_points[0], [65, 40], [95, 30], measured_points[1] ], [0,0]);
-        cube([measured_points[1][0], measured_points[1][1], gHeight], center = false);
+        half_mug_maincurve();
+        translate([0,0.5,0])
+        {
+            mirror([0,1,0])
+            {
+                half_mug_maincurve();
+            }
+        }
+        // TODO: Add the "bottom" of the reflector that will be bent 90degrees.
     }
 }
 
-half_mug();
+// Output the shape, TODO: project to 2D (since we will be exporting DXF for CNC)
+reflector();
