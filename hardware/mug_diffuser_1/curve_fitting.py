@@ -21,8 +21,8 @@ ax.plot(measured_xs, measured_ys, 'ro')
 # Bezier code from http://matplotlib.org/users/path_tutorial.html
 verts = [
     measured_points[0],  # P0
-    (50, 40), # P1
-    (80, 40), # P2
+    (55, 39), # P1
+    (85, 35), # P2
     measured_points[1], # P3
     ]
 
