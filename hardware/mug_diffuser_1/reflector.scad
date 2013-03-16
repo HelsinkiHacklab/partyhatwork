@@ -3,17 +3,17 @@
 include <bezier.scad>
 
 measured_points = [
-    [0, 80.0/2], // x,y (mug sideways, opening to left, tracking *inside* dimensions)
+    [0, 79.0/2], // x,y (mug sideways, opening to left, tracking *inside* dimensions)
     [110, 46.0/2],
-    [110.0/2, 73.0/2],
-    [110.0/4, 76.0/2],
-    [110.0/4*3, 61.0/2],
+    [110.0/2, 71.0/2],
+    [110.0/4, 75.0/2],
+    [110.0/4*3, 60.0/2],
 ];
 
 /**
  * The fitted control points from curve_fitting.py
  *
-    (62, 41), # P1
+    (62, 38), # P1
     (97, 27), # P2
  */
 /**
@@ -26,7 +26,7 @@ module half_mug_maincurve()
     {
         union()
         {
-            BezCubicFillet([measured_points[0], [62, 41], [97, 27], measured_points[1] ], [0,0]);
+            BezCubicFillet([measured_points[0], [62, 38], [97, 27], measured_points[1] ], [0,0]);
             cube([measured_points[1][0], measured_points[1][1], gHeight], center = false);
         }
     }
