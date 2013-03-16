@@ -22,7 +22,7 @@ ax.plot(measured_xs, measured_ys, 'ro')
 verts = [
     measured_points[0],  # P0
     (55, 39), # P1
-    (85, 35), # P2
+    (85, 37), # P2
     measured_points[1], # P3
     ]
 
