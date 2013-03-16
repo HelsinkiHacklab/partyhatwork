@@ -38,13 +38,17 @@ bottomcube_xy = [measured_points[1][0]+2, measured_points[1][1]-4];
 module half_mug()
 {
     $fn=100;
-    union()
+    // Calculate and cache results, will speed up rendering especially when modifying other parameters.
+    render()
     {
-        half_mug_maincurve();
-        // Cube indicating full depth
-        cube([bottomcube_xy[0], bottomcube_xy[1] , gHeight], center = false);
-        // Bezier merging the end of the main curve to the bottom cube
-        BezCubicFillet([measured_points[1], [bottomcube_xy[0]-1, bottomcube_xy[1]+3.5], [bottomcube_xy[0]+0, bottomcube_xy[1]+2], bottomcube_xy ], [measured_points[1][0]-6,measured_points[1][1]-6]);
+        union()
+        {
+            half_mug_maincurve();
+            // Cube indicating full depth
+            cube([bottomcube_xy[0], bottomcube_xy[1] , gHeight], center = false);
+            // Bezier merging the end of the main curve to the bottom cube
+            BezCubicFillet([measured_points[1], [bottomcube_xy[0]-1, bottomcube_xy[1]+3.5], [bottomcube_xy[0]+0, bottomcube_xy[1]+2], bottomcube_xy ], [measured_points[1][0]-6,measured_points[1][1]-6]);
+        }
     }
 }
 
@@ -84,5 +88,14 @@ module reflector()
     }
 }
 
-// Output the shape, TODO: project to 2D (since we will be exporting DXF for CNC)
+module reflector_2d()
+{
+    projection(cut=false)
+    {
+        reflector();
+    }
+}
+
+// Output the shape
 reflector();
+//reflector_2d();
