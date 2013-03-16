@@ -5,10 +5,10 @@ import matplotlib.patches as patches
 
 measured_points = [
     (0, 80.0/2), # x,y (mug sideways, opening to left, tracking *outside* dimensions)
-    (112, 46.0/2),
-    (112.0/2, 73.0/2),
-    (112.0/4, 76.0/2),
-    (112.0/4*3, 61.0/2),
+    (110, 46.0/2),
+    (110.0/2, 73.0/2),
+    (110.0/4, 76.0/2),
+    (110.0/4*3, 61.0/2),
 ]
 measured_xs, measured_ys = zip(*measured_points)
 
