@@ -3,7 +3,7 @@
 ## BOM
 
   * Orthex juomamuki 4dl, EAN: 6411760154911. This particular mug is likely only available in Finland (At least Prisma carries it)
-  * Thin aluminium sheet with smooth surface, 550mmx550mm minimum. Bauhaus & K-rauta have these small & thin sheets in various sizes and finishes.
+  * Thin aluminium sheet with smooth surface, 155mmx160mm minimum. Bauhaus & K-rauta have these small & thin sheets in various sizes and finishes.
 
 ## Instructions
 
