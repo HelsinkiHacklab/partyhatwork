@@ -97,5 +97,5 @@ module reflector_2d()
 }
 
 // Output the shape
-reflector();
-//reflector_2d();
+//reflector();
+reflector_2d();
