@@ -36,9 +36,19 @@ module half_mug_maincurve()
  */
 module half_mug()
 {
-    half_mug_maincurve();
-    // TODO: Add union for the last curve and a few mm more of x-dimension lenght
+    $fn=100;
+    union()
+    {
+        half_mug_maincurve();
+        cube([measured_points[1][0]+2, measured_points[1][1]-4, gHeight], center = false);
+        translate([measured_points[1][0]-1.95, measured_points[1][1]-3.55, 0])
+        {
+            #cylinder(r=4, h=gHeight);
+        }
+    }
 }
+
+half_mug();
 
 module reflector()
 {
@@ -75,4 +85,4 @@ module reflector()
 }
 
 // Output the shape, TODO: project to 2D (since we will be exporting DXF for CNC)
-reflector();
+//reflector();
