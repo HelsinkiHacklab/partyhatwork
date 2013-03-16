@@ -13,12 +13,36 @@ measured_points = [
 measured_xs, measured_ys = zip(*measured_points)
 
 
-
-
+# Create a plot and add the measured points
 fig = plt.figure()
 ax = fig.add_subplot(111)
-
 ax.plot(measured_xs, measured_ys, 'ro')
+
+# Bezier code from http://matplotlib.org/users/path_tutorial.html
+verts = [
+    measured_points[0],  # P0
+    (0.2, 1.), # P1
+    (1., 0.8), # P2
+    measured_points[1], # P3
+    ]
+
+codes = [Path.MOVETO,
+         Path.CURVE4,
+         Path.CURVE4,
+         Path.CURVE4,
+         ]
+
+path = Path(verts, codes)
+patch = patches.PathPatch(path, facecolor='none', lw=2)
+ax.add_patch(patch)
+
+xs, ys = zip(*verts)
+ax.plot(xs, ys, 'x--', lw=2, color='black', ms=10)
+
+ax.text(xs[0]-0.05, ys[0]-0.05, 'P0')
+ax.text(xs[1]+0.05, ys[1]+0.05, 'P1')
+ax.text(xs[2]+0.05, ys[2]+0.05, 'P2')
+ax.text(xs[3]-0.05, ys[3]-0.05, 'P3')
 
 
 
