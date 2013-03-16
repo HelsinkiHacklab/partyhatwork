@@ -1,9 +1,9 @@
 Orthex juomamuki 4dl: 6411760154911
 
-Pohjan halkaisija 50mm/~42mm (ulko/sisä)
+Pohjan halkaisija 50mm/~46mm (ulko/sisä, ~42 aivan pohjassa, se viimeinen kaari on todella jyrkkä)
 Aukon halkaisija 82mm/79mm
 Seinän vahvuus (aukolla): 2mm
-Korkeus: ~114mm/~110mm (ulko/sisä)
+Korkeus: ~114mm/~110mm (ulko/sisä, ~112 aivan pohjassa)
 
 Ulkohalkaisija ~keskellä: ~75mm
 Ulkohalkaisija 1/4 pohjasta: ~63mm

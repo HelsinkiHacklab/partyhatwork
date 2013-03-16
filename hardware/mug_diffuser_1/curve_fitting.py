@@ -4,11 +4,11 @@ from matplotlib.path import Path
 import matplotlib.patches as patches
 
 measured_points = [
-    (0, 82.0/2), # x,y (mug sideways, opening to left, tracking *outside* dimensions)
-    (114, 50.0/2),
-    (114.0/2, 75.0/2),
-    (114.0/4, 78.0/2),
-    (114.0/4*3, 63.0/2),
+    (0, 80.0/2), # x,y (mug sideways, opening to left, tracking *outside* dimensions)
+    (112, 46.0/2),
+    (112.0/2, 73.0/2),
+    (112.0/4, 76.0/2),
+    (112.0/4*3, 61.0/2),
 ]
 measured_xs, measured_ys = zip(*measured_points)
 
@@ -21,8 +21,8 @@ ax.plot(measured_xs, measured_ys, 'ro')
 # Bezier code from http://matplotlib.org/users/path_tutorial.html
 verts = [
     measured_points[0],  # P0
-    (65, 40), # P1
-    (95, 30), # P2
+    (63, 40), # P1
+    (97, 28), # P2
     measured_points[1], # P3
     ]
 
