@@ -1,7 +1,9 @@
+// This is from http://www.thingiverse.com/thing:8454
+// See also: http://williamaadams.wordpress.com/2011/05/12/mr-bezier-goes-to-openscad/
 include <bezier.scad>
 
 measured_points = [
-    [0, 80.0/2], // x,y (mug sideways, opening to left, tracking *outside* dimensions)
+    [0, 80.0/2], // x,y (mug sideways, opening to left, tracking *inside* dimensions)
     [110, 46.0/2],
     [110.0/2, 73.0/2],
     [110.0/4, 76.0/2],

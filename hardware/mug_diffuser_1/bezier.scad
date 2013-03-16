@@ -1,6 +1,9 @@
 //=====================================
 // This is public Domain Code
 // Contributed by: William A Adams
+//
+// This is from http://www.thingiverse.com/thing:8454
+// See also: http://williamaadams.wordpress.com/2011/05/12/mr-bezier-goes-to-openscad/
 //=====================================
 joinfactor = 0.125;
 
