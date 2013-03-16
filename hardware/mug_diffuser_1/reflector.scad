@@ -34,21 +34,21 @@ module half_mug_maincurve()
 /**
  * Half a mug
  */
+bottomcube_xy = [measured_points[1][0]+2, measured_points[1][1]-4];
 module half_mug()
 {
     $fn=100;
     union()
     {
         half_mug_maincurve();
-        cube([measured_points[1][0]+2, measured_points[1][1]-4, gHeight], center = false);
-        translate([measured_points[1][0]-1.95, measured_points[1][1]-3.55, 0])
-        {
-            #cylinder(r=4, h=gHeight);
-        }
+        // Cube indicating full depth
+        cube([bottomcube_xy[0], bottomcube_xy[1] , gHeight], center = false);
+        // Bezier merging the end of the main curve to the bottom cube
+        BezCubicFillet([measured_points[1], [bottomcube_xy[0]-1, bottomcube_xy[1]+3.5], [bottomcube_xy[0]+0, bottomcube_xy[1]+2], bottomcube_xy ], [measured_points[1][0]-6,measured_points[1][1]-6]);
     }
 }
 
-half_mug();
+//half_mug();
 
 module reflector()
 {
@@ -58,12 +58,12 @@ module reflector()
         union()
         {
             // Two mug halves mirrored
-            half_mug_maincurve();
+            half_mug();
             translate([0,0.5,0])
             {
                 mirror([0,1,0])
                 {
-                    half_mug_maincurve();
+                    half_mug();
                 }
             }
             // The semicircle that will be bent 90degrees to form the bottom of the reflector
@@ -85,4 +85,4 @@ module reflector()
 }
 
 // Output the shape, TODO: project to 2D (since we will be exporting DXF for CNC)
-//reflector();
+reflector();
