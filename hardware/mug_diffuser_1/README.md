@@ -15,3 +15,9 @@
 
 If you have some sort of CNC that can cut thin metal sheets you can use the [DXF-file](./reflector.dxf).
 
+Some photos: [template][1], [cut & bent][2], [glued][3] & [in use][4]
+
+[1]: https://picasaweb.google.com/lh/photo/nGylbYth7qOaIvtZZEVNvtMTjNZETYmyPJy0liipFm0?feat=directlink
+[2]: https://picasaweb.google.com/lh/photo/HIvYXgTCgEQDVCX9EG3fN9MTjNZETYmyPJy0liipFm0?feat=directlink
+[3]: https://picasaweb.google.com/lh/photo/DAcRxKpaTQmPHOa6ay1VA9MTjNZETYmyPJy0liipFm0?feat=directlink
+[4]: https://picasaweb.google.com/lh/photo/euiXRlEUV-68nEd8NDOWBtMTjNZETYmyPJy0liipFm0?feat=directlink
