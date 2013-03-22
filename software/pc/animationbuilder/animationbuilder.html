@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+        <title>Partyhatwork animation configurator</title>
+    </head>
+    <body>
+        <h1>Partyhatwork animation configurator</h1>
+        <div id="preview" style="float: left; width: 50%;">
+        </div>
+        <div id="animationinfo" style="float: right; width: 50%">
+            <h2>Animation information</h2>
+            Name (valid c++ variable name): <input type="text" name="name" /> <br/>
+            <div id="ledselector" style="float: left; width: 50%">
+                <h2>Active LEDs</h2>
+                <input type="checkbox" name="led_0_enabled" checked> Left <br/>
+                <input type="checkbox" name="led_1_enabled" checked> Right <br/>
+                <input type="checkbox" name="led_2_enabled"> Front <br/>
+                <input type="checkbox" name="led_3_enabled"> Back <br/>
+                <input type="checkbox" name="led_4_enabled"> Undef <br/>
+                <input type="checkbox" name="led_5_enabled"> Undef <br/>
+                <input type="checkbox" name="led_6_enabled"> Undef <br/>
+                <input type="checkbox" name="led_7_enabled"> Undef <br/>
+            </div>
+            <div id="modes" style="float: right; width: 50%">
+                <h3>Mode flags</h3>
+                <input type="checkbox" name="mode_fading" checked> Fading <br/>
+            </div>
+        </div>
+        <div id="framecontainer" style="float: right; width: 50%">
+            <div id="frames">
+            </div>
+            <button id="newframe">Add frame</button>
+        </div>
+        <div id="generated" style="clear: both; height: 200px;">
+            <h2>Generated code</h2>
+            <textarea name="generated" style="height: 100%; width: 100%"></textarea>
+        </div>
+        <script type="text/javascript">
+            jQuery(document).ready(function(){
+                jQuery('#newframe').click(function(){
+                    
+                });
+            });
+        </script>        
+    </body>
+</html>
