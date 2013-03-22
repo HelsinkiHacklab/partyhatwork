@@ -30,8 +30,12 @@
             </div>
         </div>
         <div id="framecontainer" style="float: right; width: 50%">
-            <div id="frames">
-            </div>
+            <table id="frames">
+                <thead>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
             <button id="newframe">Add frame</button>
         </div>
         <div id="generated" style="clear: both; height: 200px;">
@@ -46,14 +50,56 @@
                         me = jQuery(this);
                         me.prop('disabled', true);
                     });
+                    // No header, add it.
+                    if (jQuery('#frames thead tr').length == 0)
+                    {
+                        row1html = '<tr>';
+                        row2html = '<tr>';
+                        for(i=0; i<8; i++)
+                        {
+                            if (jQuery('#led_'+i+'_enabled').filter(':checked').length)
+                            {
+                                lbl = jQuery('#lbl_led_'+i+'_enabled')
+                                row1html += '<th colspan=3>'+lbl.html()+'</th>';
+                                row2html += '<th>R</th><th>G</th><th>B</th>';
+                            }
+                        }
+                        row1html += '<th rowspan=2>Duration (ms)</th></tr>';
+                        jQuery('#frames thead').append(row1html);
+                        jQuery('#frames thead').append(row2html);
+                    }
+                    
+                    rows = jQuery('#frames tbody tr').length;
                     // Add the frame values inputs
+                    rowhtml = '<tr>';
                     for(i=0; i<8; i++)
                     {
-                        
+                        if (jQuery('#led_'+i+'_enabled').filter(':checked').length)
+                        {
+                            rowhtml += '<td><input id="row_'+rows+'_led_'+i+'_r" /></td>';
+                            rowhtml += '<td><input id="row_'+rows+'_led_'+i+'_g" /></td>';
+                            rowhtml += '<td><input id="row_'+rows+'_led_'+i+'_b" /></td>';
+                        }
                     }
+                    rowhtml += '<td class="duration"><input id="row_'+rows+'_duration" /></td></tr>';
+                    jQuery('#frames tbody').append(rowhtml);
                     
                 });
             });
-        </script>        
+        </script>
+        <style type="text/css">
+            #frames td, #frames th
+            {
+                border: 1px solid black;
+            }
+            #frames tbody td input
+            {
+                width: 3em;
+            }
+            #frames tbody td.duration input
+            {
+                width: 5em;
+            }
+        </style>
     </body>
 </html>
