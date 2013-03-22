@@ -9,7 +9,9 @@
     </head>
     <body>
         <h1>Partyhatwork animation configurator</h1>
+        <!-- TODO: re-enable when we have callback for this that actually works, meanwhile shift-reload works
         <button id="resetbutton">Reset</button>
+        -->
         <div id="preview" style="float: left; width: 50%;">
         </div>
         <div id="animationinfo" style="float: right; width: 50%">
@@ -48,10 +50,7 @@
             jQuery(document).ready(function(){
                 jQuery('#newframe').click(function(){
                     // Disable all the led selectors
-                    jQuery('#ledselector input').each(function(){
-                        me = jQuery(this);
-                        me.prop('disabled', true);
-                    });
+                    jQuery('#ledselector input').prop('disabled', true);
                     // No header, add it.
                     if (jQuery('#frames thead tr').length == 0)
                     {
@@ -78,7 +77,7 @@
                             rowhtml += '<td><input class="rgbinput" id="row_'+rows+'_led_'+i+'_rbg" name="row_'+rows+'_led_'+i+'_rbg" /></td>';
                         }
                     }
-                    rowhtml += '<td class="duration"><input id="row_'+rows+'_duration" /></td></tr>';
+                    rowhtml += '<td class="duration"><input id="row_'+rows+'_duration" /><button class="deleterow">X</button></td></tr>';
                     jQuery('#frames tbody').append(rowhtml);
                     
                     jQuery('input.rgbinput').ColorPicker({
@@ -90,6 +89,18 @@
                         },
                         onBeforeShow: function () {
                             $(this).ColorPickerSetColor(this.value);
+                        }
+                    });
+                    // Row remove callback (TODO: before this we should probably make sure only the last row has the input)
+                    jQuery('button.deleterow').click(function(){
+                        me = jQuery(this);
+                        me.parents('tr').remove();
+                        // Re-enable LED selectors when we have no frames
+                        if (jQuery('#frames tbody tr').length == 0)
+                        {
+                            // Remove the header
+                            jQuery('#frames thead tr').remove();
+                            jQuery('#ledselector input').prop('disabled', false);
                         }
                     });
                     
