@@ -16,7 +16,7 @@
         </div>
         <div id="animationinfo" style="float: right; width: 50%">
             <h2>Animation information</h2>
-            Name (valid c++ variable name): <input type="text" name="name" /> <br/>
+            Name (valid c++ variable name): <input type="text" name="name" value="my_animation" /> <br/>
             <div id="ledselector" style="float: left; width: 50%">
                 <h2>Active LEDs</h2>
                 <input type="checkbox" id="led_0_enabled" value="0x1" checked /><label for="led_0_enabled" id="lbl_led_0_enabled"> Left</label><br/>
@@ -41,12 +41,31 @@
                 </tbody>
             </table>
             <button id="newframe">Add frame</button>
+            <button id="preview">Preview</button>
         </div>
         <div id="generated" style="clear: both; height: 200px;">
             <h2>Generated code</h2>
             <textarea name="generated" style="height: 100%; width: 100%"></textarea>
         </div>
         <script type="text/javascript">
+            function animation_class() {
+                var state = 'stopped';
+                var current_frame = 0;
+
+                function start()
+                {
+                }
+
+                function stop()
+                {
+                }
+
+                function run_step()
+                {
+                }
+            };
+            animation = new animation_class();
+
             jQuery(document).ready(function(){
                 jQuery('#newframe').click(function(){
                     // Disable all the led selectors
@@ -79,7 +98,7 @@
                     }
                     rowhtml += '<td class="duration"><input id="row_'+rows+'_duration" /><button class="deleterow">X</button></td></tr>';
                     jQuery('#frames tbody').append(rowhtml);
-                    
+                    // Initialize colorpicker for inputs
                     jQuery('input.rgbinput').ColorPicker({
                         onSubmit: function(hsb, hex, rgb, el) {
                             jel = jQuery(el);
