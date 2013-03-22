@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
         <title>Partyhatwork animation configurator</title>
     </head>
     <body>
         <h1>Partyhatwork animation configurator</h1>
+        <button id="resetbutton">Reset</button>
         <div id="preview" style="float: left; width: 50%;">
         </div>
         <div id="animationinfo" style="float: right; width: 50%">
@@ -14,18 +15,18 @@
             Name (valid c++ variable name): <input type="text" name="name" /> <br/>
             <div id="ledselector" style="float: left; width: 50%">
                 <h2>Active LEDs</h2>
-                <input type="checkbox" name="led_0_enabled" checked> Left <br/>
-                <input type="checkbox" name="led_1_enabled" checked> Right <br/>
-                <input type="checkbox" name="led_2_enabled"> Front <br/>
-                <input type="checkbox" name="led_3_enabled"> Back <br/>
-                <input type="checkbox" name="led_4_enabled"> Undef <br/>
-                <input type="checkbox" name="led_5_enabled"> Undef <br/>
-                <input type="checkbox" name="led_6_enabled"> Undef <br/>
-                <input type="checkbox" name="led_7_enabled"> Undef <br/>
+                <input type="checkbox" id="led_0_enabled" value="0x1" checked /><label for="led_0_enabled" id="lbl_led_0_enabled"> Left</label><br/>
+                <input type="checkbox" id="led_1_enabled" value="0x2" checked /><label for="led_1_enabled" id="lbl_led_1_enabled"> Right</label><br/>
+                <input type="checkbox" id="led_2_enabled" value="0x4" /><label for="led_2_enabled" id="lbl_led_2_enabled"> Front</label><br/>
+                <input type="checkbox" id="led_3_enabled" value="0x8" /><label for="led_3_enabled" id="lbl_led_3_enabled"> Back</label><br/>
+                <input type="checkbox" id="led_4_enabled" value="0x10" /><label for="led_4_enabled" id="lbl_led_4_enabled"> Undef 1</label><br/>
+                <input type="checkbox" id="led_5_enabled" value="0x20" /><label for="led_5_enabled" id="lbl_led_5_enabled"> Undef 2</label><br/>
+                <input type="checkbox" id="led_6_enabled" value="0x40" /><label for="led_6_enabled" id="lbl_led_6_enabled"> Undef 3</label><br/>
+                <input type="checkbox" id="led_7_enabled" value="0x80" /><label for="led_7_enabled" id="lbl_led_7_enabled"> Undef 4</label><br/>
             </div>
             <div id="modes" style="float: right; width: 50%">
                 <h3>Mode flags</h3>
-                <input type="checkbox" name="mode_fading" checked> Fading <br/>
+                <input type="checkbox" id="mode_fading" value="0x1" checked /><label for="mode_fading" id="lbl_mode_fading"> Fading</label><br/>
             </div>
         </div>
         <div id="framecontainer" style="float: right; width: 50%">
@@ -40,6 +41,16 @@
         <script type="text/javascript">
             jQuery(document).ready(function(){
                 jQuery('#newframe').click(function(){
+                    // Disable all the led selectors
+                    jQuery('#ledselector input').each(function(){
+                        me = jQuery(this);
+                        me.prop('disabled', true);
+                    });
+                    // Add the frame values inputs
+                    for(i=0; i<8; i++)
+                    {
+                        
+                    }
                     
                 });
             });
