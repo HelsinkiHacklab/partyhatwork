@@ -381,6 +381,9 @@
 
                 // This will generate the Arduino code for the animation
                 jQuery('#generatebutton').click(function(){
+                    animation.stop();
+                    jQuery('#previewbutton').html('Preview');
+
                     animation_code = "const Animation "+jQuery('#animation_name').val()+" PROGMEM = {\n    &next_animation_name,\n    B";
                     for (i = 7; i >= 0; i--)
                     {
