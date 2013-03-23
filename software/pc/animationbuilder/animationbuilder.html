@@ -41,7 +41,7 @@
                 </tbody>
             </table>
             <button id="newframe">Add frame</button>
-            <button id="preview">Preview</button>
+            <button id="previewbutton">Preview</button>
         </div>
         <div id="generated" style="clear: both; height: 200px;">
             <h2>Generated code</h2>
@@ -49,27 +49,37 @@
         </div>
         <script type="text/javascript">
             function animation_class() {
-                var state = 'stopped';
+                this.state = 'stopped';
                 var current_frame = 0;
+                var num_frames = 0;
 
-                function start()
+                this.start = function()
                 {
+                    this.state = 'running';
+                    current_frame = 0;
+                    num_frames = jQuery('#frames tbody tr').length;
+                    setTimeout(run_step, 1);
                 }
 
-                function stop()
+                this.stop = function()
                 {
+                    this.state = 'stopped';
+                    current_frame = 0;
                 }
 
-                function run_step()
+                var run_step = function()
                 {
+                    console.log('run_step called');
                 }
             };
             animation = new animation_class();
 
             jQuery(document).ready(function(){
+                jQuery('#previewbutton').hide();
                 jQuery('#newframe').click(function(){
                     // Disable all the led selectors
                     jQuery('#ledselector input').prop('disabled', true);
+                    jQuery('#previewbutton').show();
                     // No header, add it.
                     if (jQuery('#frames thead tr').length == 0)
                     {
@@ -120,6 +130,23 @@
                             // Remove the header
                             jQuery('#frames thead tr').remove();
                             jQuery('#ledselector input').prop('disabled', false);
+                            jQuery('#previewbutton').hide();
+                        }
+                    });
+                    // 
+                    jQuery('#previewbutton').click(function(){
+                        me = jQuery(this);
+                        if (animation.state == 'stopped')
+                        {
+                            animation.start();
+                            me.html('Stop preview');
+                            return;
+                        }
+                        else
+                        {
+                            animation.stop();
+                            me.html('Preview');
+                            return;
                         }
                     });
                     
