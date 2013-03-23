@@ -272,9 +272,7 @@
                             }
                             if (tmpval1 > tmpval2)
                             {
-                                // This is buggy somehow, on xmega using unisgned types hides the error
-                                //tmp = tmpval2 - Math.floor(((tmpval1 - tmpval2) / fade_num_steps) * fade_current_step);
-                                tmp = Math.abs(tmpval2 - Math.floor(((tmpval1 - tmpval2) / fade_num_steps) * fade_current_step));
+                                tmp = tmpval1 - Math.floor(((tmpval1 - tmpval2) / fade_num_steps) * fade_current_step);
                             }
                             else
                             {
