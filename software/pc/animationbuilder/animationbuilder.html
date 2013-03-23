@@ -194,6 +194,7 @@
                     });
                 });
 
+                // Toggles animation between runnign and stopped state
                 jQuery('#previewbutton').click(function(e){
                     e.preventDefault();
                     me = jQuery(this);
@@ -211,11 +212,13 @@
                     return false;
                 });
                 
+                // This handler clears generated code if any animation base config flags are changed
                 jQuery('#animationinfo').find(':input').change(function(){
                     // Clear generated code
                     jQuery('#generated textarea').val('');
                 });
 
+                // This will generate the Arduino code for the animation
                 jQuery('#generatebutton').click(function(){
                     animation_code = "const Animation "+jQuery('#animation_name').val()+" PROGMEM = {\n    &next_animation_name,\n    B";
                     for (i = 7; i >= 0; i--)
