@@ -118,7 +118,7 @@
 
                     if (jQuery('#mode_fading').filter(':checked').length)
                     {
-                        console.log('state='+this.state);
+                        console.log('state='+this.state+' fade_current_step='+fade_current_step);
                         // The fade is done here the same way as in the uC code (no fancy browser features for us).
                         switch(this.state)
                         {
@@ -267,8 +267,10 @@
                             {
                                 tmp = (Math.floor((tmpval2 - tmpval1) / fade_num_steps) * fade_current_step);
                             }
+                            console.log('tmpval1='+tmpval1+' tmpval2='+tmpval2+' tmp='+tmp);
                             fade_rgb += tmp.toString(16);
                         }
+                        console.log('setting LED '+i+' to '+fade_rgb);
                         jQuery('#preview_led_'+i).css('background-color', fade_rgb);
                     }
                 }
