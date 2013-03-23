@@ -49,14 +49,19 @@
                 this.state = 'stopped';
                 var current_frame = 0;
                 var num_frames = 0;
+                var timer = null;
 
                 this.start = function()
                 {
+                    if (this.state != 'stopped')
+                    {
+                        console.log('Already started');
+                        return;
+                    }
                     this.state = 'running';
                     current_frame = 0;
-                    num_frames = jQuery('#frames tbody tr').length;
                     create_preview_elements();
-                    setTimeout(run_step, 1);
+                    timer = setTimeout(run_step, 1);
                 }
 
                 var create_preview_elements = function()
@@ -80,6 +85,7 @@
                 this.stop = function()
                 {
                     this.state = 'stopped';
+                    clearTimeout(timer);
                     current_frame = 0;
                     // Remove the preview elements
                     jQuery('#preview').children().remove();
@@ -87,8 +93,32 @@
 
                 var run_step = function()
                 {
-                    console.log('run_step called');
-                    
+                    console.log('run_step called, current_frame='+current_frame);
+                    if (this.state == 'stopped')
+                    {
+                        console.log('state is stopped, returning via stop');
+                        return this.stop();
+                    }
+
+                    num_frames = jQuery('#frames tbody tr').length;
+                    frame_tr = jQuery(jQuery('#frames tbody tr').get(current_frame));
+                    frame_duration = parseInt(frame_tr.find('td.duration input').val());
+
+                    if (jQuery('#mode_fading').filter(':checked').length)
+                    {
+                        console.log('Fading not implemented');
+                        return;
+                    }
+                    else
+                    {
+                        for(i=0; i<8; i++)
+                        {
+                            rgbval = '#'+frame_tr.find('input.led'+i).val();
+                            jQuery('#preview_led_'+i).css('background-color', rgbval);
+                        }
+                        current_frame = (current_frame + 1) % num_frames;
+                        timer = setTimeout(run_step, frame_duration);
+                    }
                 }
             };
             animation = new animation_class();
@@ -124,7 +154,7 @@
                     {
                         if (jQuery('#led_'+i+'_enabled').filter(':checked').length)
                         {
-                            rowhtml += '<td><input class="rgbinput" id="row_'+rows+'_led_'+i+'_rbg" name="row_'+rows+'_led_'+i+'_rbg" /></td>';
+                            rowhtml += '<td><input class="rgbinput led'+i+'" id="row_'+rows+'_led_'+i+'_rbg" name="row_'+rows+'_led_'+i+'_rbg" /></td>';
                         }
                     }
                     rowhtml += '<td class="duration"><input id="row_'+rows+'_duration" /><button class="deleterow">X</button></td></tr>';
@@ -151,24 +181,26 @@
                             // Remove the header
                             jQuery('#frames thead tr').remove();
                             jQuery('#ledselector input').prop('disabled', false);
+                            animation.stop();
                             jQuery('#previewbutton').hide();
                         }
                     });
                     // 
-                    jQuery('#previewbutton').click(function(){
+                    jQuery('#previewbutton').click(function(e){
+                        e.preventDefault();
                         me = jQuery(this);
+                        console.log('previewbutton clicked, animation.state=' + animation.state);
                         if (animation.state == 'stopped')
                         {
-                            animation.start();
                             me.html('Stop preview');
-                            return;
+                            animation.start();
                         }
                         else
                         {
-                            animation.stop();
                             me.html('Preview');
-                            return;
+                            animation.stop();
                         }
+                        return false;
                     });
                     
                 });
