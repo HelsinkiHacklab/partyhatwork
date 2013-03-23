@@ -58,18 +58,40 @@
                     this.state = 'running';
                     current_frame = 0;
                     num_frames = jQuery('#frames tbody tr').length;
+                    create_preview_elements();
                     setTimeout(run_step, 1);
+                }
+
+                var create_preview_elements = function()
+                {
+                    tbl = '<table><thead><tr>';
+                    tbod = '<tr>';
+                    for(i=0; i<8; i++)
+                    {
+                        if (jQuery('#led_'+i+'_enabled').filter(':checked').length)
+                        {
+                            lbl = jQuery('#lbl_led_'+i+'_enabled')
+                            tbl += '<th>'+lbl.html()+'</th>';
+                            tbod += '<td id="preview_led_'+i+'"> &nbsp; </td>';
+                        }
+                    }
+                    tbl += '</tr></thead><tbody></tbody></table>';
+                    jQuery('#preview').append(tbl);
+                    jQuery('#preview table tbody').append(tbod);
                 }
 
                 this.stop = function()
                 {
                     this.state = 'stopped';
                     current_frame = 0;
+                    // Remove the preview elements
+                    jQuery('#preview').children().remove();
                 }
 
                 var run_step = function()
                 {
                     console.log('run_step called');
+                    
                 }
             };
             animation = new animation_class();
@@ -154,7 +176,7 @@
             });
         </script>
         <style type="text/css">
-            #frames td, #frames th
+            #frames td, #frames th, #preview table td, #preview table th
             {
                 border: 1px solid black;
             }
@@ -165,6 +187,11 @@
             #frames tbody td.duration input
             {
                 width: 6em;
+            }
+            #preview table td
+            {
+                width: 75px;
+                height: 75px;
             }
         </style>
     </body>
