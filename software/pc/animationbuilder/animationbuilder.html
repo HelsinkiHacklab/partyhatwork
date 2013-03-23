@@ -180,6 +180,8 @@
                     jQuery(jQuery('#frames tbody tr').get(rows)).find('button.deleterow').click(function(){
                         me = jQuery(this);
                         me.parents('tr').remove();
+                        // Clear generated code
+                        jQuery('#generated textarea').val('');
                         // Re-enable LED selectors when we have no frames
                         if (jQuery('#frames tbody tr').length == 0)
                         {
@@ -208,7 +210,11 @@
                     }
                     return false;
                 });
-
+                
+                jQuery('#animationinfo').find(':input').change(function(){
+                    // Clear generated code
+                    jQuery('#generated textarea').val('');
+                });
 
                 jQuery('#generatebutton').click(function(){
                     animation_code = "const Animation "+jQuery('#animation_name').val()+" PROGMEM = {\n    &next_animation_name,\n    B";
