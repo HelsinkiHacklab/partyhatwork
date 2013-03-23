@@ -52,6 +52,11 @@
                 var current_frame = 0;
                 var num_frames = 0;
                 var timer = null;
+                
+                var next_frame = 0;
+                var fade_current_step = 0;
+                var fade_num_steps = 0;
+                var fade_duration = 0;
 
                 this.start = function()
                 {
@@ -92,6 +97,8 @@
                     this.state = 'stopped';
                     clearTimeout(timer);
                     current_frame = 0;
+                    fade_current_step = 0;
+                    fade_max_steps = 0;
                     // Remove the preview elements
                     jQuery('#preview').children().remove();
                 }
@@ -111,13 +118,118 @@
 
                     if (jQuery('#mode_fading').filter(':checked').length)
                     {
-                        console.log('Fading not implemented');
+                        console.log('state='+this.state);
+                        // The fade is done here the same way as in the uC code (no fancy browser features for us).
+                        switch(this.state)
+                        {
+                            default:
+                            case 'running':
+                                // Set led values from inputs directly
+                                for(i=0; i<8; i++)
+                                {
+                                    // Skip disabled LEDs
+                                    if (jQuery('#led_'+i+'_enabled').filter(':checked').length == 0)
+                                    {
+                                        continue;
+                                    }
+                                    rgbval = '#'+frame_tr.find('input.led'+i).val();
+                                    jQuery('#preview_led_'+i).css('background-color', rgbval);
+                                }
+
+                                this.state = 'fading_start';
+                                timer = setTimeout(run_step, 1);
+                                break;
+                            case 'fading_start':
+                                next_frame = current_frame + 1;
+                                if (next_frame >= num_frames)
+                                {
+                                    next_frame = 0;
+                                }
+                                // Calculate fade-frame duration
+                                fade_duration = 10; // FRAME_MIN_TIME in Arduino code
+                                fade_max_steps = Math.floor(frame_duration / 10);
+                                if (fade_max_steps > 255)
+                                {
+                                    fade_max_steps =  255;
+                                    fade_duration = frame_duration / 255;
+                                }
+                                // Calculate how many steps we are going to take
+                                largest_diff = 0;
+                                next_frame_tr = jQuery(jQuery('#frames tbody tr').get(next_frame));
+                                for(i=0; i<8; i++)
+                                {
+                                    // Skip disabled LEDs
+                                    if (jQuery('#led_'+i+'_enabled').filter(':checked').length == 0)
+                                    {
+                                        continue;
+                                    }
+                                    tmpdif = 0;
+                                    rgb = frame_tr.find('input.led'+i).val();
+                                    next_rgb = next_frame_tr.find('input.led'+i).val();
+                                    for (i2=0; i2<6; i2+=2)
+                                    {
+                                        tmpval1 = parseInt('0x'+rgb.substr(i2,2));
+                                        tmpval2 = parseInt('0x'+next_rgb.substr(i2,2));
+                                        if (tmpval1 > tmpval2)
+                                        {
+                                            tmpdiff = tmpval1-tmpval2;
+                                        }
+                                        else
+                                        {
+                                            tmpdiff = tmpval2-tmpval1;
+                                        }
+                                        if (tmpdiff > largest_diff)
+                                        {
+                                            largest_diff = tmpdiff;
+                                        }
+                                    }
+                                }
+                                if (largest_diff <= fade_max_steps)
+                                {
+                                    fade_num_steps = largest_diff;
+                                }
+                                else
+                                {
+                                    fade_num_steps = fade_max_steps;
+                                }
+
+                                // Set the next state and timer to reach it
+                                fade_current_step = 1;
+                                this.state = 'fading';
+                                timer = setTimeout(run_step, fade_duration);
+                                break;
+                            case 'fading':
+                                interpolate_fade_and_set();
+                                if (fade_current_step >= fade_num_steps)
+                                {
+                                    this.state = 'fading_end';
+                                }
+                                fade_current_step++;
+                                timer = setTimeout(run_step, fade_duration);
+                                break;
+                            case 'fading_end':
+                                interpolate_fade_and_set();
+                                current_frame++;
+                                if (current_frame >= num_frames)
+                                {
+                                    current_frame = 0;
+                                }
+                                this.state = 'running';
+                                timer = setTimeout(run_step, fade_duration);
+                                break;
+                        }
                         return;
                     }
                     else
                     {
+                        // Set led values from inputs directly
                         for(i=0; i<8; i++)
                         {
+                            // Skip disabled LEDs
+                            if (jQuery('#led_'+i+'_enabled').filter(':checked').length == 0)
+                            {
+                                continue;
+                            }
                             rgbval = '#'+frame_tr.find('input.led'+i).val();
                             jQuery('#preview_led_'+i).css('background-color', rgbval);
                         }
@@ -125,6 +237,42 @@
                         timer = setTimeout(run_step, frame_duration);
                     }
                 }
+                
+                var interpolate_fade_and_set = function()
+                {
+                    for(i=0; i<8; i++)
+                    {
+                        // Skip disabled LEDs
+                        if (jQuery('#led_'+i+'_enabled').filter(':checked').length == 0)
+                        {
+                            continue;
+                        }
+                        rgb = frame_tr.find('input.led'+i).val();
+                        next_rgb = next_frame_tr.find('input.led'+i).val();
+                        fade_rgb = '#';
+                        for (i2=0; i2<6; i2+=2)
+                        {
+                            tmpval1 = parseInt('0x'+rgb.substr(i2,2));
+                            tmpval2 = parseInt('0x'+next_rgb.substr(i2,2));
+                            if (tmpval1 == tmpval2)
+                            {
+                                fade_rgb += tmpval2.toString(16);
+                                continue;
+                            }
+                            if (tmpval1 > tmpval2)
+                            {
+                                tmp = tmpval2 - (Math.floor((tmpval1 - tmpval2) / fade_num_steps) * fade_current_step);
+                            }
+                            else
+                            {
+                                tmp = (Math.floor((tmpval2 - tmpval1) / fade_num_steps) * fade_current_step);
+                            }
+                            fade_rgb += tmp.toString(16);
+                        }
+                        jQuery('#preview_led_'+i).css('background-color', fade_rgb);
+                    }
+                }
+                
             };
             animation = new animation_class();
 
