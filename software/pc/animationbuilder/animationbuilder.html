@@ -53,9 +53,10 @@
 
                 this.start = function()
                 {
+                    console.log('animation_class::start called');
                     if (this.state != 'stopped')
                     {
-                        console.log('Already started');
+                        console.log('Already running!');
                         return;
                     }
                     this.state = 'running';
@@ -66,6 +67,7 @@
 
                 var create_preview_elements = function()
                 {
+                    console.log('animation_class::create_preview_elements called');
                     tbl = '<table><thead><tr>';
                     tbod = '<tr>';
                     for(i=0; i<8; i++)
@@ -84,6 +86,7 @@
 
                 this.stop = function()
                 {
+                    console.log('animation_class::stop called');
                     this.state = 'stopped';
                     clearTimeout(timer);
                     current_frame = 0;
@@ -93,7 +96,7 @@
 
                 var run_step = function()
                 {
-                    console.log('run_step called, current_frame='+current_frame);
+                    console.log('animation_class::run_step called, current_frame='+current_frame);
                     if (this.state == 'stopped')
                     {
                         console.log('state is stopped, returning via stop');
@@ -172,7 +175,7 @@
                         }
                     });
                     // Row remove callback (TODO: before this we should probably make sure only the last row has the input)
-                    jQuery('button.deleterow').click(function(){
+                    jQuery(jQuery('#frames tbody tr').get(rows)).find('button.deleterow').click(function(){
                         me = jQuery(this);
                         me.parents('tr').remove();
                         // Re-enable LED selectors when we have no frames
@@ -185,24 +188,23 @@
                             jQuery('#previewbutton').hide();
                         }
                     });
-                    // 
-                    jQuery('#previewbutton').click(function(e){
-                        e.preventDefault();
-                        me = jQuery(this);
-                        console.log('previewbutton clicked, animation.state=' + animation.state);
-                        if (animation.state == 'stopped')
-                        {
-                            me.html('Stop preview');
-                            animation.start();
-                        }
-                        else
-                        {
-                            me.html('Preview');
-                            animation.stop();
-                        }
-                        return false;
-                    });
-                    
+                });
+
+                jQuery('#previewbutton').click(function(e){
+                    e.preventDefault();
+                    me = jQuery(this);
+                    console.log('previewbutton clicked, animation.state=' + animation.state);
+                    if (animation.state == 'stopped')
+                    {
+                        me.html('Stop preview');
+                        animation.start();
+                    }
+                    else
+                    {
+                        me.html('Preview');
+                        animation.stop();
+                    }
+                    return false;
                 });
             });
         </script>
