@@ -47,6 +47,16 @@
             <textarea name="generated" style="height: 100%; width: 100%"></textarea>
         </div>
         <script type="text/javascript">
+            function decimalToHex(d, padding) {
+                var hex = Number(d).toString(16);
+                padding = typeof (padding) === "undefined" || padding === null ? padding = 2 : padding;
+            
+                while (hex.length < padding) {
+                    hex = "0" + hex;
+                }
+            
+                return hex;
+            }
             function animation_class() {
                 this.state = 'stopped';
                 var current_frame = 0;
@@ -192,6 +202,7 @@
                                 {
                                     fade_num_steps = fade_max_steps;
                                 }
+                                console.log('fade_num_steps='+fade_num_steps);
 
                                 // Set the next state and timer to reach it
                                 fade_current_step = 1;
@@ -256,19 +267,21 @@
                             tmpval2 = parseInt('0x'+next_rgb.substr(i2,2));
                             if (tmpval1 == tmpval2)
                             {
-                                fade_rgb += tmpval2.toString(16);
+                                fade_rgb += decimalToHex(tmpval2, 2);
                                 continue;
                             }
                             if (tmpval1 > tmpval2)
                             {
-                                tmp = tmpval2 - (Math.floor((tmpval1 - tmpval2) / fade_num_steps) * fade_current_step);
+                                // This is buggy somehow, on xmega using unisgned types hides the error
+                                //tmp = tmpval2 - Math.floor(((tmpval1 - tmpval2) / fade_num_steps) * fade_current_step);
+                                tmp = Math.abs(tmpval2 - Math.floor(((tmpval1 - tmpval2) / fade_num_steps) * fade_current_step));
                             }
                             else
                             {
-                                tmp = (Math.floor((tmpval2 - tmpval1) / fade_num_steps) * fade_current_step);
+                                tmp = Math.floor(((tmpval2 - tmpval1) / fade_num_steps) * fade_current_step);
                             }
                             console.log('tmpval1='+tmpval1+' tmpval2='+tmpval2+' tmp='+tmp);
-                            fade_rgb += tmp.toString(16);
+                            fade_rgb += decimalToHex(tmp, 2);
                         }
                         console.log('setting LED '+i+' to '+fade_rgb);
                         jQuery('#preview_led_'+i).css('background-color', fade_rgb);
