@@ -13,7 +13,7 @@
         </div>
         <div id="animationinfo" style="float: right; width: 50%">
             <h2>Animation information</h2>
-            Name (valid c++ variable name): <input type="text" name="name" value="my_animation" /> <br/>
+            <label for="animation_name" id="lbl_animation_name">Name (valid c++ variable name): </label><input type="text" id="animation_name" value="my_animation" /><br/>
             <div id="ledselector" style="float: left; width: 50%">
                 <h2>Active LEDs</h2>
                 <input type="checkbox" id="led_0_enabled" value="0x1" checked /><label for="led_0_enabled" id="lbl_led_0_enabled"> Left</label><br/>
@@ -27,6 +27,7 @@
             </div>
             <div id="modes" style="float: right; width: 50%">
                 <h3>Mode flags</h3>
+                <!-- TODO: when we have more of these rewrite to use the bit value for identifier -->
                 <input type="checkbox" id="mode_fading" value="0x1" checked /><label for="mode_fading" id="lbl_mode_fading"> Fading</label><br/>
             </div>
         </div>
@@ -39,6 +40,7 @@
             </table>
             <button id="newframe">Add frame</button>
             <button id="previewbutton">Preview</button>
+            <button id="generatebutton">Generate code</button>
         </div>
         <div id="generated" style="clear: both; height: 200px;">
             <h2>Generated code</h2>
@@ -205,6 +207,42 @@
                         animation.stop();
                     }
                     return false;
+                });
+
+
+                jQuery('#generatebutton').click(function(){
+                    animation_code = "const Animation "+jQuery('#animation_name').val()+" PROGMEM = {\n    &next_animation_name,\n    B";
+                    for (i = 7; i >= 0; i--)
+                    {
+                        if (jQuery('#led_'+i+'_enabled').filter(':checked').length)
+                        {
+                            animation_code +=  "1";
+                        }
+                        else
+                        {
+                            animation_code +=  "0";
+                        }
+                    }
+                    animation_code += ",\n    "+jQuery('#frames tbody tr').length+",\n    ";
+                    if (jQuery('#mode_fading').filter(':checked').length)
+                    {
+                        animation_code += "0x1,\n";
+                    }
+                    else
+                    {
+                        animation_code += "0x0,\n";
+                    }
+                    animation_code += "    "+jQuery('#animation_name').val()+"_frames,\n};\n";
+                    
+                    // TODO: Generate frame data too
+                    
+                    jQuery('#generated textarea').val(animation_code);
+                    
+                    // Scroll to and focus the textarea
+                    jQuery('html, body').animate({
+                        scrollTop: jQuery('#generated').offset().top
+                    }, 50);
+                    jQuery('#generated textarea').focus();
                 });
             });
         </script>
