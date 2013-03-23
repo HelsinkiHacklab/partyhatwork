@@ -115,7 +115,7 @@
 
                 var run_step = function()
                 {
-                    console.log('animation_class::run_step called, current_frame='+current_frame);
+                    //console.log('animation_class::run_step called, current_frame='+current_frame);
                     if (this.state == 'stopped')
                     {
                         console.log('state is stopped, returning via stop');
@@ -128,7 +128,7 @@
 
                     if (jQuery('#mode_fading').filter(':checked').length)
                     {
-                        console.log('state='+this.state+' fade_current_step='+fade_current_step);
+                        //console.log('state='+this.state+' fade_current_step='+fade_current_step);
                         // The fade is done here the same way as in the uC code (no fancy browser features for us).
                         switch(this.state)
                         {
@@ -202,7 +202,7 @@
                                 {
                                     fade_num_steps = fade_max_steps;
                                 }
-                                console.log('fade_num_steps='+fade_num_steps);
+                                //console.log('fade_num_steps='+fade_num_steps);
 
                                 // Set the next state and timer to reach it
                                 fade_current_step = 1;
@@ -278,10 +278,10 @@
                             {
                                 tmp = Math.floor(((tmpval2 - tmpval1) / fade_num_steps) * fade_current_step);
                             }
-                            console.log('tmpval1='+tmpval1+' tmpval2='+tmpval2+' tmp='+tmp);
+                            //console.log('tmpval1='+tmpval1+' tmpval2='+tmpval2+' tmp='+tmp);
                             fade_rgb += decimalToHex(tmp, 2);
                         }
-                        console.log('setting LED '+i+' to '+fade_rgb);
+                        //console.log('setting LED '+i+' to '+fade_rgb);
                         jQuery('#preview_led_'+i).css('background-color', fade_rgb);
                     }
                 }
