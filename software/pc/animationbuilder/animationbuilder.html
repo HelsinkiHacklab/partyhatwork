@@ -235,8 +235,26 @@
                     animation_code += "    "+jQuery('#animation_name').val()+"_frames,\n};\n";
                     
                     // TODO: Generate frame data too
+                    frames_code = "const uint8_t "+jQuery('#animation_name').val()+"_frames[] PROGMEM = {\n";
+                    jQuery('#frames tbody tr').each(function(){
+                        frames_code += "    ";
+                        row = jQuery(this);
+                        row.find('input.rgbinput').each(function(){
+                            input = jQuery(this);
+                            rgb = input.val();
+                            r = "0x" + rgb.substr(0,2);
+                            g = "0x" + rgb.substr(2,2);
+                            b = "0x" + rgb.substr(4,2);
+                            frames_code += r+", "+g+", "+b+",   ";
+                        });
+                        frame_duration = parseInt(row.find('td.duration input').val());
+                        hi_nibble = Math.floor(frame_duration / 256);
+                        low_nibble = frame_duration % 256;
+                        frames_code += "0x"+hi_nibble.toString(16)+", 0x"+low_nibble.toString(16)+",\n";
+                    });
+                    frames_code += "};\n";
                     
-                    jQuery('#generated textarea').val(animation_code);
+                    jQuery('#generated textarea').val(frames_code+animation_code);
                     
                     // Scroll to and focus the textarea
                     jQuery('html, body').animate({
