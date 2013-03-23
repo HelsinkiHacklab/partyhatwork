@@ -9,9 +9,6 @@
     </head>
     <body>
         <h1>Partyhatwork animation configurator</h1>
-        <!-- TODO: re-enable when we have callback for this that actually works, meanwhile shift-reload works
-        <button id="resetbutton">Reset</button>
-        -->
         <div id="preview" style="float: left; width: 50%;">
         </div>
         <div id="animationinfo" style="float: right; width: 50%">
@@ -97,7 +94,9 @@
             animation = new animation_class();
 
             jQuery(document).ready(function(){
+                jQuery('#ledselector input').prop('disabled', false);
                 jQuery('#previewbutton').hide();
+                
                 jQuery('#newframe').click(function(){
                     // Disable all the led selectors
                     jQuery('#ledselector input').prop('disabled', true);
