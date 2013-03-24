@@ -10,5 +10,5 @@
     * See http://ww1.microchip.com/downloads/en/AppNotes/01149c.pdf
   * Consider adding a microphone (for sound-sensitive stuff)
     * http://www.digikey.fi/product-detail/en/CMA-4544PF-W/102-1721-ND/1869981
-    * Remember an op-amp to get usable voltage levels from the mic
+    * Remember an [op-amp](http://www.digikey.fi/product-detail/en/OPA344NA%2F250/OPA344NACT-ND/362263) to get usable voltage levels from the mic
       * Sparkfun has a schematic but it needs changes, check [this comment](https://www.sparkfun.com/products/9964#comment-4f47af0dce395f4713000000) for reminder of freq calculations and adjust R5 to 500k for example
