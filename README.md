@@ -5,7 +5,7 @@ Mesh network of party-hats, see http://kirjoitusalusta.fi/hacklab-partyhatwork
 
 ## Hardware
 
-  * [rev1](./hardware/rev1/)
+  * [rev1](./hardware/board_rev1/)
 
 ## Software
 
