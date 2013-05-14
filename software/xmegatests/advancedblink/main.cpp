@@ -216,13 +216,13 @@ int main() {
 	PORTD.DIRSET =	0b00010000;
 
 	
-	PORTD.DIRSET = 0b00100000; 		// D0 as output for the LED
+	PORTD.DIRSET = 0b00100000; 		// PD4 as output for the LED
 
 	 
 	while (true) {	
 		
 		// Toggle LED
-		PORTD.OUTTGL = 0b00100001; 	// Toggle D0
+		PORTD.OUTTGL = 0b00100001; 	// Toggle PD4
 
 		delaySeconds(1);
 
