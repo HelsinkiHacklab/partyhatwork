@@ -384,7 +384,7 @@
                     animation.stop();
                     jQuery('#previewbutton').html('Preview');
 
-                    animation_code = "const Animation "+jQuery('#animation_name').val()+" PROGMEM = {\n    &next_animation_name,\n    B";
+                    animation_code = "const Animation "+jQuery('#animation_name').val()+"_anim PROGMEM = {\n    &next_animation_name,\n    B";
                     for (i = 7; i >= 0; i--)
                     {
                         if (jQuery('#led_'+i+'_enabled').filter(':checked').length)
