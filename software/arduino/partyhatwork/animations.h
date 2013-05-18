@@ -2,7 +2,13 @@
 #define ANIMATIONS_H
 #include "animation_tasks.h"
 
-#define FIRST_ANIMATION strobe 
+/**
+ * Usually it's a good idea to add new animations to end of file and then point the next to the previously last 
+ * and then define this as the last one.
+ *
+ * This is the simplest way to make sure the linked list stays so.
+ */
+#define FIRST_ANIMATION strobe_anim 
 
 const uint8_t police1_frames[] PROGMEM = { 
   0xff, 0x0, 0x0,    0x0, 0x0, 0x0,     0x1, 0xf4,
@@ -51,7 +57,7 @@ const uint8_t strobe_frames[] PROGMEM = {
     0xff, 0xff, 0xff,   0xff, 0xff, 0xff,   0x0, 0xa,
     0x00, 0x00, 0x00,   0x00, 0x00, 0x00,   0x0, 0x5a,
 };
-const Animation strobe PROGMEM = {
+const Animation strobe_anim PROGMEM = {
     &police3_anim,
     B00000011,
     2,
@@ -59,7 +65,7 @@ const Animation strobe PROGMEM = {
     strobe_frames,
 };
 
-// ***** KEEP THIS LAST *****
+// ***** KEEP THIS FUNCTION AS LAST PART OF FILE, ADD ANIMATION ABOVE *****
 
 uint8_t count_animations()
 {
