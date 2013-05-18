@@ -60,6 +60,7 @@ SERIAL_DEFINE(Serial3, E, 0); -> PE2/PE3 == 2/3
 #include "animations.h"
 AnimationRunner anim_runner;
 
+
 void load_nth_animation(uint8_t n)
 {
     load_animation_to_buffer(&FIRST_ANIMATION);
@@ -80,6 +81,63 @@ void load_nth_animation(uint8_t n)
         i++;
     }
 }
+
+class AnimationSwitcher : public TimedTask
+{
+public:
+    // Base methods
+    AnimationSwitcher();
+    virtual void run(uint32_t now);
+    virtual bool canRun(uint32_t now);
+    // My own methods
+    virtual void start_cycle();
+    virtual void stop_cycle();
+
+private:
+    uint8_t current_index;
+    AnimationState state;
+    
+};
+
+AnimationSwitcher::AnimationSwitcher()
+: TimedTask(millis())
+{
+    state = STOPPED;
+}
+
+void AnimationSwitcher::start_cycle()
+{
+    state = RUNNING;
+}
+
+void AnimationSwitcher::stop_cycle()
+{
+    state = STOPPED;
+}
+
+bool AnimationSwitcher::canRun(uint32_t now)
+{
+    if (state == STOPPED)
+    {
+        return false;
+    }
+    return TimedTask::canRun(now);
+}
+
+void AnimationSwitcher::run(uint32_t now)
+{
+    incRunTime(2000);
+    anim_runner.stop_animation();
+    load_nth_animation(current_index);
+    current_index++;
+    if (current_index >= LAST_ANIMATION)
+    {
+        current_index = 0;
+    }
+    anim_runner.start_animation();
+}
+
+AnimationSwitcher anim_switcher;
 
 
 #include "xbee_tasks.h"
@@ -107,6 +165,7 @@ void xbee_api_callback(ZBRxResponse rx)
         }
         case 0x3:
         {
+            anim_switcher.stop_cycle();
             anim_runner.start_animation();
             break;
         }
@@ -117,6 +176,7 @@ void xbee_api_callback(ZBRxResponse rx)
         }
         case 0x5:
         {
+            anim_switcher.stop_cycle();
             load_nth_animation(rx.getData(1));
             anim_runner.start_animation();
             break;
@@ -182,13 +242,12 @@ void loop()
     blinker.on_time = 250;
     
     // Start a "demo mode"
-    load_nth_animation(0);
-    anim_runner.start_animation();
+    anim_switcher.start_cycle();
 
 
     // Tasks are in priority order, only one task is run per tick, be sure to keep sleeper as last task if you use it.
      //Task *tasks[] = { &xbeereader, &batterymonitor };
-    Task *tasks[] = { &xbeereader, &anim_runner, &blinker, &batterymonitor, &sleeper };
+    Task *tasks[] = { &xbeereader, &anim_switcher, &anim_runner, &blinker, &batterymonitor, &sleeper };
     TaskScheduler sched(tasks, NUM_TASKS(tasks));
 
     // Run the scheduler - never returns.

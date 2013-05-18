@@ -2,7 +2,7 @@
 #define ANIMATIONS_H
 #include "animation_tasks.h"
 
-#define FIRST_ANIMATION police3_anim 
+#define FIRST_ANIMATION strobe 
 
 const uint8_t police1_frames[] PROGMEM = { 
   0xff, 0x0, 0x0,    0x0, 0x0, 0x0,     0x1, 0xf4,
@@ -47,7 +47,36 @@ const Animation police3_anim PROGMEM = {
     police3_frames  // Array name is always a pointer so no need for &
 };
 
+const uint8_t strobe_frames[] PROGMEM = {
+    0xff, 0xff, 0xff,   0xff, 0xff, 0xff,   0x0, 0xa,
+    0x00, 0x00, 0x00,   0x00, 0x00, 0x00,   0x0, 0x5a,
+};
+const Animation strobe PROGMEM = {
+    &police3_anim,
+    B00000011,
+    2,
+    0x0,
+    strobe_frames,
+};
 
+// ***** KEEP THIS LAST *****
+
+uint8_t count_animations()
+{
+    uint8_t i = 0;
+    load_animation_to_buffer(&FIRST_ANIMATION);
+    while (true)
+    {
+        if (!animation_buffer.Next)
+        {
+            break;
+        }
+        load_animation_to_buffer((const Animation*)animation_buffer.Next);
+        i++;
+    }
+    return i;
+}
+extern const uint8_t LAST_ANIMATION = count_animations();
 
 
 #endif

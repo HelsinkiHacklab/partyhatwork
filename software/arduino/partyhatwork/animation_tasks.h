@@ -19,6 +19,7 @@ typedef struct {
 Animation animation_buffer;
 extern Animation animation_buffer;
 
+
 void load_animation_to_buffer(const Animation* src)
 {
     memcpy_P(&animation_buffer, src, sizeof(Animation));
@@ -339,6 +340,7 @@ void AnimationRunner::run(uint32_t now)
 
 
 }
+
 
 
 #endif
