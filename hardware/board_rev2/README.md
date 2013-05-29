@@ -8,7 +8,5 @@
     * In any case [MCP1826T](http://www.digikey.fi/product-detail/en/MCP1826T-3302E%2FDC/MCP1826T-3302E%2FDCCT-ND/1776943) looks like a good choice for regulator (very low drop even at high current) and decent price.
   * Consider MCP73837 as alternative LiPo charger
     * See http://ww1.microchip.com/downloads/en/AppNotes/01149c.pdf
-  * Consider adding a microphone (for sound-sensitive stuff)
-    * http://www.digikey.fi/product-detail/en/CMA-4544PF-W/102-1721-ND/1869981
-    * Remember an [op-amp](http://www.digikey.fi/product-detail/en/OPA344NA%2F250/OPA344NACT-ND/362263) to get usable voltage levels from the mic
-      * Sparkfun has a schematic but it needs changes, check [this comment](https://www.sparkfun.com/products/9964#comment-4f47af0dce395f4713000000) for reminder of freq calculations and adjust R5 to 500k for example
+  * Consider adding a [microphone](../micamp/) (for sound-sensitive stuff)
+    * or at least a standard header for connecting that board...
