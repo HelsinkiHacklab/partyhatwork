@@ -16,18 +16,26 @@ class EEGAnimation : public AnimationRunner
 {
 public:
   void new_data();
+
+protected:
+    virtual void unpack_frame(const uint8_t *start_of_frame, frame_data& tgt);
 };
 
 void EEGAnimation::new_data()
 {
     // TODO: what to do ?
 
-
     if (state == STOPPED)
     {
         this->start_animation();
     }
 }
+
+void EEGAnimation::unpack_frame(const uint8_t *start_of_frame, frame_data& tgt)
+{
+    return;
+}
+
 
 EEGAnimation eeg_anim;
 extern EEGAnimation eeg_anim;
