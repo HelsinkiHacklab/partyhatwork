@@ -11,15 +11,30 @@
 
 Brain brain(BRAIN_SERIAL);
 
+Animation eeg_animation_muckable = {
+    0x0,
+    B000011,
+    2,
+    0x0
+};
 
 class EEGAnimation : public AnimationRunner
 {
 public:
-  void new_data();
+    EEGAnimation();
+    void new_data();
 
 protected:
     virtual void unpack_frame(const uint8_t *start_of_frame, frame_data& tgt);
+    frame_data eeg_frame;
+    
 };
+
+EEGAnimation::EEGAnimation()
+{
+    set_animation(&eeg_animation_muckable);
+}
+
 
 void EEGAnimation::new_data()
 {
