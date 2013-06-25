@@ -7,6 +7,7 @@
 #include <Task.h>
 #include <XBee.h>
 
+// Reminder, XBee uses by defaul the first Serial object ("Serial")
 
 XBee xbee = XBee();
 XBeeResponse response = XBeeResponse();
@@ -55,8 +56,11 @@ XBeeRead::XBeeRead()
 // We can't just return true since then no other task could ever run (since we have the priority)
 bool XBeeRead::canRun(uint32_t now)
 {
+    return (boolean)Serial.available();
+    /*
     yield_counter++;
     return ((yield_counter % XBEE_READ_YIELD_TICKS) == 1);
+    */
 }
 
 void XBeeRead::run(uint32_t now)

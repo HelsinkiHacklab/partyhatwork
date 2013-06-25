@@ -32,6 +32,9 @@ SERIAL_DEFINE(Serial3, E, 0); -> PE2/PE3 == 2/3
  * 
  */
 
+// If you have EEG module connected, connect it here.
+#define BRAIN_SERIAL Serial1
+
 // Get this library from http://code.google.com/p/xbee-arduino/
 #include <XBee.h>
 
@@ -59,6 +62,13 @@ SERIAL_DEFINE(Serial3, E, 0); -> PE2/PE3 == 2/3
 #include "animation_tasks.h"
 #include "animations.h"
 AnimationRunner anim_runner;
+
+#ifdef BRAIN_SERIAL
+#include "brain_tasks.h"
+EEGReader eeg_reader;
+EEGAnimation eeg_anim;
+#endif
+
 
 
 void load_nth_animation(uint8_t n)
@@ -242,12 +252,18 @@ void loop()
     blinker.on_time = 250;
     
     // Start a "demo mode"
+#ifndef BRAIN_SERIAL
     anim_switcher.start_cycle();
+#endif BRAIN_SERIAL
 
 
     // Tasks are in priority order, only one task is run per tick, be sure to keep sleeper as last task if you use it.
      //Task *tasks[] = { &xbeereader, &batterymonitor };
+#ifdef BRAIN_SERIAL
+    Task *tasks[] = { &xbeereader, &eeg_reader, &eeg_anim, &anim_switcher, &anim_runner, &blinker, &batterymonitor, &sleeper };
+#else
     Task *tasks[] = { &xbeereader, &anim_switcher, &anim_runner, &blinker, &batterymonitor, &sleeper };
+#endif
     TaskScheduler sched(tasks, NUM_TASKS(tasks));
 
     // Run the scheduler - never returns.
