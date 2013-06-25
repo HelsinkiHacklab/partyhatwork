@@ -57,7 +57,7 @@ public:
     virtual void stop_animation();
     
 
-private:
+protected:
     virtual void unpack_frame(const uint8_t *start_of_frame, frame_data& tgt);
     void interpolate_fade();
     void set_leds(frame_data& src);

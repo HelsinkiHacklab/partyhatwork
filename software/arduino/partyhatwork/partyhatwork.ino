@@ -64,9 +64,10 @@ SERIAL_DEFINE(Serial3, E, 0); -> PE2/PE3 == 2/3
 AnimationRunner anim_runner;
 
 #ifdef BRAIN_SERIAL
+// Get this from https://github.com/rambo/Arduino-Brain-Library
+#include <Brain.h>
 #include "brain_tasks.h"
 EEGReader eeg_reader;
-EEGAnimation eeg_anim;
 #endif
 
 
