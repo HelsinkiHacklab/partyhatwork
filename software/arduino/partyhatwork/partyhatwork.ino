@@ -155,6 +155,11 @@ void setup()
     XBEE_SERIAL.begin(57600);
     xbee.begin(XBEE_SERIAL);
 
+#ifdef BRAIN_SERIAL
+    BRAIN_SERIAL.begin(57600);
+#endif
+
+
 #ifdef SLEEP_DEBUG_PIN
     pinMode(SLEEP_DEBUG_PIN, OUTPUT);
     // We keep the pin high whenever the sketch is running

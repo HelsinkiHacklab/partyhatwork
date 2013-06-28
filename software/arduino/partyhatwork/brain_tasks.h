@@ -100,7 +100,6 @@ protected:
 EEGReader::EEGReader()
 : Task()
 {
-    BRAIN_SERIAL.begin(57600);
 }
 
 bool EEGReader::canRun(uint32_t now)
