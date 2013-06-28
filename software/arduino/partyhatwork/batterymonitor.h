@@ -37,5 +37,19 @@ void BatteryMonitor::run(uint32_t now)
 BatteryMonitor batterymonitor(BAT_SENSE_PIN);
 extern BatteryMonitor batterymonitor;
 
+void high_current_chg(boolean mode)
+{
+    if (mode)
+    {
+        pinMode(HIGH_CURRENT_CHG_PIN, OUTPUT);
+        digitalWrite(HIGH_CURRENT_CHG_PIN, LOW);
+    }
+    else
+    {
+        pinMode(HIGH_CURRENT_CHG_PIN, INPUT);
+    }
+}
+
+
 
 #endif

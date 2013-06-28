@@ -202,18 +202,6 @@ void xbee_api_callback(ZBRxResponse rx)
 #include "sleep_task.h"
 #include "blinker.h"
 
-void high_current_chg(boolean mode)
-{
-    if (mode)
-    {
-        pinMode(HIGH_CURRENT_CHG_PIN, OUTPUT);
-        digitalWrite(HIGH_CURRENT_CHG_PIN, LOW);
-    }
-    else
-    {
-        pinMode(HIGH_CURRENT_CHG_PIN, INPUT);
-    }
-}
 
 
 void setup()
