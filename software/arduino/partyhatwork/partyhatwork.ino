@@ -102,6 +102,9 @@ void xbee_api_callback(ZBRxResponse rx)
         }
         case 0x3:
         {
+#ifdef BRAIN_SERIAL
+            eeg_anim.stop_animation();
+#endif
             anim_switcher.stop_cycle();
             anim_runner.start_animation();
             break;
@@ -113,6 +116,9 @@ void xbee_api_callback(ZBRxResponse rx)
         }
         case 0x5:
         {
+#ifdef BRAIN_SERIAL
+            eeg_anim.stop_animation();
+#endif
             anim_switcher.stop_cycle();
             load_nth_animation(rx.getData(1));
             anim_runner.start_animation();

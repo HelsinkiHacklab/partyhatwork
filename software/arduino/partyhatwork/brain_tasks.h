@@ -80,6 +80,10 @@ void EEGAnimation::unpack_frame(const uint8_t *start_of_frame, frame_data& tgt)
 EEGAnimation eeg_anim;
 extern EEGAnimation eeg_anim;
 
+#ifdef BRAIN_REPORT_TO
+    unsigned long last_report_time;
+    const unsigned int report_interval = 3000;
+#endif
 
 class EEGReader : public Task
 {
@@ -112,6 +116,16 @@ void EEGReader::run(uint32_t now)
     {
         eeg_anim.stop_animation();
         // TODO: Check for indicator led pin and turn it on
+
+#ifdef BRAIN_REPORT_TO
+        // Report low quality at intervals
+        if ((millis() - last_report_time) > report_interval)
+        {
+            eeg_payload[1] =  brain.signalQuality;
+            xbee.send(zb_EEG_Tx);
+            last_report_time = millis();
+        }
+#endif        
         return;
     }
     // TODO: if we have indicator led for poor signal turn it off.

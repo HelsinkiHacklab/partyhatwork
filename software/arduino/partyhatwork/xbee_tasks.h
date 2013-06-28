@@ -31,17 +31,13 @@ void reset_xbee()
 typedef void (*XBeeReadvoidFuncPtr)(ZBRxResponse);
 
 
-#define XBEE_READ_YIELD_TICKS 4
 class XBeeRead : public Task
 {
 public:
-//    XBeeRead(XBeeReadvoidFuncPtr _callback);
     XBeeRead();
     virtual void run(uint32_t now);
     virtual bool canRun(uint32_t now);
     XBeeReadvoidFuncPtr callback;
-private:
-    uint8_t yield_counter; // Incremented on each canRun call, used to yield to other tasks.
 };
 
 /*
@@ -60,10 +56,6 @@ XBeeRead::XBeeRead()
 bool XBeeRead::canRun(uint32_t now)
 {
     return (boolean)XBEE_SERIAL.available();
-    /*
-    yield_counter++;
-    return ((yield_counter % XBEE_READ_YIELD_TICKS) == 1);
-    */
 }
 
 void XBeeRead::run(uint32_t now)
