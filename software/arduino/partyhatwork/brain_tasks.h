@@ -81,8 +81,8 @@ EEGAnimation eeg_anim;
 extern EEGAnimation eeg_anim;
 
 #ifdef BRAIN_REPORT_TO
-    unsigned long last_report_time;
-    const unsigned int report_interval = 3000;
+unsigned long last_report_time;
+const unsigned int report_interval = 3000;
 #endif
 
 class EEGReader : public Task
