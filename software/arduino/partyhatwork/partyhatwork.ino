@@ -28,7 +28,7 @@
 From serial_init.cpp: RX/TX
 SERIAL_DEFINE(Serial, C, 0); -> PC1/PC3 == 17/19
 SERIAL_DEFINE(Serial1, C, 1); -> PC6/PC7 == 22/23
-SERIAL_DEFINE(Serial2, D, 0); -> PD2/PD3 == 26/27
+SERIAL_DEFINE(XBEE_SERIAL, D, 0); -> PD2/PD3 == 26/27
 //SERIAL_DEFINE(Serial3, D, 1);  This is USB
 SERIAL_DEFINE(Serial3, E, 0); -> PE2/PE3 == 2/3
 
@@ -143,7 +143,7 @@ void setup()
     reset_xbee();
 
     // Initialize the XBee wrapper
-    Serial2.begin(57600);
+    XBEE_SERIAL.begin(57600);
     xbee.begin(XBEE_SERIAL);
 
 #ifdef SLEEP_DEBUG_PIN
