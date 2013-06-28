@@ -37,6 +37,9 @@ SERIAL_DEFINE(Serial3, E, 0); -> PE2/PE3 == 2/3
 
 // If you have EEG module connected, connect it here.
 #define BRAIN_SERIAL Serial1
+// The high and low parts of the xbee address where to report brain activity, this will be passed to XBeeAddress64-constructor
+// TODO: This should be readable (since it's the coordinator) via the XBee API somehow I'm sure...
+#define BRAIN_REPORT_TO 0x0013a200, 0x403276df
 #define BAT_SENSE_PIN A9
 #define HIGH_CURRENT_CHG_PIN 12
 #define XBEE_RESET_PIN 28
