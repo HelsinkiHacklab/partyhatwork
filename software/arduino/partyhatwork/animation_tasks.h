@@ -341,6 +341,7 @@ void AnimationRunner::run(uint32_t now)
 
 }
 
-
+AnimationRunner anim_runner;
+extern AnimationRunner anim_runner;
 
 #endif

@@ -62,7 +62,6 @@ SERIAL_DEFINE(Serial3, E, 0); -> PE2/PE3 == 2/3
 // Animations
 #include "animation_tasks.h"
 #include "animations.h"
-AnimationRunner anim_runner;
 
 #ifdef BRAIN_SERIAL
 // Get this from https://github.com/rambo/Arduino-Brain-Library
@@ -73,26 +72,6 @@ EEGReader eeg_reader;
 
 
 
-void load_nth_animation(uint8_t n)
-{
-    load_animation_to_buffer(&FIRST_ANIMATION);
-    uint8_t i = 0;
-    while (true)
-    {
-        if (i == n)
-        {
-            anim_runner.set_animation(&animation_buffer);
-            break;
-        }
-
-        if (!animation_buffer.Next)
-        {
-            break;
-        }
-        load_animation_to_buffer((const Animation*)animation_buffer.Next);
-        i++;
-    }
-}
 
 class AnimationSwitcher : public TimedTask
 {

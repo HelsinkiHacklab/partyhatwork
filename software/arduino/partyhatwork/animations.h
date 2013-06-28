@@ -84,6 +84,26 @@ uint8_t count_animations()
 }
 extern const uint8_t LAST_ANIMATION = count_animations();
 
+void load_nth_animation(uint8_t n)
+{
+    load_animation_to_buffer(&FIRST_ANIMATION);
+    uint8_t i = 0;
+    while (true)
+    {
+        if (i == n)
+        {
+            anim_runner.set_animation(&animation_buffer);
+            break;
+        }
+
+        if (!animation_buffer.Next)
+        {
+            break;
+        }
+        load_animation_to_buffer((const Animation*)animation_buffer.Next);
+        i++;
+    }
+}
 
 #endif
 
