@@ -62,6 +62,7 @@ SERIAL_DEFINE(Serial3, E, 0); -> PE2/PE3 == 2/3
 // Animations
 #include "animation_tasks.h"
 #include "animations.h"
+#include "demo_tasks.h"
 
 #ifdef BRAIN_SERIAL
 // Get this from https://github.com/rambo/Arduino-Brain-Library
@@ -73,62 +74,6 @@ EEGReader eeg_reader;
 
 
 
-class AnimationSwitcher : public TimedTask
-{
-public:
-    // Base methods
-    AnimationSwitcher();
-    virtual void run(uint32_t now);
-    virtual bool canRun(uint32_t now);
-    // My own methods
-    virtual void start_cycle();
-    virtual void stop_cycle();
-
-private:
-    uint8_t current_index;
-    AnimationState state;
-    
-};
-
-AnimationSwitcher::AnimationSwitcher()
-: TimedTask(millis())
-{
-    state = STOPPED;
-}
-
-void AnimationSwitcher::start_cycle()
-{
-    state = RUNNING;
-}
-
-void AnimationSwitcher::stop_cycle()
-{
-    state = STOPPED;
-}
-
-bool AnimationSwitcher::canRun(uint32_t now)
-{
-    if (state == STOPPED)
-    {
-        return false;
-    }
-    return TimedTask::canRun(now);
-}
-
-void AnimationSwitcher::run(uint32_t now)
-{
-    incRunTime(2000);
-    anim_runner.stop_animation();
-    load_nth_animation(current_index);
-    current_index++;
-    if (current_index >= LAST_ANIMATION)
-    {
-        current_index = 0;
-    }
-    anim_runner.start_animation();
-}
-
-AnimationSwitcher anim_switcher;
 
 
 
@@ -221,11 +166,18 @@ void loop()
 
     // Tasks are in priority order, only one task is run per tick, be sure to keep sleeper as last task if you use it.
      //Task *tasks[] = { &xbeereader, &batterymonitor };
+    Task *tasks[] = { 
+        &xbeereader,
 #ifdef BRAIN_SERIAL
-    Task *tasks[] = { &xbeereader, &eeg_reader, &eeg_anim, &anim_switcher, &anim_runner, &blinker, &batterymonitor, &sleeper };
-#else
-    Task *tasks[] = { &xbeereader, &anim_switcher, &anim_runner, &blinker, &batterymonitor, &sleeper };
+        &eeg_reader,
+        &eeg_anim,
 #endif
+        &anim_switcher,
+        &anim_runner,
+        &blinker,
+        &batterymonitor,
+        &sleeper
+    };
     TaskScheduler sched(tasks, NUM_TASKS(tasks));
 
     // Run the scheduler - never returns.
