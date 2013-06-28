@@ -34,10 +34,6 @@ SERIAL_DEFINE(Serial3, E, 0); -> PE2/PE3 == 2/3
 
 // If you have EEG module connected, connect it here.
 #define BRAIN_SERIAL Serial1
-
-// Get this library from http://code.google.com/p/xbee-arduino/
-#include <XBee.h>
-
 #define BAT_SENSE_PIN A9
 #define HIGH_CURRENT_CHG_PIN 12
 #define XBEE_RESET_PIN 28
@@ -45,6 +41,11 @@ SERIAL_DEFINE(Serial3, E, 0); -> PE2/PE3 == 2/3
 #define SLEEP_DEBUG_PIN 4
 // This will just blink every second
 #define BLINKER_PIN 5
+
+// Get this library from http://code.google.com/p/xbee-arduino/
+#include <XBee.h>
+#include "xbee_tasks.h"
+
 
 // Get this library from http://bleaklow.com/files/2010/Task.tar.gz (and fix WProgram.h -> Arduino.h)
 // and read http://bleaklow.com/2010/07/20/a_very_simple_arduino_task_manager.html for background and instructions
@@ -151,7 +152,6 @@ void AnimationSwitcher::run(uint32_t now)
 AnimationSwitcher anim_switcher;
 
 
-#include "xbee_tasks.h"
 
 void xbee_api_callback(ZBRxResponse rx)
 {
@@ -199,9 +199,7 @@ void xbee_api_callback(ZBRxResponse rx)
         }
     }
 }
-// Init the reader task and set callback
-//XBeeRead xbeereader(&xbee_api);
-XBeeRead xbeereader;
+// Init the reader task and set callback (callback is set in loop due to some weird dependency issue
 
 #include "sleep_task.h"
 SleepTask sleeper;

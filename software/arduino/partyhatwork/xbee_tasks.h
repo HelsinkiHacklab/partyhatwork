@@ -78,4 +78,8 @@ void XBeeRead::run(uint32_t now)
     }
 }
 
+XBeeRead xbeereader;
+extern XBeeRead xbeereader;
+
+
 #endif
