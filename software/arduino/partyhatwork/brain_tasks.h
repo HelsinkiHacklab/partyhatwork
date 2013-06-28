@@ -104,4 +104,8 @@ void EEGReader::run(uint32_t now)
     }
 }
 
+EEGReader eeg_reader;
+extern EEGReader eeg_reader;
+
+
 #endif

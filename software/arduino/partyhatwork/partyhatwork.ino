@@ -48,15 +48,14 @@ SERIAL_DEFINE(Serial3, E, 0); -> PE2/PE3 == 2/3
 // On the partyhat board this is where the XBee is hardwired to
 #define XBEE_SERIAL Serial2
 
-// Get this library from http://code.google.com/p/xbee-arduino/
-#include <XBee.h>
-#include "xbee_tasks.h"
-
-
 // Get this library from http://bleaklow.com/files/2010/Task.tar.gz (and fix WProgram.h -> Arduino.h)
 // and read http://bleaklow.com/2010/07/20/a_very_simple_arduino_task_manager.html for background and instructions
 #include <Task.h>
 #include <TaskScheduler.h>
+
+// Get this library from http://code.google.com/p/xbee-arduino/
+#include <XBee.h>
+#include "xbee_tasks.h"
 
 // This defines the variable batterymonitor (a task instance) via extern
 #include "batterymonitor.h"
@@ -65,7 +64,7 @@ SERIAL_DEFINE(Serial3, E, 0); -> PE2/PE3 == 2/3
 #include "gammaramp.h"
 #include "rgb.h"
 
-// Animations
+// Animations (define some task instances via extern and a bunch of helper functions)
 #include "animation_tasks.h"
 #include "animations.h"
 #include "demo_tasks.h"
@@ -74,15 +73,9 @@ SERIAL_DEFINE(Serial3, E, 0); -> PE2/PE3 == 2/3
 // Get this from https://github.com/rambo/Arduino-Brain-Library
 #include <Brain.h>
 #include "brain_tasks.h"
-EEGReader eeg_reader;
 #endif
 
-
-
-
-
-
-
+// This implements the XBee API, first byte is command identifier rest of them are command specific.
 void xbee_api_callback(ZBRxResponse rx)
 {
     // Check first byte
@@ -129,9 +122,13 @@ void xbee_api_callback(ZBRxResponse rx)
         }
     }
 }
-#include "sleep_task.h"
-#include "blinker.h"
 
+// An idle task to conserve a little bit of power (it's pretty meaningless as long as we have leds turned on but every little thing counts sometimes and this was easy to do)
+#include "sleep_task.h"
+
+#ifdef BLINKER_PIN
+#include "blinker.h"
+#endif
 
 
 void setup()
@@ -154,6 +151,7 @@ void setup()
     // We keep the pin high whenever the sketch is running
     digitalWrite(SLEEP_DEBUG_PIN, HIGH);
 #endif
+    // Enable high-current charging on the charge controller by default, to be exact we should negotiate for it (or test for dumb charger) first.
     high_current_chg(true);
 }
 
@@ -168,7 +166,7 @@ void loop()
     blinker.on_time = 250;
 #endif
     
-    // Start a "demo mode" (if there is no EEG reader)
+    // Start a "demo mode" (if there is no EEG reader) that will simply cycle the available animations
 #ifndef BRAIN_SERIAL
     anim_switcher.start_cycle();
 #endif
