@@ -42,6 +42,8 @@ void SleepTask::run(uint32_t now)
 #endif
 }
 
+SleepTask sleeper;
+extern SleepTask sleeper;
 
 
 #endif

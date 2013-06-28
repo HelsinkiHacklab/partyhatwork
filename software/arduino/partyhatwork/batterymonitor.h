@@ -35,6 +35,7 @@ void BatteryMonitor::run(uint32_t now)
 }
 
 BatteryMonitor batterymonitor(BAT_SENSE_PIN);
+extern BatteryMonitor batterymonitor;
 
 
 #endif

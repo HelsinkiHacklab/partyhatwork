@@ -199,11 +199,7 @@ void xbee_api_callback(ZBRxResponse rx)
         }
     }
 }
-// Init the reader task and set callback (callback is set in loop due to some weird dependency issue
-
 #include "sleep_task.h"
-SleepTask sleeper;
-
 #include "blinker.h"
 
 void high_current_chg(boolean mode)
