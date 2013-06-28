@@ -2,14 +2,17 @@
 #ifndef XBEE_RESET_PIN
 #error "XBEE_RESET_PIN not defined"
 #endif
+#ifndef XBEE_SERIAL
+#error "XBEE_SERIAL not defined"
+#endif
 #define XBEE_TASKS_H
 #include <Arduino.h>
 #include <Task.h>
 #include <XBee.h>
 
-// Reminder, XBee uses by defaul the first Serial object ("Serial")
-
+// Reminder, XBee uses by defaul the first Serial object ("Serial"), but we override that in the setup() function in partyhatwork.ino
 XBee xbee = XBee();
+extern XBee xbee;
 XBeeResponse response = XBeeResponse();
 // create reusable response objects for responses we expect to handle 
 ZBRxResponse rx = ZBRxResponse();
@@ -56,7 +59,7 @@ XBeeRead::XBeeRead()
 // We can't just return true since then no other task could ever run (since we have the priority)
 bool XBeeRead::canRun(uint32_t now)
 {
-    return (boolean)Serial.available();
+    return (boolean)XBEE_SERIAL.available();
     /*
     yield_counter++;
     return ((yield_counter % XBEE_READ_YIELD_TICKS) == 1);

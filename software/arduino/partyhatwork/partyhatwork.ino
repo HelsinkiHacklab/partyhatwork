@@ -25,8 +25,11 @@
    14   PB2     PC1   17
    15   PB3     PC0   16
 
-From serial_init.cpp:
+From serial_init.cpp: RX/TX
+SERIAL_DEFINE(Serial, C, 0); -> PC1/PC3 == 17/19
+SERIAL_DEFINE(Serial1, C, 1); -> PC6/PC7 == 22/23
 SERIAL_DEFINE(Serial2, D, 0); -> PD2/PD3 == 26/27
+//SERIAL_DEFINE(Serial3, D, 1);  This is USB
 SERIAL_DEFINE(Serial3, E, 0); -> PE2/PE3 == 2/3
 
  * 
@@ -41,6 +44,9 @@ SERIAL_DEFINE(Serial3, E, 0); -> PE2/PE3 == 2/3
 #define SLEEP_DEBUG_PIN 4
 // This will just blink every second
 #define BLINKER_PIN 5
+
+// On the partyhat board this is where the XBee is hardwired to
+#define XBEE_SERIAL Serial2
 
 // Get this library from http://code.google.com/p/xbee-arduino/
 #include <XBee.h>
@@ -141,7 +147,7 @@ void setup()
 
     // Initialize the XBee wrapper
     Serial2.begin(57600);
-    xbee.begin(Serial2);
+    xbee.begin(XBEE_SERIAL);
 
 #ifdef SLEEP_DEBUG_PIN
     pinMode(SLEEP_DEBUG_PIN, OUTPUT);
@@ -153,19 +159,21 @@ void setup()
 
 void loop()
 {
+    // Add the XBee API callback function pointer to the task
     xbeereader.callback = &xbee_api_callback;
 
+#ifdef BLINKER_PIN
+    // Initialize a blinker used to make sure the task system is running
     Blinker blinker(BLINKER_PIN, 1000);
     blinker.on_time = 250;
+#endif
     
-    // Start a "demo mode"
+    // Start a "demo mode" (if there is no EEG reader)
 #ifndef BRAIN_SERIAL
     anim_switcher.start_cycle();
-#endif BRAIN_SERIAL
-
+#endif
 
     // Tasks are in priority order, only one task is run per tick, be sure to keep sleeper as last task if you use it.
-     //Task *tasks[] = { &xbeereader, &batterymonitor };
     Task *tasks[] = { 
         &xbeereader,
 #ifdef BRAIN_SERIAL
@@ -174,7 +182,9 @@ void loop()
 #endif
         &anim_switcher,
         &anim_runner,
+#ifdef BLINKER_PIN
         &blinker,
+#endif
         &batterymonitor,
         &sleeper
     };
