@@ -43,6 +43,17 @@ Animation eeg_animation_muckable = {
     0x0
 };
 
+const uint8_t eeg_band_colors[EEG_POWER_BANDS][3] = {
+    { 0x0, 0x0, 0x0 }, // delta, 
+    { 0x0, 0x0, 0x0 }, // theta
+    { 0x0, 0x0, 0x0 }, // low-alpha 
+    { 0x0, 0x0, 0x0 }, // high-alpha, 
+    { 0x0, 0x0, 0x0 }, // low-beta 
+    { 0x0, 0x0, 0x0 }, // high-beta
+    { 0x0, 0x0, 0x0 }, // low-gamma
+    { 0x0, 0x0, 0x0 }  // mid-gamma
+};
+
 class EEGAnimation : public AnimationRunner
 {
 public:
@@ -63,7 +74,25 @@ EEGAnimation::EEGAnimation()
 
 void EEGAnimation::new_data()
 {
-    // TODO: what to do ?
+    // Find strongest band
+    unsigned long strongest_value;
+    uint8_t strongest_band_idx;
+    for(byte j = 0; j < EEG_POWER_BANDS; j++)
+    {
+        if (brain.eegPower[j] > strongest_value)
+        {
+            strongest_value = brain.eegPower[j];
+            strongest_band_idx = j;
+        }
+    }
+    // Set the frame to said color
+    for (byte i = 0; i < 3; i++)
+    {
+        eeg_frame.leds[0][i] = eeg_band_colors[strongest_band_idx][i];
+        eeg_frame.leds[1][i] = eeg_band_colors[strongest_band_idx][i];
+    }
+    // The data comes in once a second, set wait time accordingly
+    eeg_frame.wait_ms = 1000;
 
     if (state == STOPPED)
     {
@@ -73,7 +102,12 @@ void EEGAnimation::new_data()
 
 void EEGAnimation::unpack_frame(const uint8_t *start_of_frame, frame_data& tgt)
 {
-    return;
+    for (byte i = 0; i < 3; i++)
+    {
+        tgt.leds[0][i] = eeg_frame.leds[0][i];
+        tgt.leds[1][i] = eeg_frame.leds[1][i];
+    }
+    tgt.wait_ms = eeg_frame.wait_ms;
 }
 
 
