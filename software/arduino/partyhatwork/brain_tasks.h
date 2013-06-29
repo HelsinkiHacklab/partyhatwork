@@ -38,11 +38,11 @@ ZBTxRequest zb_EEG_Tx = ZBTxRequest(coordinator_addr64, eeg_payload, sizeof(eeg_
 Brain brain(BRAIN_SERIAL);
 
 Animation eeg_animation_muckable = {
-    0x0,
-    B000011,
-    0x2,
-    B000001,
-    0x0
+    0x0, // There is no next animation in the linked list, this is not part of the animations chain
+    0x3, // leds 0 & 1
+    0x2, // Two frames long (not that matters since we overload the unpack_frame method
+    0x1, // Fading
+    0x0 // There is no address for the first frame of the animation (we overload the unpacking function to cope with this)
 };
 
 // Hues for the 8 bands, right now they're just spread evenly over the space but hand-picking might be an option as well
@@ -90,8 +90,8 @@ void EEGAnimation::new_data()
     }
     byte hsv_to_rgb[3];
     // TODO: calculate these from attention/meditation values
-    double s = 1.0;
-    double v = 1.0;
+    double s = (double)brain.attention/100;
+    double v = (double)((brain.attention+brain.meditation)/2)/100;
     rgbconverter.hsvToRgb(eeg_band_hsv_hue[strongest_band_idx], s, v, hsv_to_rgb);
 
     // Set the frame to said color
