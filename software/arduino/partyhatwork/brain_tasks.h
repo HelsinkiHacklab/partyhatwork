@@ -5,7 +5,7 @@
 #define BRAIN_TASKS_H
 #include <Arduino.h>
 #include <Task.h>
-
+#include <RGBConverter.h>
 
 #include "animation_tasks.h"
 // Get this from https://github.com/rambo/Arduino-Brain-Library

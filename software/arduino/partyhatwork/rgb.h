@@ -18,8 +18,6 @@ uint8_t pwmlimit(uint8_t pwm)
 
 /**
  * Generic setter for 3 consequtve PWM pins
- *
- * TODO: Apply gamma correction
  */
 void setRGB(uint8_t startpin, uint8_t r, uint8_t g, uint8_t b)
 {
@@ -59,6 +57,8 @@ inline void setStdRGB(uint8_t ledno, uint8_t r, uint8_t g, uint8_t b)
           break;
     }
 }
+
+// TODO: move the RGB interpolation code from the animationrunnner to here so it can be used elsewhere 
 
 
 #endif

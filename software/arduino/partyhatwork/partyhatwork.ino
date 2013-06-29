@@ -75,6 +75,8 @@ SERIAL_DEFINE(Serial3, E, 0); -> PE2/PE3 == 2/3
 #ifdef BRAIN_SERIAL
 // Get this from https://github.com/rambo/Arduino-Brain-Library
 #include <Brain.h>
+// Get this from https://github.com/ratkins/RGBConverter
+#include <RGBConverter.h>
 #include "brain_tasks.h"
 #endif
 
