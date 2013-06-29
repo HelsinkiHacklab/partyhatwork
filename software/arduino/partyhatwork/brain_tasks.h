@@ -40,7 +40,8 @@ Brain brain(BRAIN_SERIAL);
 Animation eeg_animation_muckable = {
     0x0,
     B000011,
-    2,
+    0x2,
+    B000001,
     0x0
 };
 
