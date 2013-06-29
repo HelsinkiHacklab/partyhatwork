@@ -6,6 +6,7 @@
 #include <Arduino.h>
 #include <Task.h>
 #include <RGBConverter.h>
+RGBConverter rgbconverter;
 
 #include "animation_tasks.h"
 // Get this from https://github.com/rambo/Arduino-Brain-Library
@@ -43,15 +44,16 @@ Animation eeg_animation_muckable = {
     0x0
 };
 
-const uint8_t eeg_band_colors[EEG_POWER_BANDS][3] = {
-    { 0x0, 0x0, 0x0 }, // delta, 
-    { 0x0, 0x0, 0x0 }, // theta
-    { 0x0, 0x0, 0x0 }, // low-alpha 
-    { 0x0, 0x0, 0x0 }, // high-alpha, 
-    { 0x0, 0x0, 0x0 }, // low-beta 
-    { 0x0, 0x0, 0x0 }, // high-beta
-    { 0x0, 0x0, 0x0 }, // low-gamma
-    { 0x0, 0x0, 0x0 }  // mid-gamma
+// Hues for the 8 bands, right now they're just spread evenly over the space but hand-picking might be an option as well
+const double eeg_band_hsv_hue[EEG_POWER_BANDS] = {
+    0.0, // delta, 
+    (double)1.0/(double)8.0, // theta
+    (double)1.0/(double)8.0*(double)2.0, // low-alpha 
+    (double)1.0/(double)8.0*(double)3.0, // high-alpha, 
+    (double)1.0/(double)8.0*(double)4.0, // low-beta 
+    (double)1.0/(double)8.0*(double)5.0, // high-beta
+    (double)1.0/(double)8.0*(double)6.0, // low-gamma
+    (double)1.0/(double)8.0*(double)7.0  // mid-gamma
 };
 
 class EEGAnimation : public AnimationRunner
@@ -85,12 +87,19 @@ void EEGAnimation::new_data()
             strongest_band_idx = j;
         }
     }
+    byte hsv_to_rgb[3];
+    // TODO: calculate these from attention/meditation values
+    double s = 1.0;
+    double v = 1.0;
+    rgbconverter.hsvToRgb(eeg_band_hsv_hue[strongest_band_idx], s, v, hsv_to_rgb);
+
     // Set the frame to said color
     for (byte i = 0; i < 3; i++)
     {
-        eeg_frame.leds[0][i] = eeg_band_colors[strongest_band_idx][i];
-        eeg_frame.leds[1][i] = eeg_band_colors[strongest_band_idx][i];
+        eeg_frame.leds[0][i] = hsv_to_rgb[i];
+        eeg_frame.leds[1][i] = hsv_to_rgb[i];
     }
+
     // The data comes in once a second, set wait time accordingly
     eeg_frame.wait_ms = 1000;
 
