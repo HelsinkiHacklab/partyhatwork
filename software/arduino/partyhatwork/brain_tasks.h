@@ -83,12 +83,19 @@ void EEGAnimation::new_data()
     // Find strongest band
     unsigned long strongest_value;
     uint8_t strongest_band_idx;
+    unsigned long sec_strongest_value;
+    uint8_t sec_strongest_band_idx;
     for(byte j = 0; j < EEG_POWER_BANDS; j++)
     {
         if (brain.eegPower[j] > strongest_value)
         {
             strongest_value = brain.eegPower[j];
             strongest_band_idx = j;
+        }
+        else if (brain.eegPower[j] > sec_strongest_value)
+        {
+            sec_strongest_value = brain.eegPower[j];
+            sec_strongest_band_idx = j;
         }
     }
     byte hsv_to_rgb[3];
@@ -110,7 +117,7 @@ void EEGAnimation::new_data()
     {
         v = 0.3;
     }
-    rgbconverter.hsvToRgb(eeg_band_hsv_hue[strongest_band_idx], s, v, hsv_to_rgb);
+    rgbconverter.hsvToRgb((eeg_band_hsv_hue[strongest_band_idx]+eeg_band_hsv_hue[sec_strongest_band_idx])/2, s, v, hsv_to_rgb);
 
     // Set the frame to said color
     for (byte i = 0; i < 3; i++)
