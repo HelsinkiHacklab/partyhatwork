@@ -29,6 +29,7 @@ uint8_t eeg_payload[] = {
     0x0, 0x0, 0x0,
     0x0, 0x0, 0x0,
     0x0, 0x0, 0x0,
+    0x0 // The bitfield showing which data was decoded
 }; 
 // SH + SL Address of receiving XBee
 XBeeAddress64 coordinator_addr64 = XBeeAddress64(BRAIN_REPORT_TO);
@@ -36,6 +37,8 @@ ZBTxRequest zb_EEG_Tx = ZBTxRequest(coordinator_addr64, eeg_payload, sizeof(eeg_
 #endif
 
 Brain brain(BRAIN_SERIAL);
+byte brain_packets;
+
 
 Animation eeg_animation_muckable = {
     0x0, // There is no next animation in the linked list, this is not part of the animations chain
@@ -89,9 +92,24 @@ void EEGAnimation::new_data()
         }
     }
     byte hsv_to_rgb[3];
-    // TODO: calculate these from attention/meditation values
-    double s = (double)brain.attention/100;
-    double v = (double)((brain.attention+brain.meditation)/2)/100;
+    double s = 1.0;
+    double v = 1.0;
+    // calculate S and V these from attention/meditation values (if we have them)
+    if (   bitRead(brain_packets, 1)
+        && bitRead(brain_packets, 2))
+    {
+        double s = (double)brain.attention/100;
+        double v = (double)((brain.attention+brain.meditation)/2)/100;
+    }
+    // In case the attention/meditation measurements are too low force a minimum
+    if (s < 0.3)
+    {
+        s = 0.3;
+    }
+    if (v < 0.3)
+    {
+        v = 0.3;
+    }
     rgbconverter.hsvToRgb(eeg_band_hsv_hue[strongest_band_idx], s, v, hsv_to_rgb);
 
     // Set the frame to said color
@@ -135,10 +153,6 @@ public:
     EEGReader();
     virtual void run(uint32_t now);
     virtual bool canRun(uint32_t now);
-
-protected:
-    byte brain_packets;
-
 };
 
 EEGReader::EEGReader()
@@ -165,10 +179,11 @@ void EEGReader::run(uint32_t now)
         if ((millis() - last_report_time) > report_interval)
         {
             eeg_payload[1] =  brain.signalQuality;
+            eeg_payload[sizeof(eeg_payload)-1] = brain_packets;
             xbee.send(zb_EEG_Tx);
             last_report_time = millis();
         }
-#endif        
+#endif
         return;
     }
     // TODO: if we have indicator led for poor signal turn it off.
@@ -187,6 +202,7 @@ void EEGReader::run(uint32_t now)
             eeg_payload[(5+j)] = (uint8_t)((brain.eegPower[j] & 0xffff) >> 8);
             eeg_payload[(6+j)] = (uint8_t)((brain.eegPower[j] & 0xff));
         }
+        eeg_payload[sizeof(eeg_payload)-1] = brain_packets;
         // Fire and forget... (the reader task will eventually get the response for this but we do not care since there is nothing we can do about it)
         xbee.send(zb_EEG_Tx);
 #endif
