@@ -37,6 +37,7 @@ SERIAL_DEFINE(Serial3, E, 0); -> PE2/PE3 == 2/3
 
 // If you have EEG module connected, connect it here.
 #define BRAIN_SERIAL Serial1
+#define BRAIN_POWER_PIN 6
 // The high and low parts of the xbee address where to report brain activity, this will be passed to XBeeAddress64-constructor
 // TODO: This should be readable (since it's the coordinator) via the XBee API somehow I'm sure...
 #define BRAIN_REPORT_TO 0x0013a200, 0x403276df
@@ -105,7 +106,7 @@ void xbee_api_callback(ZBRxResponse rx)
         case 0x3:
         {
 #ifdef BRAIN_SERIAL
-            eeg_anim.stop_animation();
+            eeg_reader.enable(false);
 #endif
             anim_switcher.stop_cycle();
             anim_runner.start_animation();
@@ -119,13 +120,22 @@ void xbee_api_callback(ZBRxResponse rx)
         case 0x5:
         {
 #ifdef BRAIN_SERIAL
-            eeg_anim.stop_animation();
+            eeg_reader.enable(false);
 #endif
             anim_switcher.stop_cycle();
             load_nth_animation(rx.getData(1));
             anim_runner.start_animation();
             break;
         }
+#ifdef BRAIN_SERIAL
+        case 0xF:
+        {
+            anim_runner.stop_animation();
+            anim_switcher.stop_cycle();
+            eeg_reader.enable((boolean)rx.getData(1));
+            break;
+        }
+#endif
         case 0x58: // Ascii X
         {
             // Your extended protocol goes here
@@ -185,6 +195,8 @@ void loop()
     // Start a "demo mode" (if there is no EEG reader) that will simply cycle the available animations
 #ifndef BRAIN_SERIAL
     anim_switcher.start_cycle();
+#else
+    eeg_reader.enable(true);
 #endif
 
     // Tasks are in priority order, only one task is run per tick, be sure to keep sleeper as last task if you use it.

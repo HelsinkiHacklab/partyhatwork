@@ -64,7 +64,7 @@ class EEGAnimation : public AnimationRunner
 {
 public:
     EEGAnimation();
-    void new_data();
+    virtual void new_data();
 
 protected:
     virtual void unpack_frame(const uint8_t *start_of_frame, frame_data& tgt);
@@ -74,7 +74,8 @@ protected:
 
 EEGAnimation::EEGAnimation()
 {
-    set_animation(&eeg_animation_muckable);
+    this->set_animation(&eeg_animation_muckable);
+    this->start_animation();
 }
 
 
@@ -160,11 +161,26 @@ public:
     EEGReader();
     virtual void run(uint32_t now);
     virtual bool canRun(uint32_t now);
+    virtual void enable(boolean en);
 };
 
 EEGReader::EEGReader()
 : Task()
 {
+    this->enable(true);
+}
+
+void EEGReader::enable(boolean en)
+{
+    if (en)
+    {
+        pinMode(BRAIN_POWER_PIN, OUTPUT);
+        digitalWrite(BRAIN_POWER_PIN, HIGH);
+        return;
+    }
+    eeg_anim.stop_animation();
+    pinMode(BRAIN_POWER_PIN, INPUT);
+    digitalWrite(BRAIN_POWER_PIN, LOW);
 }
 
 bool EEGReader::canRun(uint32_t now)
