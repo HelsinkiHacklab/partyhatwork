@@ -8,7 +8,8 @@
  *
  * This is the simplest way to make sure the linked list stays so.
  */
-#define FIRST_ANIMATION strobe_anim 
+//#define FIRST_ANIMATION strobe_anim 
+#define FIRST_ANIMATION police3_anim 
 
 const uint8_t police1_frames[] PROGMEM = { 
   0xff, 0x0, 0x0,    0x0, 0x0, 0x0,     0x1, 0xf4,

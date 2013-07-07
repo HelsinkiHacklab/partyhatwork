@@ -190,12 +190,12 @@ void loop()
     // Tasks are in priority order, only one task is run per tick, be sure to keep sleeper as last task if you use it.
     Task *tasks[] = { 
         &xbeereader,
-#ifdef BRAIN_SERIAL
-        &eeg_reader,
-        &eeg_anim,
-#endif
-        &anim_switcher,
         &anim_runner,
+        &anim_switcher,
+#ifdef BRAIN_SERIAL
+        &eeg_anim,
+        &eeg_reader,
+#endif
 #ifdef BLINKER_PIN
         &blinker,
 #endif
