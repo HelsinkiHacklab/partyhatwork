@@ -48,3 +48,10 @@ class handler(object):
     def ping_nodes(self):
         """Ping each known node to make sure it's still alive, if not remove from node list (or maybe just mark dead somehow)"""
         pass        
+
+    def tx_all(self, *args):
+        for nodeid in self.nodes_by_identifier.keys():
+            print "Sending to %s" % nodeid
+            self.nodes_by_identifier[nodeid].tx(*args)
+        print "All sent"
+            

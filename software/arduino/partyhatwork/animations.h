@@ -8,7 +8,7 @@
  *
  * This is the simplest way to make sure the linked list stays so.
  */
-#define FIRST_ANIMATION strobe_anim 
+#define FIRST_ANIMATION lrblu_anim 
 //#define FIRST_ANIMATION police3_anim 
 
 const uint8_t police1_frames[] PROGMEM = { 
@@ -64,6 +64,20 @@ const Animation strobe_anim PROGMEM = {
     2,
     0x0,
     strobe_frames,
+};
+
+const uint8_t lrblu_frames[] PROGMEM = {
+    0x2e, 0x00, 0xc7,   0x00, 0x00, 0x00,   0x1, 0x2c,
+    0x00, 0x00, 0x00,   0x00, 0x00, 0x00,   0x0, 0x64,
+    0x00, 0x00, 0x00,   0x2e, 0x00, 0xc7,   0x1, 0x2c,
+    0x00, 0x00, 0x00,   0x00, 0x00, 0x00,   0x0, 0x64,
+};
+const Animation lrblu_anim PROGMEM = {
+    &strobe_anim,
+    B00000011,
+    4,
+    0x1,
+    lrblu_frames,
 };
 
 // ***** KEEP THIS FUNCTION AS LAST PART OF FILE, ADD ANIMATION ABOVE *****
