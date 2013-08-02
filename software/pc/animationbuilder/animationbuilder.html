@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+        <link rel="stylesheet" media="screen" type="text/css" href="colorpicker/css/colorpicker.css" />
+        <script type="text/javascript" src="colorpicker/js/colorpicker.js"></script>
+        <title>Partyhatwork animation configurator</title>
+    </head>
+    <body>
+        <h1>Partyhatwork animation configurator</h1>
+        <div id="preview" style="float: left; width: 50%;">
+        </div>
+        <div id="animationinfo" style="float: right; width: 50%">
+            <h2>Animation information</h2>
+            <label for="animation_name" id="lbl_animation_name">Name (valid c++ variable name): </label><input type="text" id="animation_name" value="my_animation" /><br/>
+            <div id="ledselector" style="float: left; width: 50%">
+                <h2>Active LEDs</h2>
+                <input type="checkbox" id="led_0_enabled" value="0x1" checked /><label for="led_0_enabled" id="lbl_led_0_enabled"> Left</label><br/>
+                <input type="checkbox" id="led_1_enabled" value="0x2" checked /><label for="led_1_enabled" id="lbl_led_1_enabled"> Right</label><br/>
+                <input type="checkbox" id="led_2_enabled" value="0x4" /><label for="led_2_enabled" id="lbl_led_2_enabled"> Front</label><br/>
+                <input type="checkbox" id="led_3_enabled" value="0x8" /><label for="led_3_enabled" id="lbl_led_3_enabled"> Back</label><br/>
+                <input type="checkbox" id="led_4_enabled" value="0x10" /><label for="led_4_enabled" id="lbl_led_4_enabled"> Undef 1</label><br/>
+                <input type="checkbox" id="led_5_enabled" value="0x20" /><label for="led_5_enabled" id="lbl_led_5_enabled"> Undef 2</label><br/>
+                <input type="checkbox" id="led_6_enabled" value="0x40" /><label for="led_6_enabled" id="lbl_led_6_enabled"> Undef 3</label><br/>
+                <input type="checkbox" id="led_7_enabled" value="0x80" /><label for="led_7_enabled" id="lbl_led_7_enabled"> Undef 4</label><br/>
+            </div>
+            <div id="modes" style="float: right; width: 50%">
+                <h3>Mode flags</h3>
+                <!-- TODO: when we have more of these rewrite to use the bit value for identifier -->
+                <input type="checkbox" id="mode_fading" value="0x1" checked /><label for="mode_fading" id="lbl_mode_fading"> Fading</label><br/>
+            </div>
+        </div>
+        <div id="framecontainer" style="float: right; width: 50%">
+            <table id="frames">
+                <thead>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <button id="newframe">Add frame</button>
+            <button id="previewbutton">Preview</button>
+            <button id="generatebutton">Generate code</button>
+        </div>
+        <div id="generated" style="clear: both; height: 200px;">
+            <h2>Generated code</h2>
+            <textarea name="generated" style="height: 100%; width: 100%"></textarea>
+        </div>
+        <script type="text/javascript">
+            function decimalToHex(d, padding) {
+                var hex = Number(d).toString(16);
+                padding = typeof (padding) === "undefined" || padding === null ? padding = 2 : padding;
+            
+                while (hex.length < padding) {
+                    hex = "0" + hex;
+                }
+            
+                return hex;
+            }
+            function animation_class() {
+                this.state = 'stopped';
+                var current_frame = 0;
+                var num_frames = 0;
+                var timer = null;
+                
+                var next_frame = 0;
+                var fade_current_step = 0;
+                var fade_num_steps = 0;
+                var fade_duration = 0;
+
+                this.start = function()
+                {
+                    console.log('animation_class::start called');
+                    if (this.state != 'stopped')
+                    {
+                        console.log('Already running!');
+                        return;
+                    }
+                    this.state = 'running';
+                    current_frame = 0;
+                    create_preview_elements();
+                    timer = setTimeout(run_step, 1);
+                }
+
+                var create_preview_elements = function()
+                {
+                    console.log('animation_class::create_preview_elements called');
+                    tbl = '<table><thead><tr>';
+                    tbod = '<tr>';
+                    for(i=0; i<8; i++)
+                    {
+                        if (jQuery('#led_'+i+'_enabled').filter(':checked').length)
+                        {
+                            lbl = jQuery('#lbl_led_'+i+'_enabled')
+                            tbl += '<th>'+lbl.html()+'</th>';
+                            tbod += '<td id="preview_led_'+i+'"> &nbsp; </td>';
+                        }
+                    }
+                    tbl += '</tr></thead><tbody></tbody></table>';
+                    jQuery('#preview').append(tbl);
+                    jQuery('#preview table tbody').append(tbod);
+                }
+
+                this.stop = function()
+                {
+                    console.log('animation_class::stop called');
+                    this.state = 'stopped';
+                    clearTimeout(timer);
+                    current_frame = 0;
+                    fade_current_step = 0;
+                    fade_max_steps = 0;
+                    // Remove the preview elements
+                    jQuery('#preview').children().remove();
+                }
+
+                var run_step = function()
+                {
+                    //console.log('animation_class::run_step called, current_frame='+current_frame);
+                    if (this.state == 'stopped')
+                    {
+                        console.log('state is stopped, returning via stop');
+                        return this.stop();
+                    }
+
+                    num_frames = jQuery('#frames tbody tr').length;
+                    frame_tr = jQuery(jQuery('#frames tbody tr').get(current_frame));
+                    frame_duration = parseInt(frame_tr.find('td.duration input').val());
+
+                    if (jQuery('#mode_fading').filter(':checked').length)
+                    {
+                        //console.log('state='+this.state+' fade_current_step='+fade_current_step);
+                        // The fade is done here the same way as in the uC code (no fancy browser features for us).
+                        switch(this.state)
+                        {
+                            default:
+                            case 'running':
+                                // Set led values from inputs directly
+                                for(i=0; i<8; i++)
+                                {
+                                    // Skip disabled LEDs
+                                    if (jQuery('#led_'+i+'_enabled').filter(':checked').length == 0)
+                                    {
+                                        continue;
+                                    }
+                                    rgbval = '#'+frame_tr.find('input.led'+i).val();
+                                    jQuery('#preview_led_'+i).css('background-color', rgbval);
+                                }
+
+                                this.state = 'fading_start';
+                                timer = setTimeout(run_step, 1);
+                                break;
+                            case 'fading_start':
+                                next_frame = current_frame + 1;
+                                if (next_frame >= num_frames)
+                                {
+                                    next_frame = 0;
+                                }
+                                // Calculate fade-frame duration
+                                fade_duration = 10; // FRAME_MIN_TIME in Arduino code
+                                fade_max_steps = Math.floor(frame_duration / 10);
+                                if (fade_max_steps > 255)
+                                {
+                                    fade_max_steps =  255;
+                                    fade_duration = frame_duration / 255;
+                                }
+                                // Calculate how many steps we are going to take
+                                largest_diff = 0;
+                                next_frame_tr = jQuery(jQuery('#frames tbody tr').get(next_frame));
+                                for(i=0; i<8; i++)
+                                {
+                                    // Skip disabled LEDs
+                                    if (jQuery('#led_'+i+'_enabled').filter(':checked').length == 0)
+                                    {
+                                        continue;
+                                    }
+                                    tmpdif = 0;
+                                    rgb = frame_tr.find('input.led'+i).val();
+                                    next_rgb = next_frame_tr.find('input.led'+i).val();
+                                    for (i2=0; i2<6; i2+=2)
+                                    {
+                                        tmpval1 = parseInt('0x'+rgb.substr(i2,2));
+                                        tmpval2 = parseInt('0x'+next_rgb.substr(i2,2));
+                                        if (tmpval1 > tmpval2)
+                                        {
+                                            tmpdiff = tmpval1-tmpval2;
+                                        }
+                                        else
+                                        {
+                                            tmpdiff = tmpval2-tmpval1;
+                                        }
+                                        if (tmpdiff > largest_diff)
+                                        {
+                                            largest_diff = tmpdiff;
+                                        }
+                                    }
+                                }
+                                if (largest_diff <= fade_max_steps)
+                                {
+                                    fade_num_steps = largest_diff;
+                                }
+                                else
+                                {
+                                    fade_num_steps = fade_max_steps;
+                                }
+                                //console.log('fade_num_steps='+fade_num_steps);
+
+                                // Set the next state and timer to reach it
+                                fade_current_step = 1;
+                                this.state = 'fading';
+                                timer = setTimeout(run_step, fade_duration);
+                                break;
+                            case 'fading':
+                                interpolate_fade_and_set();
+                                if (fade_current_step >= fade_num_steps)
+                                {
+                                    this.state = 'fading_end';
+                                }
+                                fade_current_step++;
+                                timer = setTimeout(run_step, fade_duration);
+                                break;
+                            case 'fading_end':
+                                interpolate_fade_and_set();
+                                current_frame++;
+                                if (current_frame >= num_frames)
+                                {
+                                    current_frame = 0;
+                                }
+                                this.state = 'running';
+                                timer = setTimeout(run_step, fade_duration);
+                                break;
+                        }
+                        return;
+                    }
+                    else
+                    {
+                        // Set led values from inputs directly
+                        for(i=0; i<8; i++)
+                        {
+                            // Skip disabled LEDs
+                            if (jQuery('#led_'+i+'_enabled').filter(':checked').length == 0)
+                            {
+                                continue;
+                            }
+                            rgbval = '#'+frame_tr.find('input.led'+i).val();
+                            jQuery('#preview_led_'+i).css('background-color', rgbval);
+                        }
+                        current_frame = (current_frame + 1) % num_frames;
+                        timer = setTimeout(run_step, frame_duration);
+                    }
+                }
+                
+                var interpolate_fade_and_set = function()
+                {
+                    for(i=0; i<8; i++)
+                    {
+                        // Skip disabled LEDs
+                        if (jQuery('#led_'+i+'_enabled').filter(':checked').length == 0)
+                        {
+                            continue;
+                        }
+                        rgb = frame_tr.find('input.led'+i).val();
+                        next_rgb = next_frame_tr.find('input.led'+i).val();
+                        fade_rgb = '#';
+                        for (i2=0; i2<6; i2+=2)
+                        {
+                            tmpval1 = parseInt('0x'+rgb.substr(i2,2));
+                            tmpval2 = parseInt('0x'+next_rgb.substr(i2,2));
+                            if (tmpval1 == tmpval2)
+                            {
+                                fade_rgb += decimalToHex(tmpval2, 2);
+                                continue;
+                            }
+                            if (tmpval1 > tmpval2)
+                            {
+                                tmp = tmpval1 - Math.floor(((tmpval1 - tmpval2) / fade_num_steps) * fade_current_step);
+                            }
+                            else
+                            {
+                                tmp = Math.floor(((tmpval2 - tmpval1) / fade_num_steps) * fade_current_step);
+                            }
+                            //console.log('tmpval1='+tmpval1+' tmpval2='+tmpval2+' tmp='+tmp);
+                            fade_rgb += decimalToHex(tmp, 2);
+                        }
+                        //console.log('setting LED '+i+' to '+fade_rgb);
+                        jQuery('#preview_led_'+i).css('background-color', fade_rgb);
+                    }
+                }
+                
+            };
+            animation = new animation_class();
+
+            jQuery(document).ready(function(){
+                jQuery('#ledselector input').prop('disabled', false);
+                jQuery('#previewbutton').hide();
+                
+                jQuery('#newframe').click(function(){
+                    // Disable all the led selectors
+                    jQuery('#ledselector input').prop('disabled', true);
+                    jQuery('#previewbutton').show();
+                    // No header, add it.
+                    if (jQuery('#frames thead tr').length == 0)
+                    {
+                        row1html = '<tr>';
+                        for(i=0; i<8; i++)
+                        {
+                            if (jQuery('#led_'+i+'_enabled').filter(':checked').length)
+                            {
+                                lbl = jQuery('#lbl_led_'+i+'_enabled')
+                                row1html += '<th>'+lbl.html()+'</th>';
+                            }
+                        }
+                        row1html += '<th>Duration (ms)</th></tr>';
+                        jQuery('#frames thead').append(row1html);
+                    }
+                    
+                    rows = jQuery('#frames tbody tr').length;
+                    // Add the frame values inputs
+                    rowhtml = '<tr>';
+                    for(i=0; i<8; i++)
+                    {
+                        if (jQuery('#led_'+i+'_enabled').filter(':checked').length)
+                        {
+                            rowhtml += '<td><input class="rgbinput led'+i+'" id="row_'+rows+'_led_'+i+'_rbg" name="row_'+rows+'_led_'+i+'_rbg" /></td>';
+                        }
+                    }
+                    rowhtml += '<td class="duration"><input id="row_'+rows+'_duration" /><button class="deleterow">X</button></td></tr>';
+                    jQuery('#frames tbody').append(rowhtml);
+                    // Initialize colorpicker for inputs
+                    jQuery('input.rgbinput').ColorPicker({
+                        onSubmit: function(hsb, hex, rgb, el) {
+                            jel = jQuery(el);
+                            jel.val(hex);
+                            jel.css('background-color', '#'+hex);
+                            jel.ColorPickerHide();
+                        },
+                        onBeforeShow: function () {
+                            $(this).ColorPickerSetColor(this.value);
+                        }
+                    });
+                    // Row remove callback (TODO: before this we should probably make sure only the last row has the input)
+                    jQuery(jQuery('#frames tbody tr').get(rows)).find('button.deleterow').click(function(){
+                        me = jQuery(this);
+                        me.parents('tr').remove();
+                        // Clear generated code
+                        jQuery('#generated textarea').val('');
+                        // Re-enable LED selectors when we have no frames
+                        if (jQuery('#frames tbody tr').length == 0)
+                        {
+                            // Remove the header
+                            jQuery('#frames thead tr').remove();
+                            jQuery('#ledselector input').prop('disabled', false);
+                            animation.stop();
+                            jQuery('#previewbutton').hide();
+                        }
+                    });
+                });
+
+                // Toggles animation between runnign and stopped state
+                jQuery('#previewbutton').click(function(e){
+                    e.preventDefault();
+                    me = jQuery(this);
+                    console.log('previewbutton clicked, animation.state=' + animation.state);
+                    if (animation.state == 'stopped')
+                    {
+                        me.html('Stop preview');
+                        animation.start();
+                    }
+                    else
+                    {
+                        me.html('Preview');
+                        animation.stop();
+                    }
+                    return false;
+                });
+                
+                // This handler clears generated code if any animation base config flags are changed
+                jQuery('#animationinfo').find(':input').change(function(){
+                    // Clear generated code
+                    jQuery('#generated textarea').val('');
+                });
+
+                // This will generate the Arduino code for the animation
+                jQuery('#generatebutton').click(function(){
+                    animation.stop();
+                    jQuery('#previewbutton').html('Preview');
+
+                    animation_code = "const Animation "+jQuery('#animation_name').val()+"_anim PROGMEM = {\n    &next_animation_name,\n    B";
+                    for (i = 7; i >= 0; i--)
+                    {
+                        if (jQuery('#led_'+i+'_enabled').filter(':checked').length)
+                        {
+                            animation_code +=  "1";
+                        }
+                        else
+                        {
+                            animation_code +=  "0";
+                        }
+                    }
+                    animation_code += ",\n    "+jQuery('#frames tbody tr').length+",\n    ";
+                    if (jQuery('#mode_fading').filter(':checked').length)
+                    {
+                        animation_code += "0x1,\n";
+                    }
+                    else
+                    {
+                        animation_code += "0x0,\n";
+                    }
+                    animation_code += "    "+jQuery('#animation_name').val()+"_frames,\n};\n";
+                    
+                    // TODO: Generate frame data too
+                    frames_code = "const uint8_t "+jQuery('#animation_name').val()+"_frames[] PROGMEM = {\n";
+                    jQuery('#frames tbody tr').each(function(){
+                        frames_code += "    ";
+                        row = jQuery(this);
+                        row.find('input.rgbinput').each(function(){
+                            input = jQuery(this);
+                            rgb = input.val();
+                            r = "0x" + rgb.substr(0,2);
+                            g = "0x" + rgb.substr(2,2);
+                            b = "0x" + rgb.substr(4,2);
+                            frames_code += r+", "+g+", "+b+",   ";
+                        });
+                        frame_duration = parseInt(row.find('td.duration input').val());
+                        hi_nibble = Math.floor(frame_duration / 256);
+                        low_nibble = frame_duration % 256;
+                        frames_code += "0x"+hi_nibble.toString(16)+", 0x"+low_nibble.toString(16)+",\n";
+                    });
+                    frames_code += "};\n";
+                    
+                    jQuery('#generated textarea').val(frames_code+animation_code);
+                    
+                    // Scroll to and focus the textarea
+                    jQuery('html, body').animate({
+                        scrollTop: jQuery('#generated').offset().top
+                    }, 50);
+                    jQuery('#generated textarea').focus();
+                });
+            });
+        </script>
+        <style type="text/css">
+            #frames td, #frames th, #preview table td, #preview table th
+            {
+                border: 1px solid black;
+            }
+            #frames tbody td input
+            {
+                width: 5em;
+            }
+            #frames tbody td.duration input
+            {
+                width: 6em;
+            }
+            #preview table td
+            {
+                width: 75px;
+                height: 75px;
+            }
+        </style>
+    </body>
+</html>
