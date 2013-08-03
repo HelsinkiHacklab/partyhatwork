@@ -12,7 +12,9 @@ Mesh network of [party][party1]-[hats][hat1], see http://kirjoitusalusta.fi/hack
 
 ## Software
 
-  * Reference XMegaduino sketch
-  * Instructions for patching XMegaduino to support our board variant
+  * Reference XMegaduino [sketch](./software/arduino/partyhatwork/)
+  * [Instructions](https://github.com/HelsinkiHacklab/XMega-boards/tree/master/software/arduino-xmega) for patching XMegaduino to support our board variant
+  * [XBee API wrapper](./software/pc/beehive)
+  * [Animation builder](http://helsinkihacklab.github.io/partyhatwork/software/pc/animationbuilder/animationbuilder.html)
 
 
