@@ -39,7 +39,11 @@ class handler(object):
 
     def __init__(self, port):
         self.xb = ZigBee(port,callback=self.xbee_callback,escaped=True,start_callback=self.start_callback)
-        self.xb.start()
+        try:
+            self.xb.start()
+        except Exception:
+            # TODO: check the real exception threading throws up
+            pass
         self.discover_nodes()
 
     def discover_nodes(self):
