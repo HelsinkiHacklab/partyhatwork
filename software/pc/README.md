@@ -1,16 +1,9 @@
 # PC == Coordinator software
 
-## Requirements
+## Beehive
 
-### python-serial
+The XBee network coordinator
 
-    pip install pyserial
+## Animationbuilder
 
-### python-xbee
-
-But not from pypi, those packages are buggy...
-
-    wget https://github.com/tomstrummer/python-xbee/archive/master.zip
-    unzip master
-    cd python-xbee-master/
-    python setup.py install
+Helper to make animations, [online version](http://helsinkihacklab.github.io/partyhatwork/software/pc/animationbuilder/animationbuilder.html)
