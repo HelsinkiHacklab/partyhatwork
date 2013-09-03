@@ -20,3 +20,6 @@ class XbeeNode(object):
         data_packed = pack("%dB" % len(args), *args)
         self.xb.tx( dest_addr = self.short_addr, dest_addr_long = self.long_addr, data = data_packed )
 
+    def tx_string(self, send_string):
+        send_args = [ ord(x) for x in send_string ]
+        self.tx(*send_args)

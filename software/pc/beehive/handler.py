@@ -58,4 +58,11 @@ class handler(object):
             print "Sending to %s" % nodeid
             self.nodes_by_identifier[nodeid].tx(*args)
         print "All sent"
-            
+
+    def tx_string_all(self, *args):
+        for nodeid in self.nodes_by_identifier.keys():
+            print "Sending to %s" % nodeid
+            self.nodes_by_identifier[nodeid].tx_string(*args)
+        print "All sent"
+
+
